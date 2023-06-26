@@ -1,8 +1,8 @@
 to-do list
 extract date uploaded metadata from uploaded file
 allow optional user note on upload
-download all dependencies (weaviate langchain unstructured) - difficult to do on laptop
-parse a pdf document using Unstructured
+✔️ download all dependencies (weaviate langchain unstructured) - difficult to do on laptop
+✔️ parse a pdf document using Unstructured
 order to-do list by priority
 understand shchemas and their relevance for uploading to weaviate
-learn how to show a new page in streamlit
+✔️ learn how to show a new page in streamlit
