@@ -1,6 +1,6 @@
 from urllib import parse
 import streamlit as st
-import src.helper
+import helper
 import pandas as pd
 import numpy as np
 
@@ -15,7 +15,7 @@ from unstructured.partition.text_type import sentence_count
 st.title("your library")
 st.markdown("upload any document to store its meaning")
 # need to install pip package to use this 
-st.write(src.helper.format_for_viewing())
+st.write(helper.format_for_viewing())
 
 ## Upload any document
 raw_document = st.file_uploader("")
@@ -64,7 +64,7 @@ if raw_document is not None:
     parsed_pdf = pd.read_csv("./data/parsed_pdf.csv")
     # show to user the processed pdf. get confirmation before adding to weaviate
     st.table(parsed_pdf)
-    st.button(label="upload to database",on_click=src.helper.send_to_weaviate(parsed_pdf))
+    st.button(label="upload to database",on_click=helper.send_to_weaviate(parsed_pdf))
     
 
 
