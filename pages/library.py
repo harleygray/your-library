@@ -2,36 +2,14 @@ import streamlit as st
 import pandas as pd
 import helper
 
-st.title("experimenting with partitioning pdfs")
 
-
-
-
-from unstructured.partition.auto import partition_pdf
-
-elements = partition_pdf("data/Australian Parliament Network effects.pdf")
-pdf_data = pd.Series()
-
-
-
-from unstructured.documents.elements import NarrativeText
-from unstructured.partition.text_type import sentence_count
-
-
-
-
-for element in elements[:100]:
-    if isinstance(element, NarrativeText) and sentence_count(element.text) > 2:
-        pdf_data = pd.concat([pdf_data, pd.Series(element.text)])
-
-
-st.table(pdf_data)
 
 st.header("current library contents")
 show_library = False
 # API_KEY = os.environ(..)
 
-
+# url to embed into personal library
+# https://towardsdatascience.com/a-multi-page-interactive-dashboard-with-streamlit-and-plotly-c3182443871a
 
 st.button(
     label="fetch from library",

@@ -4,20 +4,78 @@ import helper
 import pandas as pd
 import numpy as np
 
+from unstructured.partition.auto import partition
+from unstructured.documents.elements import *
+from unstructured.partition.text_type import sentence_count
 
 st.title("your library")
-st.markdown("upload a pdf document to store its meaning")
-raw_pdf = st.file_uploader("",type=["pdf"])
-if raw_pdf is not None:
-    st.write("Success: ", raw_pdf.name," uploaded!")
-    parsed_pdf = helper.parse_pdf(raw_pdf, user_input="")
+st.markdown("upload any document to store its meaning")
+
+## Upload any document
+raw_document = st.file_uploader("")
+if raw_document is not None:
+    st.write("Success: ", raw_document.name," uploaded!")
+    doc_elements = partition(file=raw_document)
+    doc_data = pd.DataFrame(columns=
+                            ["Text",
+                             "FigureCaption", 
+                             "NarrativeText", 
+                             "ListItem", 
+                             "Title", 
+                             "Address", 
+                             "Table", 
+                             "PageBreak", 
+                             "Header", 
+                             "Footer"])
+
+    # Create a DataFrame for each type of element
+    #df = pd.DataFrame()
+    """     for element in doc_elements:
+        element_type = type(element).__name__
+        doc_data[element_type] = pd.concat(doc_data[element_type],element.text, ignore_index=True) """
+
+    for element in doc_elements:
+        element_type = str(type(element).__name__)
+
+        doc_data[element_type] = doc_data[element_type].append(pd.Series([element.text]), ignore_index=True)
+        doc_data = doc_data.fillna(method='ffill')
+
+        
+    """     for element in doc_elements:
+        # This is where it makes sense to have classes of document types. 
+        # Option for user to select what element types are allowed. They are parameters for the underlying document type (types/classes)
+        # Maybe they don't actually need to be distinct types. maybe storing the metadata about e.g. how many of each of the Element objects:
+        # 
+        #if isinstance(element, NarrativeText) and sentence_count(element.text) > 2:
+        #doc_data = pd.concat([doc_data, pd.Series([format("{0}: \n{1}", element.id, element.text)])])
+        doc_data = pd.concat([doc_data, pd.Series("{0}: \n{1}".format(element.id, element.text))])
+
+
+    """
+
+    st.table(doc_data)
+
     parsed_pdf = pd.read_csv("./data/parsed_pdf.csv")
     # show to user the processed pdf. get confirmation before adding to weaviate
     st.table(parsed_pdf)
     st.button(label="upload to database",on_click=helper.send_to_weaviate(parsed_pdf))
     
+
+
+
+
+
 # show all items in database
 ## display a new page
+
+
+
+
+
+
+
+
+
 
 
 
