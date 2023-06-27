@@ -1,0 +1,3 @@
+"unstructured[local-inference]"
+langchain
+weaviate-client
