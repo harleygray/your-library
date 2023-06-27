@@ -1,15 +1,21 @@
 from urllib import parse
 import streamlit as st
-import helper
+import src.helper
 import pandas as pd
 import numpy as np
+
+
 
 from unstructured.partition.auto import partition
 from unstructured.documents.elements import *
 from unstructured.partition.text_type import sentence_count
 
+
+
 st.title("your library")
 st.markdown("upload any document to store its meaning")
+# need to install pip package to use this 
+st.write(src.helper.format_for_viewing())
 
 ## Upload any document
 raw_document = st.file_uploader("")

@@ -22,8 +22,8 @@ def fetch_from_weaviate(query):
     return graphql_response
 
 
-def format_for_viewing(graphql_response):
-    return ""
+def format_for_viewing():
+    return "[formatted_text]"
 
 def summarise_embeds(graphql_response):
     # add new column to graphql_response with summaries
