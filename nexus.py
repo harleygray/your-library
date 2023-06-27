@@ -64,7 +64,7 @@ if raw_document is not None:
     parsed_pdf = pd.read_csv("./data/parsed_pdf.csv")
     # show to user the processed pdf. get confirmation before adding to weaviate
     st.table(parsed_pdf)
-    st.button(label="upload to database",on_click=helper.send_to_weaviate(parsed_pdf))
+    st.button(label="upload to database",on_click=src.helper.send_to_weaviate(parsed_pdf))
     
 
 
