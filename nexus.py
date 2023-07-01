@@ -18,7 +18,7 @@ st.markdown("upload any document to store its meaning")
 st.write(helper.format_for_viewing())
 
 ## Upload any document
-raw_document = st.file_uploader("")
+raw_document = st.file_uploader("upload")
 if raw_document is not None:
     st.write("Success: ", raw_document.name," uploaded!")
     doc_elements = partition(file=raw_document)
@@ -34,18 +34,30 @@ if raw_document is not None:
                              "Header", 
                              "Footer"])
 
+    for element in doc_elements:
+        element_type = type(element).__name__
+        if element_type in doc_data.columns:
+            new_row = pd.DataFrame({element_type: [element.text]})
+            doc_data[element_type] = pd.concat([doc_data[element_type], new_row], ignore_index=True)
     # Create a DataFrame for each type of element
     #df = pd.DataFrame()
     """     for element in doc_elements:
         element_type = type(element).__name__
-        doc_data[element_type] = pd.concat(doc_data[element_type],element.text, ignore_index=True) """
+        doc_data[element_type] = pd.concat(doc_data[element_type],pd.Series([element.text]), ignore_index=True) """
 
-    for element in doc_elements:
-        element_type = str(type(element).__name__)
-
-        doc_data[element_type] = doc_data[element_type].append(pd.Series([element.text]), ignore_index=True)
-        doc_data = doc_data.fillna(method='ffill')
-
+    
+    # For now, only put NarrativeText in
+#    for element in doc_elements:
+#        element_type = str(type(element).__name__)
+#        if element_type == 'NarrativeText':
+#            new_row = pd.DataFrame({element_type: [element.text]})
+#            #doc_data[element_type] = pd.concat([doc_data[element_type], new_row], ignore_index=True)
+#            new_row
+#            doc_data
+#
+#            #doc_data = doc_data.fillna(method='ffill')
+#            element_type
+#            element.text
         
     """     for element in doc_elements:
         # This is where it makes sense to have classes of document types. 
@@ -59,7 +71,7 @@ if raw_document is not None:
 
     """
 
-    st.table(doc_data)
+    st.table(doc_data['NarrativeText'])
 
     parsed_pdf = pd.read_csv("./data/parsed_pdf.csv")
     # show to user the processed pdf. get confirmation before adding to weaviate
