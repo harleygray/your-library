@@ -1,0 +1,7 @@
+name: your-library
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python

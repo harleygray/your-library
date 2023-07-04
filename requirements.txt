@@ -1,3 +1,5 @@
 unstructured[local-inference]
 langchain
 weaviate-client
+dotenv
+ipykernel
