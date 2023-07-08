@@ -98,12 +98,11 @@ if raw_document is not None:
     st.write("Success: ", raw_document.name," uploaded!")
     doc_elements = partition(file=raw_document)
     data_objects = stage_for_weaviate(doc_elements)
+    st.button(label="upload to database",on_click=upload_to_weaviate(data_objects, filename=raw_document.name))  
     #st.write("keys of uploaded doc:", data_objects[0].keys())
     # show to user the text of processed pdf. get confirmation before adding to weaviate
     st.table(pd.DataFrame([data_object['text'] for data_object in data_objects]).iloc[0:10] )
-    
-if data_objects is not None:
-        st.button(label="upload to database",on_click=upload_to_weaviate(data_objects, filename=raw_document.name))  
+        
 
 
 
