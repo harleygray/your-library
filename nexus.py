@@ -1,83 +1,109 @@
 from urllib import parse
 import streamlit as st
 import helper
+from dotenv import load_dotenv
+import os
 import pandas as pd
-import numpy as np
-
-
+import json
+from datetime import date
 
 from unstructured.partition.auto import partition
 from unstructured.documents.elements import *
 from unstructured.partition.text_type import sentence_count
+from unstructured.staging.weaviate import create_unstructured_weaviate_class, stage_for_weaviate
 
+import weaviate
+from weaviate.util import generate_uuid5
+load_dotenv()
 
+WEAVIATE_URL = os.getenv("WEAVIATE_URL")
+WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY")
+OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 
 st.title("your library")
-st.markdown("upload any document to store its meaning")
+#
 # need to install pip package to use this 
-st.write(helper.format_for_viewing())
+# st.write(helper.format_for_viewing())
 
+
+# Set up UnstructuredDocument class for Weaviate schema
+unstructured_class = {
+    'class': 'UnstructuredDocument',
+    'description': 'General class for all documents (todo: add more specific classes)',
+    'properties': [
+        {'name': 'text', 'dataType': ['text']},
+        {'name': 'category', 'dataType': ['text']},
+        {'name': 'filename', 'dataType': ['text']},
+        {'name': 'file_directory', 'dataType': ['text']},
+        {'name': 'date', 'dataType': ['text']},
+        {'name': 'filetype', 'dataType': ['text']},
+        {'name': 'attached_to_filename', 'dataType': ['text']},
+        {'name': 'page_number', 'dataType': ['int']},
+        {'name': 'page_name', 'dataType': ['text']},
+        {'name': 'url', 'dataType': ['text']},
+        {'name': 'sent_from', 'dataType': ['text']},
+        {'name': 'sent_to', 'dataType': ['text']},
+        {'name': 'subject', 'dataType': ['text']},
+        {'name': 'header_footer_type', 'dataType': ['text']},
+        {'name': 'text_as_html', 'dataType': ['text']},
+        {'name': 'regex_metadata', 'dataType': ['text']},
+        {'name': 'tags', 'dataType': ['text']},
+        {'name': 'upload_note', 'dataType': ['text']},
+    ],
+    'vectorizer': 'text2vec-openai', 
+    "moduleConfig": {
+        "text2vec-openai": {
+            "vectorizeClassName": False
+        }
+    },
+}
+
+# Initialize Weaviate client
+client = weaviate.Client(
+    url=WEAVIATE_URL,
+    auth_client_secret=weaviate.AuthApiKey(api_key=WEAVIATE_API_KEY),
+    additional_headers= {
+        "X-OpenAI-Api-Key": OPENAI_API_KEY,
+    }
+)
+
+# Test tags
+upload_note = "hello weaviate"
+tags = "test, weaviate, python"
+
+# store in helper.py
+def upload_to_weaviate(data_objects, filename):
+    with client.batch(batch_size=10) as batch:
+        for i, d in enumerate(data_objects):  
+            properties = {
+                'category': d['category'],
+                'text': d['text'],
+                'filename': filename,
+                'page_number': d['page_number'],
+                'filetype': d['filetype'],
+                'date': date.today().strftime("%Y-%m-%d"),
+                'upload_note': upload_note, # testing
+                'tags': tags # testing
+            }
+            batch.add_data_object(
+                properties,
+                'UnstructuredDocument',
+                uuid=generate_uuid5(properties),
+            )
+
+data_objects = None
 ## Upload any document
-raw_document = st.file_uploader("upload")
+raw_document = st.file_uploader("upload any document to store its meaning")
 if raw_document is not None:
     st.write("Success: ", raw_document.name," uploaded!")
     doc_elements = partition(file=raw_document)
-    doc_data = pd.DataFrame(columns=
-                            ["Text",
-                             "FigureCaption", 
-                             "NarrativeText", 
-                             "ListItem", 
-                             "Title", 
-                             "Address", 
-                             "Table", 
-                             "PageBreak", 
-                             "Header", 
-                             "Footer"])
-
-    for element in doc_elements:
-        element_type = type(element).__name__
-        if element_type in doc_data.columns:
-            new_row = pd.DataFrame({element_type: [element.text]})
-            doc_data[element_type] = pd.concat([doc_data[element_type], new_row], ignore_index=True)
-    # Create a DataFrame for each type of element
-    #df = pd.DataFrame()
-    """     for element in doc_elements:
-        element_type = type(element).__name__
-        doc_data[element_type] = pd.concat(doc_data[element_type],pd.Series([element.text]), ignore_index=True) """
-
+    data_objects = stage_for_weaviate(doc_elements)
+    #st.write("keys of uploaded doc:", data_objects[0].keys())
+    # show to user the text of processed pdf. get confirmation before adding to weaviate
+    st.table(pd.DataFrame([data_object['text'] for data_object in data_objects]).iloc[0:10] )
     
-    # For now, only put NarrativeText in
-#    for element in doc_elements:
-#        element_type = str(type(element).__name__)
-#        if element_type == 'NarrativeText':
-#            new_row = pd.DataFrame({element_type: [element.text]})
-#            #doc_data[element_type] = pd.concat([doc_data[element_type], new_row], ignore_index=True)
-#            new_row
-#            doc_data
-#
-#            #doc_data = doc_data.fillna(method='ffill')
-#            element_type
-#            element.text
-        
-    """     for element in doc_elements:
-        # This is where it makes sense to have classes of document types. 
-        # Option for user to select what element types are allowed. They are parameters for the underlying document type (types/classes)
-        # Maybe they don't actually need to be distinct types. maybe storing the metadata about e.g. how many of each of the Element objects:
-        # 
-        #if isinstance(element, NarrativeText) and sentence_count(element.text) > 2:
-        #doc_data = pd.concat([doc_data, pd.Series([format("{0}: \n{1}", element.id, element.text)])])
-        doc_data = pd.concat([doc_data, pd.Series("{0}: \n{1}".format(element.id, element.text))])
-
-
-    """
-
-    st.table(doc_data['NarrativeText'])
-
-    parsed_pdf = pd.read_csv("./data/parsed_pdf.csv")
-    # show to user the processed pdf. get confirmation before adding to weaviate
-    st.table(parsed_pdf)
-    st.button(label="upload to database",on_click=helper.send_to_weaviate(parsed_pdf))
-    
+if data_objects is not None:
+        st.button(label="upload to database",on_click=upload_to_weaviate(data_objects, filename=raw_document.name))  
 
 
 
@@ -103,8 +129,8 @@ if raw_document is not None:
 
 
 # set a goal, mindfully
-st.header("Current goal")
-st.text("Assemble the fullstack skeleton")
+# st.header("Current goal")
+# st.text("Assemble the fullstack skeleton")
 
 # add new note
 user_input = st.text_input("add new note")

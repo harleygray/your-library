@@ -1,13 +1,13 @@
 to-do list
+✔️ download all dependencies (weaviate langchain unstructured)
+✔️ understand shchemas and their relevance for uploading to weaviate
+✔️ mvp document import (general unstructured document) live on app
+✔️ learn how to show a new page in streamlit
 ✔️ extract date uploaded metadata from uploaded file
+✔️ order to-do list by priority
 allow optional user note on upload
 optional tag (user  input)
-✔️ download all dependencies (weaviate langchain unstructured) - difficult to do on laptop
-✔️ parse a pdf document using Unstructured
-order to-do list by priority
-✔️ understand shchemas and their relevance for uploading to weaviate
-✔️ learn how to show a new page in streamlit
-logins and separate databases per user
-mvp document import (general unstructured document) live on app
 one unique class in the schema (e.g. abc article)
-mvp youtube import (whisper, identify distinct people and store info to class)
+allow user to modify (delete or edit) parts of uploaded documents before adding to weaviate
+logins and separate databases per user
+mvp youtube import (whisper then identify distinct people and store info to class)
