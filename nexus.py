@@ -96,7 +96,6 @@ def upload_to_weaviate(data_objects, filename, user_note, user_tags):
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
 document_contents = st.empty()
 
-
 # Initialization
 if 'data_objects' not in st.session_state:
     st.session_state.data_objects = None
@@ -114,13 +113,20 @@ if 'upload_button' not in st.session_state:
     st.session_state.upload_button = st.empty()
 
 if 'document_contents' not in st.session_state:
-    st.session_state.document_contents = None
+    st.session_state.document_contents = st.empty()
 
 if 'document_name' not in st.session_state:
     st.session_state.document_name = None
 
 if 'raw_document' not in st.session_state:
     st.session_state.raw_document = None
+
+if 'content_data' not in st.session_state:
+    st.session_state.content_data = None
+
+if 'content_widget' not in st.session_state:
+    st.session_state.content_widget = st.empty()
+
 
 def clear_user_input(input_note, input_tags, upload_button):
     input_note.empty()
@@ -131,16 +137,63 @@ def clear_user_input(input_note, input_tags, upload_button):
     st.session_state.upload_button = False
 
 
+def display_contents(df, table_widget):
+    if df is not None and isinstance(df, pd.DataFrame):
+        return table_widget.table(df.iloc[0:10])
+    elif df is None and not table_widget==st.empty:
+        return table_widget.empty()
+    elif table_widget==st.empty():
+        return table_widget
+
+
+# cache the function so that this only runs with a new document upload
+@st.cache_data
+def process_raw_document():
+    if 'raw_document' not in st.session_state:
+        st.session_state.raw_document = None
+
+    if st.session_state.raw_document is not None:
+        # display message that document uploaded and is processing
+        status_message = st.empty()
+        status_text = st.session_state.raw_document.name +  " uploaded! processing now..."
+        status_message.write(status_text)
+
+        # process document
+        doc_elements = partition(file=st.session_state.raw_document)
+        data_objects = stage_for_weaviate(doc_elements)
+
+        # Save the results in the session state
+        st.session_state.processed = True
+        st.session_state.data_objects = data_objects
+        st.session_state.document_name = st.session_state.raw_document.name
+        st.session_state.display_contents = pd.DataFrame({
+                'category': [data_object['category'] for data_object in st.session_state.data_objects],
+                'text': [data_object['text'] for data_object in st.session_state.data_objects]})
+        
+        display_contents(
+            df = st.session_state.content_data,
+            table_widget = document_contents
+        )
+
+        
+        status_message.empty()
 
     
 
-st.session_state.raw_document = st.file_uploader("upload any document to store its meaning")
+st.file_uploader(
+    "upload any document to store its meaning", 
+    key="raw_document",
+    on_change=process_raw_document
+)
 
-
+document_contents = st.empty()
+display_contents(
+    df = st.session_state.content_data,
+    table_widget = document_contents
+)
 # function to process document and display contents
 if st.session_state.raw_document is not None:
     status_message = st.empty()
-    st.write("test")
     status_text = st.session_state.raw_document.name +  " uploaded! processing now..."
     status_message.write(status_text)
     doc_elements = partition(file=st.session_state.raw_document)
