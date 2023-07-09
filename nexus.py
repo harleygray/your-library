@@ -7,6 +7,8 @@ import pandas as pd
 import json
 from datetime import date
 
+
+
 from unstructured.partition.auto import partition
 from unstructured.documents.elements import *
 from unstructured.partition.text_type import sentence_count
@@ -20,9 +22,12 @@ WEAVIATE_URL = os.getenv("WEAVIATE_URL")
 WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY")
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 
+
+st.set_page_config(
+    page_icon='📚', 
+    page_title="your library")
+
 st.title("your library")
-#
-# need to install pip package to use this 
 # st.write(helper.format_for_viewing())
 
 
@@ -67,12 +72,9 @@ client = weaviate.Client(
     }
 )
 
-# Test tags
-upload_note = "hello weaviate"
-tags = "test, weaviate, python"
 
 # store in helper.py
-def upload_to_weaviate(data_objects, filename):
+def upload_to_weaviate(data_objects, filename, user_note, user_tags):
     with client.batch(batch_size=10) as batch:
         for i, d in enumerate(data_objects):  
             properties = {
@@ -82,8 +84,8 @@ def upload_to_weaviate(data_objects, filename):
                 'page_number': d['page_number'],
                 'filetype': d['filetype'],
                 'date': date.today().strftime("%Y-%m-%d"),
-                'upload_note': upload_note, # testing
-                'tags': tags # testing
+                'upload_note': user_note,
+                'tags': user_tags 
             }
             batch.add_data_object(
                 properties,
@@ -91,25 +93,127 @@ def upload_to_weaviate(data_objects, filename):
                 uuid=generate_uuid5(properties),
             )
 
-data_objects = None
-## Upload any document
-raw_document = st.file_uploader("upload any document to store its meaning")
-if raw_document is not None:
-    st.write("Success: ", raw_document.name," uploaded!")
-    doc_elements = partition(file=raw_document)
+input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
+document_contents = st.empty()
+
+
+# Initialization
+if 'data_objects' not in st.session_state:
+    st.session_state.data_objects = None
+
+if "processed" not in st.session_state:
+    st.session_state.processed = False
+
+if 'input_tags' not in st.session_state:
+    st.session_state.input_tags = st.empty()
+
+if 'input_note' not in st.session_state:
+    st.session_state.input_note = st.empty()
+
+if 'upload_button' not in st.session_state:
+    st.session_state.upload_button = st.empty()
+
+if 'document_contents' not in st.session_state:
+    st.session_state.document_contents = None
+
+if 'document_name' not in st.session_state:
+    st.session_state.document_name = None
+
+if 'raw_document' not in st.session_state:
+    st.session_state.raw_document = None
+
+def clear_user_input(input_note, input_tags, upload_button):
+    input_note.empty()
+    input_tags.empty()
+    upload_button.empty()
+    st.session_state.input_tags = False
+    st.session_state.input_note = False
+    st.session_state.upload_button = False
+
+
+
+    
+
+st.session_state.raw_document = st.file_uploader("upload any document to store its meaning")
+
+
+# function to process document and display contents
+if st.session_state.raw_document is not None:
+    status_message = st.empty()
+    st.write("test")
+    status_text = st.session_state.raw_document.name +  " uploaded! processing now..."
+    status_message.write(status_text)
+    doc_elements = partition(file=st.session_state.raw_document)
     data_objects = stage_for_weaviate(doc_elements)
-    st.button(label="upload to database",on_click=upload_to_weaviate(data_objects, filename=raw_document.name))  
-    #st.write("keys of uploaded doc:", data_objects[0].keys())
-    # show to user the text of processed pdf. get confirmation before adding to weaviate
-    st.table(pd.DataFrame([data_object['text'] for data_object in data_objects]).iloc[0:10] )
+    # Save the results in the session state
+    st.session_state.processed = True
+    st.session_state.data_objects = data_objects
+    st.session_state.document_name = st.session_state.raw_document.name
+    st.session_state.document_contents = pd.DataFrame({
+    'category': [data_object['category'] for data_object in st.session_state.data_objects],
+    'text': [data_object['text'] for data_object in st.session_state.data_objects]
+    })
+    status_message.empty()
+
+    
+    if st.session_state.document_contents is not None and isinstance(st.session_state.document_contents, pd.DataFrame):
+        st.table(st.session_state.document_contents.iloc[0:10])
+
+
+
+if st.session_state.processed:
+    status_message = st.empty()
+    status_text = st.session_state.document_name +  " processed! add notes or tags, then upload to library"
+    status_message.write(status_text)
+
+    # display on same line
+    input_note, input_tags, upload_button = st.columns(3)
+    st.session_state.input_note = True
+    st.session_state.input_tags = True
+    st.session_state.upload_button = True
+
+# input field for user to add notes to document
+if st.session_state.input_note is True and st.session_state.processed:
+    with input_note:
+        st.session_state.input_note = st.text_input("document notes")
         
 
+# input field for user to add tags to document
+if st.session_state.input_tags is True and st.session_state.processed:
+    with input_tags:
+        st.session_state.input_tags = st.text_input("tags")
+
+# button to upload the cleaned document to Weaviate
+if st.session_state.upload_button is True and st.session_state.processed:
+    with upload_button:
+        if st.button('     upload to library'):
+            upload_to_weaviate(
+                st.session_state['data_objects'], 
+                filename=st.session_state.raw_document.name,
+                user_note=st.session_state.input_note,
+                user_tags=st.session_state.input_tags)
+            clear_user_input(input_note, input_tags, upload_button)
+            status_message = st.empty()
+            # set raw_document, data_objects, df, tags, and user_note to None
+            raw_document = None
+            st.session_state.data_objects = None
+            
+            
+            st.session_state.df = None
+
+            st.session_state.processed = False
+            st.session_state.document_contents = None
+            st.success('document uploaded to library successfully!')
 
 
 
 
-# show all items in database
-## display a new page
+    
+
+# once document is uploaded or changed, process it and display the contents
+# if st.session_state.raw_document is not None:
+#     process_document()
+#     st.table(st.session_state.document_contents.iloc[0:10])
 
 
 
@@ -117,24 +221,6 @@ if raw_document is not None:
 
 
 
-
-
-
-
-
-
-
-# raw_pdf is now a variable
-
-
-# set a goal, mindfully
-# st.header("Current goal")
-# st.text("Assemble the fullstack skeleton")
-
-# add new note
-user_input = st.text_input("add new note")
-if user_input is not None:
-    st.write('User input: ', user_input)
 
 
 
@@ -143,6 +229,20 @@ if user_input is not None:
 current_list = pd.read_csv("./data/notes.csv")
 
 # function to append new entry to .csv file
+def append_to_csv(data):
+    with open('./data/notes.csv', 'a') as f:
+        f.write('\n' + data)
+
+# user input field to use for appending to .csv file
+user_input = st.text_input("add a note to your library")
+
+# button to append user input to .csv file
+if st.button('add to to-do list'):
+    append_to_csv(user_input)
+    current_list = pd.read_csv("./data/notes.csv")
+    st.success('note added to library successfully!')
+    
+
 
 
 
