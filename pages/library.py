@@ -35,8 +35,8 @@ client = weaviate.Client(
 schema = client.schema.get()
 # Get class list from schema
 class_list = [class_dict['class'] for class_dict in schema['classes']]
-
-selected_class = st.selectbox('Select a class', class_list)
+st.write("For now only the ABCNewsArticle class is available")
+selected_class = st.selectbox('Select a class', ["ABCNewsArticle"])
 
 # Now you can use selected_class in your application logic
 st.write(f"You selected {selected_class}")
