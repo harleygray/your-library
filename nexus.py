@@ -69,17 +69,17 @@ client = weaviate.Client(
     }
 )
 
-def set_initial_state():
-    keys = ['data_objects', 'processed', 'document_contents', 'document_name', 
-            'raw_document', 'file_uploader_key']
-    default_values = [
-        None, False, None, None, 
-        None, str(uuid.uuid4())]
+# Set initial state
+keys = ['data_objects', 'processed', 'document_contents', 'document_name', 
+        'raw_document', 'file_uploader_key']
+default_values = [
+    None, False, None, None, 
+    None, str(uuid.uuid4())]
 
-    for key, default_value in zip(keys, default_values):
-        if key not in st.session_state:
-            st.session_state[key] = default_value
-set_initial_state() 
+for key, default_value in zip(keys, default_values):
+    if key not in st.session_state:
+        st.session_state[key] = default_value
+
 
 
 def upload_to_weaviate(data_objects, filename, user_note, user_tags):
@@ -103,8 +103,14 @@ def upload_to_weaviate(data_objects, filename, user_note, user_tags):
 
 
 def reset_initial_state():
-    set_initial_state()
-    st.experimental_rerun()
+    keys = ['data_objects', 'processed', 'document_contents', 'document_name', 
+            'raw_document', 'file_uploader_key']
+    reset_values = [
+        None, False, None, None, 
+        None, str(uuid.uuid4())]
+
+    for key, reset_value in zip(keys, reset_values):
+        st.session_state[key] = reset_value
 
 # Display table when there's data
 def document_contents_widget():
@@ -144,6 +150,8 @@ def on_file_upload():
         st.session_state.data_objects = data_objects
         st.session_state.document_name = document_name
         st.session_state.document_contents = df
+
+
 
 st.session_state.raw_document = st.file_uploader(
     "upload any document to store its meaning",
@@ -189,7 +197,6 @@ if st.session_state.processed:
             # Refresh page ready for another upload
             reset_initial_state()
             st.experimental_rerun()
-
 # import current file noting metadata.
 current_list = pd.read_csv("./data/notes.csv")
 
