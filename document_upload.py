@@ -18,6 +18,7 @@ import weaviate
 from weaviate.util import generate_uuid5
 load_dotenv()
 
+
 WEAVIATE_URL = os.getenv("WEAVIATE_URL")
 WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY")
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
@@ -26,6 +27,7 @@ st.set_page_config(
     page_icon='📚', 
     page_title="your library",
     initial_sidebar_state="collapsed")
+
 
 st.title("your library")
 
