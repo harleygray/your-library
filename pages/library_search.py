@@ -13,7 +13,8 @@ st.set_page_config(
     page_icon='📚', 
     page_title="your library",
     initial_sidebar_state="collapsed")
-st.header("library contents")
+
+st.header("library search")
 st.write("search the contents of your library via semantic search")
 
 # url to embed into personal library

@@ -29,7 +29,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed")
 
 
-st.title("your library")
+st.header("document upload")
 
 # Set up UnstructuredDocument class for Weaviate schema
 unstructured_class = {
