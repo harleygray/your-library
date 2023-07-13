@@ -135,23 +135,29 @@ with search_button:
         def aggregate_texts(series):
             return '\n'.join(f"{i+1}. {text}" for i, text in enumerate(series))
 
-        # group by tags, input notes, and article names, and aggregate the text
-        grouped_df = df.groupby(['tags', 'upload_note', 'article_name'])['text'].agg(aggregate_texts).reset_index()
-        
-        results_df = st.session_state.results_table
-        
-        for _, group in grouped_df.groupby(['tags', 'upload_note', 'article_name']):
-            # Create a markdown string for the group header
-            group_header = f"`Article Name: ` {group['article_name'].iloc[0]}   \n`Tags: ` {group['tags'].iloc[0]}  \n`Upload Note: ` {group['upload_note'].iloc[0]}"
-            # Create a markdown string for the ordered list of texts
-            text_list = "\n".join(f"{text}" for text in group['text'])
-            # Append the group header and text list to the results DataFrame
-            results_df = pd.concat([results_df, pd.DataFrame([{'group_header': group_header, 'text_list': text_list}])], ignore_index=True)
+        if df.empty:
+            group_header = f"No results found in library similar to `{st.session_state.concepts_input}`"
+            text_list = ""
+            results_df = pd.concat([st.session_state.results_table, pd.DataFrame([{'group_header': group_header, 'text_list': text_list}])], ignore_index=True)
+            # Save the results DataFrame to the Streamlit session state
+            st.session_state.results_table = results_df
+        else:
+            # group by tags, input notes, and article names, and aggregate the text
+            grouped_df = df.groupby(['tags', 'upload_note', 'article_name'])['text'].agg(aggregate_texts).reset_index()
+            results_df = st.session_state.results_table
+            
+            for _, group in grouped_df.groupby(['tags', 'upload_note', 'article_name']):
+                # Create a markdown string for the group header
+                group_header = f"`Article Name: ` {group['article_name'].iloc[0]}   \n`Tags: ` {group['tags'].iloc[0]}  \n`Upload Note: ` {group['upload_note'].iloc[0]}"
+                # Create a markdown string for the ordered list of texts
+                text_list = "\n".join(f"{text}" for text in group['text'])
+                # Append the group header and text list to the results DataFrame
+                results_df = pd.concat([results_df, pd.DataFrame([{'group_header': group_header, 'text_list': text_list}])], ignore_index=True)
+                 # Save the results DataFrame to the Streamlit session state
+                st.session_state.results_table = results_df
 
-
         
-        # Save the results DataFrame to the Streamlit session state
-        st.session_state.results_table = results_df
+       
 
 for i in range(len(st.session_state.results_table)):
     st.markdown(st.session_state.results_table['group_header'][i])
