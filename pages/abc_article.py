@@ -41,6 +41,8 @@ abc_class = {
         {'name': 'text', 'dataType': ['text']},
         {'name': 'category', 'dataType': ['text']},
         {'name': 'article_name', 'dataType': ['text']},
+        {'name': 'author_list', 'dataType': ['text']}, #
+        {'name': 'publisher', 'dataType': ['text']}, #
         {'name': 'date', 'dataType': ['text']},
         {'name': 'url', 'dataType': ['text']},
         {'name': 'tags', 'dataType': ['text']},
@@ -52,7 +54,6 @@ abc_class = {
             "vectorizeClassName": False
         }
     },
-
 }
 
 # Initialize Weaviate client
@@ -75,16 +76,148 @@ for key, default_value in zip(keys, default_values):
     if key not in st.session_state:
         st.session_state[key] = default_value
 
+def cleanse_data(data_objects):
+    # Identify article name and change its category
+    data_objects[0]['category'] = 'ArticleName'
+
+    # Identify authors and change category
+    # Iterate over the data_objects list
+    for item in data_objects:
+        # Check if the category of the current item is 'Title' and the text starts with 'By '
+        if item['category'] == 'Title' and item['text'].startswith('By '):
+            # If it is, change the category to 'AuthorList' and remove 'By ' from the text
+            item['category'] = 'AuthorList'
+            item['text'] = item['text'][3:]  # Remove 'By ' from the start of the text
+            # If there are exactly two authors (i.e., there is no comma and there is ' and' in the text)
+            if ',' not in item['text'] and ' and' in item['text']:
+                # Replace ' and' with ', '
+                item['text'] = item['text'].replace(' and', ',')
+            else:
+                # If ' and' is in the text, remove it
+                item['text'] = item['text'].replace(' and', '').strip()
+            break
+
+
+    # Find the key points and assign to category 'KeyPoint'
+    # Define the start of the pattern
+    start_pattern = {"category": "Title", "text": "Key points:"}
+
+    # Iterate over the data_objects list
+    i = 0
+    while i < len(data_objects):
+        # Check if the current element's 'category' and 'text' match those in the start pattern
+        if data_objects[i].get('category') == start_pattern['category'] and data_objects[i].get('text') == start_pattern['text']:
+            # If the start of the pattern is matched, remove this element
+            del data_objects[i]
+            # Then change the category of the following 'ListItem' elements to 'KeyPoint'
+            while i < len(data_objects) and data_objects[i]["category"] == "ListItem":
+                data_objects[i]["category"] = "KeyPoint"
+                i += 1
+        else:
+            i += 1
+
+
+    # Remove the 'Read more' section
+    # Define the start of the sequence
+    start_sequence = {"category": "Title", "text": "Read more about the Indigenous Voice to Parliament:"}
+
+    # Iterate over the data_objects list
+    i = 0
+    while i < len(data_objects):
+        # Check if the current element's 'category' and 'text' match those in the start sequence
+        if data_objects[i].get('category') == start_sequence['category'] and data_objects[i].get('text') == start_sequence['text']:
+            # If the start of the sequence is matched, remove this element
+            del data_objects[i]
+            # Then remove the following 'ListItem' elements
+            while i < len(data_objects) and data_objects[i]["category"] == "ListItem":
+                del data_objects[i]
+        else:
+            i += 1
+
+    # Remove elements matching the pattern "Title: Loading..."
+    # Define the pattern to remove
+    remove_pattern = {"category": "Title", "text": "Loading..."}
+
+    # Filter out the elements that match the remove pattern
+    data_objects = [d for d in data_objects if not (d.get('category') == remove_pattern['category'] and d.get('text') == remove_pattern['text'])]
+
+
+    # Remove rows matching the pattern "ABC " at the beginning and ")" at the end
+    #data_objects = [
+    #    item for item in data_objects if 
+    #    not (item['text'].startswith('ABC ') and item['text'].endswith(')') and '(' not in item['text'])
+    #]
+
+    # Cut off after "NarrativeText: If you're ..."
+    # Define the pattern to stop at
+    stop_pattern = {"category": "NarrativeText", "text": "If you're unable to load the form, you can access it here."}
+
+    # Find the index of the element with the stop pattern
+    stop_index = next((i for i, d in enumerate(data_objects) if d.get('category') == stop_pattern['category'] and d.get('text') == stop_pattern['text']), None)
+
+    # If the stop pattern was found, slice the list up to that index
+    if stop_index is not None:
+        data_objects = data_objects[:stop_index]
+
+    # Cut off after "NarrativeText: If you're ..."
+    # Define the pattern to stop at
+    stop_pattern = {"category": "Title", "text": "Share"}
+
+    # Find the index of the element with the stop pattern
+    stop_index = next((i for i, d in enumerate(data_objects) if d.get('category') == stop_pattern['category'] and d.get('text') == stop_pattern['text']), None)
+
+    # If the stop pattern was found, slice the list up to that index
+    if stop_index is not None:
+        data_objects = data_objects[:stop_index]
+
+
+
+    # Identify publishing outlet
+    # Iterate over the data_objects list
+    for item in data_objects:
+        # Check if the category of the current item is 'Title' and the text starts with 'ABC '
+        if item['category'] == 'Title' and item['text'].startswith('ABC '):
+            # If it is, change the category to 'PublishingOutlet' and keep the text as it is
+            item['category'] = 'PublishingOutlet'
+            break
+
+
+    # Remove fluff at start of article
+    # Remove rows matching the pattern "ABC " at the beginning and ")" at the end
+    data_objects = [
+        item for item in data_objects if not (
+            item['text'] == 'updated' or
+            item['text'] == 'Copy link' or
+            item['text'] == 'Posted' or
+            item['text'] == 'Help keep family & friends informed by sharing this article' or
+            item['text'] == 'Link copied' or
+            item['text'].startswith('abc.net.au') or 
+            (item['text'].startswith('ABC ') and item['text'].endswith(')') and '(' not in item['text']) or
+            (item['text'].startswith('Supplied: ') and item['text'].endswith(')') and '(' not in item['text'])
+        )
+    ]
+
+    return data_objects
 
 
 def upload_to_weaviate(data_objects, user_note, user_tags):
+    article_name = next((data_object['text'] for data_object in data_objects if data_object['category'] == 'ArticleName'), None)
+    author_list = next((data_object['text'] for data_object in data_objects if data_object['category'] == 'AuthorList'), None)
+    publisher = next((data_object['text'] for data_object in data_objects if data_object['category'] == 'PublishingOutlet'), None)
+
+
+    # Remove the 'AuthorList' and 'PublishingOutlet' data objects
+    data_objects = [data_object for data_object in data_objects if data_object['category'] not in ['ArticleName', 'AuthorList', 'PublishingOutlet']]
+
     with client.batch(batch_size=10) as batch:
         for i, d in enumerate(data_objects):  
             properties = {
                 'category': d['category'],
                 'text': d['text'],
-                'article_name': data_objects[0]['text'],
+                'article_name': article_name,
                 'url': st.session_state.article_url,
+                'author_list': author_list,
+                'publisher': publisher,
                 'date': date.today().strftime("%Y-%m-%d"),
                 'upload_note': user_note,
                 'tags': user_tags 
@@ -122,6 +255,9 @@ def process_article(html_content):
         # Process document
         doc_elements = partition_html(text=html_content) 
         data_objects = stage_for_weaviate(doc_elements)
+
+        # Cleanse data
+        data_objects = cleanse_data(data_objects)
 
         # Create a DataFrame from the data objects
         df = pd.DataFrame({
@@ -164,7 +300,7 @@ if st.session_state.data_objects is not None:
 
 table_widget = st.empty()
 document_contents_widget()
-
+cleanse_data_button = st.empty()
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
 
 # Once a document is ready for upload, display a message and input fields
@@ -174,6 +310,22 @@ if st.session_state.processed:
     status_text = "`{0}` processed! add notes or tags, then upload to library".format(st.session_state.document_name)
     status_message.write(status_text)
 
+#    with cleanse_data_button:
+#        if st.button('cleanse data'):
+#            st.session_state.data_objects = cleanse_data(st.session_state.data_objects)
+#            # Create a DataFrame from the data objects
+#            st.session_state.document_contents = pd.DataFrame({
+#                'category': [data_object['category'] for data_object in st.session_state.data_objects],
+#                'text': [data_object['text'] for data_object in st.session_state.data_objects]
+#            })
+#
+#
+#
+#            st.success('data cleansed! refreshing table...')
+#            time.sleep(1)
+#            # Refresh table
+#            table_widget.empty()
+#            document_contents_widget()
     # User input and upload button
     input_note, input_tags, upload_button = st.columns(3)
     with input_note:
