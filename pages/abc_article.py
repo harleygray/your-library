@@ -308,7 +308,6 @@ if st.session_state.data_objects is not None:
 table_widget = st.empty()
 document_contents_widget()
 cleanse_data_button = st.empty()
-st.write(st.session_state.data_editor)
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
 
 # Once a document is ready for upload, display a message and input fields
