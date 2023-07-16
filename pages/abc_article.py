@@ -66,10 +66,10 @@ client = weaviate.Client(
 
 # Set initial state
 keys = ['data_objects', 'processed', 'document_contents', 'document_name', 
-        'article_url', 'article_uploader_key', 'data_editor']
+        'article_url', 'article_uploader_key']
 default_values = [
     None, False, None, None, 
-    None, str(uuid.uuid4())]
+    None, str(uuid.uuid4()), None]
 
 for key, default_value in zip(keys, default_values):
     if key not in st.session_state:
@@ -235,7 +235,7 @@ def reset_initial_state():
             'article_url', 'article_uploader_key', 'data_editor']
     reset_values = [
         None, False, None, None, 
-        None, str(uuid.uuid4())]
+        None, str(uuid.uuid4()), {}]
 
     for key, reset_value in zip(keys, reset_values):
         st.session_state[key] = reset_value
@@ -292,7 +292,8 @@ def on_article_upload():
 
 
 st.session_state.article_url = st.text_input(
-    "paste a link to an ABC news article to store its meaning"
+    "paste a link to an ABC news article to store its meaning",
+    key=st.session_state.article_uploader_key
 )
 
 on_article_upload()
@@ -307,7 +308,6 @@ if st.session_state.data_objects is not None:
 
 table_widget = st.empty()
 document_contents_widget()
-cleanse_data_button = st.empty()
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
 
 # Once a document is ready for upload, display a message and input fields
