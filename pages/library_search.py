@@ -54,36 +54,73 @@ with selected_class:
 
 
 
-# Create a dropdown selector for the class
+import pandas as pd
+import os
 
-# Query Weaviate to get the data objects in the selected class
-objects = (
-    client.query
-    .get(
-        st.session_state.selected_class, 
-        ["tags", "text", "article_name", "date", "url", "upload_note"])
-    .with_where({
-        "path": ["category"],
-        "operator": "Equal",
-        "valueString": "NarrativeText"
-    })
-    .do()
-)
+# Define the path to the .csv file
+csv_path = "./data/ABC_tags.csv"
 
+# Function to run the query and update the .csv file
+def update_csv():
+    # Initialize an empty set to store the unique tags
+    tags = set()
 
-# Extract the unique tags values
-tags = set()
-for obj in objects['data']['Get'][st.session_state.selected_class]:
-    if 'tags' in obj:
-        # Split the tags string into individual tags
-        individual_tags = obj['tags'].split(', ')
-        # Add each tag to the set
-        tags.update(individual_tags)
+    # Initialize the pagination offset
+    offset = 0
 
-# Create a dropdown selector for the tags
-with selected_tag:
-    st.session_state.selected_tag = st.selectbox('Select a tag', list(tags))
+    # Set the number of objects to retrieve per query
+    limit = 100
 
+    # Continue querying until no more objects are returned
+    while True:
+        # Query Weaviate to get the data objects in the selected class
+        objects = (
+            client.query
+            .get(
+                st.session_state.selected_class, 
+                ["tags", "text", "article_name", "date", "url", "upload_note"])
+            .with_where({
+                "path": ["category"],
+                "operator": "Equal",
+                "valueString": "NarrativeText"
+            })
+            .with_limit(limit)
+            .with_offset(offset)
+            .do()
+        )
+
+        # Break the loop if no objects are returned
+        if not objects['data']['Get'][st.session_state.selected_class]:
+            break
+
+        # Extract the unique tags values
+        for obj in objects['data']['Get'][st.session_state.selected_class]:
+            if 'tags' in obj:
+                # Check if tags is a list
+                if isinstance(obj['tags'], list):
+                    # If it's a list, add each tag to the set
+                    tags.update(obj['tags'])
+                elif isinstance(obj['tags'], str):
+                    # If it's a string, split it into individual tags and add them to the set
+                    individual_tags = obj['tags'].split(', ')
+                    tags.update(individual_tags)
+
+        # Increase the offset for the next query
+        offset += limit
+
+    # Save the unique tags to a .csv file
+    pd.DataFrame(list(tags), columns=['Tags']).to_csv(csv_path, index=False)
+
+# Button to run the query and update the .csv file
+if st.button('Update Tags'):
+    update_csv()
+
+# Read the dropdown selector list from the .csv file
+if os.path.exists(csv_path):
+    tags = pd.read_csv(csv_path)['Tags'].tolist()
+    # Create a dropdown selector for the tags
+    with selected_tag:
+        st.session_state.selected_tag = st.selectbox('Select a tag', tags)
 
 
 def reset_results():

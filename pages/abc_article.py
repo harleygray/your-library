@@ -32,7 +32,6 @@ st.set_page_config(
 
 
 st.header("abc article upload")
-
 # Set up ABCNewsArticle class for Weaviate schema
 abc_class = {
     'class': 'ABCNewsArticle',
@@ -67,7 +66,7 @@ client = weaviate.Client(
 
 # Set initial state
 keys = ['data_objects', 'processed', 'document_contents', 'document_name', 
-        'article_url', 'article_uploader_key']
+        'article_url', 'article_uploader_key', 'data_editor']
 default_values = [
     None, False, None, None, 
     None, str(uuid.uuid4())]
@@ -208,7 +207,9 @@ def upload_to_weaviate(data_objects, user_note, user_tags):
 
     # Remove the 'AuthorList' and 'PublishingOutlet' data objects
     data_objects = [data_object for data_object in data_objects if data_object['category'] not in ['ArticleName', 'AuthorList', 'PublishingOutlet']]
-
+    print("article name: ", article_name)
+    print("author list: ", author_list)
+    print("publisher: ", publisher)
     with client.batch(batch_size=10) as batch:
         for i, d in enumerate(data_objects):  
             properties = {
@@ -231,7 +232,7 @@ def upload_to_weaviate(data_objects, user_note, user_tags):
 
 def reset_initial_state():
     keys = ['data_objects', 'processed', 'document_contents', 'document_name', 
-            'article_url', 'article_uploader_key']
+            'article_url', 'article_uploader_key', 'data_editor']
     reset_values = [
         None, False, None, None, 
         None, str(uuid.uuid4())]
@@ -241,10 +242,12 @@ def reset_initial_state():
 
 # Display table when there's data
 def document_contents_widget():
-    if st.session_state.document_contents is None:
+    if st.session_state.data_objects is None:
         table_widget.empty() # If there's no data, clear the placeholder
     else:
-        table_widget.write(st.session_state.document_contents) # Update the placeholder with a table
+        st.data_editor(
+            # show only the text and category columns
+            st.session_state.data_objects, key="data_editor")
 
 # Cached function only runs with a new document upload
 @st.cache_data
@@ -259,13 +262,18 @@ def process_article(html_content):
         # Cleanse data
         data_objects = cleanse_data(data_objects)
 
-        # Create a DataFrame from the data objects
-        df = pd.DataFrame({
-            'category': [data_object['category'] for data_object in data_objects],
-            'text': [data_object['text'] for data_object in data_objects]
-        })
+        # List of columns to remove
+        columns_to_remove = ["filetype", "page_number"]
 
-        return data_objects, df, data_objects[0]['text']
+        # Remove the columns
+        data_objects = [
+            {key: value for key, value in obj.items() if key not in columns_to_remove}
+            for obj in data_objects
+        ]
+
+        # Create a new list of dictionaries with the keys in the order you want
+        data_objects = [{key: obj[key] for key in ["category", "text"]} for obj in data_objects]
+        return data_objects, data_objects[0]['text']
 
 def on_article_upload():
     article_url = st.session_state.article_url
@@ -274,20 +282,19 @@ def on_article_upload():
         # If multiple files are uploaded, only process the last one
         #if isinstance(uploaded_file, list):
         #    article_url = uploaded_file[-1]
-        data_objects, df, document_name = process_article(html_content)
+        data_objects, document_name = process_article(html_content)
 
         # Save the results in the session state
         st.session_state.processed = True
         st.session_state.data_objects = data_objects
         st.session_state.document_name = document_name
-        st.session_state.document_contents = df
 
 
 
 st.session_state.article_url = st.text_input(
-    "paste a link to an ABC news article to store its meaning",
-    key=st.session_state.article_uploader_key
+    "paste a link to an ABC news article to store its meaning"
 )
+
 on_article_upload()
 
 reset_button = st.empty()
@@ -301,6 +308,7 @@ if st.session_state.data_objects is not None:
 table_widget = st.empty()
 document_contents_widget()
 cleanse_data_button = st.empty()
+st.write(st.session_state.data_editor)
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
 
 # Once a document is ready for upload, display a message and input fields
@@ -310,22 +318,6 @@ if st.session_state.processed:
     status_text = "`{0}` processed! add notes or tags, then upload to library".format(st.session_state.document_name)
     status_message.write(status_text)
 
-#    with cleanse_data_button:
-#        if st.button('cleanse data'):
-#            st.session_state.data_objects = cleanse_data(st.session_state.data_objects)
-#            # Create a DataFrame from the data objects
-#            st.session_state.document_contents = pd.DataFrame({
-#                'category': [data_object['category'] for data_object in st.session_state.data_objects],
-#                'text': [data_object['text'] for data_object in st.session_state.data_objects]
-#            })
-#
-#
-#
-#            st.success('data cleansed! refreshing table...')
-#            time.sleep(1)
-#            # Refresh table
-#            table_widget.empty()
-#            document_contents_widget()
     # User input and upload button
     input_note, input_tags, upload_button = st.columns(3)
     with input_note:
@@ -334,6 +326,14 @@ if st.session_state.processed:
         st.session_state.input_tags = st.text_input("tags")
     with upload_button:
         if st.button('     upload to library'):
+            if st.session_state.data_editor['edited_rows']:
+                # If it isn't, iterate over the 'edited_rows'
+                for row_index, changes in st.session_state.data_editor['edited_rows'].items():
+                    # Convert the row index to an integer
+                    row_index = int(row_index)
+                    # Update the corresponding row in 'data_objects' with the changes
+                    for column, new_value in changes.items():
+                        st.session_state.data_objects[row_index][column] = new_value
             upload_to_weaviate(
                 st.session_state.data_objects, 
                 user_note=st.session_state.input_note,
