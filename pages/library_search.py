@@ -149,7 +149,7 @@ with search_button:
         reset_results()
         response = (
             client.query  # start a new query
-            .get("ABCNewsArticle", ["text", "article_name", "upload_note", "tags"])  
+            .get("ABCNewsArticle", ["text", "article_name", "url", "upload_note", "tags"])  
             .with_near_text(nearText)  
             .with_limit(st.session_state.result_limit) 
             .with_where({
@@ -180,12 +180,12 @@ with search_button:
             st.session_state.results_table = results_df
         else:
             # group by tags, input notes, and article names, and aggregate the text
-            grouped_df = df.groupby(['tags', 'upload_note', 'article_name'])['text'].agg(aggregate_texts).reset_index()
+            grouped_df = df.groupby(['tags', 'upload_note', 'url', 'article_name'])['text'].agg(aggregate_texts).reset_index()
             results_df = st.session_state.results_table
             
-            for _, group in grouped_df.groupby(['tags', 'upload_note', 'article_name']):
+            for _, group in grouped_df.groupby(['tags', 'upload_note', 'url', 'article_name']):
                 # Create a markdown string for the group header
-                group_header = f"`Article Name: ` {group['article_name'].iloc[0]}   \n`Tags: ` {group['tags'].iloc[0]}  \n`Upload Note: ` {group['upload_note'].iloc[0]}"
+                group_header = f"`Article Name: ` {group['article_name'].iloc[0]}   \n`URL: ` {group['url'].iloc[0]}  \n`Tags: ` {group['tags'].iloc[0]}  \n`Upload Note: ` {group['upload_note'].iloc[0]}"
                 # Create a markdown string for the ordered list of texts
                 text_list = "\n".join(f"{text}" for text in group['text'])
                 # Append the group header and text list to the results DataFrame
