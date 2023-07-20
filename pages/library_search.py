@@ -131,7 +131,7 @@ concepts_input, result_limit = st.columns(2)
 
 # User input for concepts, comma separated
 with concepts_input:
-    st.session_state.concepts_input = st.text_input("enter search query to use for similarity search", "cost of living").split(", ")
+    st.session_state.concepts_input = st.text_input("enter search query to use for similarity search", "indigenous recognition").split(", ")
 with result_limit:
     st.session_state.result_limit = st.slider("result limit", 1, 10, 4)
 

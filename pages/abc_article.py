@@ -232,22 +232,17 @@ def upload_to_weaviate(data_objects, user_note, user_tags):
 
 def reset_initial_state():
     keys = ['data_objects', 'processed', 'document_contents', 'document_name', 
-            'article_url', 'article_uploader_key', 'data_editor']
+            'article_url', 'article_uploader_key']
     reset_values = [
         None, False, None, None, 
         None, str(uuid.uuid4()), {}]
 
     for key, reset_value in zip(keys, reset_values):
         st.session_state[key] = reset_value
+    
+    table_widget.empty()
 
-# Display table when there's data
-def document_contents_widget():
-    if st.session_state.data_objects is None:
-        table_widget.empty() # If there's no data, clear the placeholder
-    else:
-        st.data_editor(
-            # show only the text and category columns
-            st.session_state.data_objects, key="data_editor")
+
 
 # Cached function only runs with a new document upload
 @st.cache_data
@@ -295,7 +290,7 @@ st.session_state.article_url = st.text_input(
     "paste a link to an ABC news article to store its meaning",
     key=st.session_state.article_uploader_key
 )
-
+st.write("example: https://www.abc.net.au/news/2023-07-07/nt-2023-naidoc-parade-in-darwin/102576316")
 on_article_upload()
 
 reset_button = st.empty()
@@ -307,7 +302,13 @@ if st.session_state.data_objects is not None:
 
 
 table_widget = st.empty()
-document_contents_widget()
+# Display table when there's data
+if st.session_state.data_objects is None:
+    table_widget.empty() # If there's no data, clear the placeholder
+else:
+    table_widget.data_editor(
+        # show only the text and category columns
+        st.session_state.data_objects, key="data_editor")
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
 
 # Once a document is ready for upload, display a message and input fields
