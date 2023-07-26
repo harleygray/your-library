@@ -23,7 +23,7 @@ st.markdown("this page allows you to upload any document (works best for text or
 
 iframe = """
 <iframe
-  src="https://your-library.streamlit.app/?embed=true"
+  src="https://your-library.streamlit.app/document_upload/?embed=true"
   height="450"
   style="width:100%;border:none;"
 ></iframe>
