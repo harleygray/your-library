@@ -202,18 +202,3 @@ if st.session_state.processed:
             st.experimental_rerun()
 
 
-
-
-
-
-
-
-
-
-
-
-# use Unstructured to extract meaning and prepare for embedding
-
-
-# embed in weaviate using the module. 
-
