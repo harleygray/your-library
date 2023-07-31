@@ -262,12 +262,21 @@ def process_article(html_content):
 
         # Remove the columns
         data_objects = [
-            {key: value for key, value in obj.items() if key not in columns_to_remove}
-            for obj in data_objects
-        ]
+                    {**{key: value for key, value in obj.items() if key not in columns_to_remove}, "to_merge": False}
+                    for obj in data_objects
+                ]
+
+
+        
+
 
         # Create a new list of dictionaries with the keys in the order you want
-        data_objects = [{key: obj[key] for key in ["category", "text"]} for obj in data_objects]
+        data_objects = [{key: obj[key] for key in ["category", "text", "to_merge"]} for obj in data_objects]
+        # add a column called 'merge' to data_objects
+        
+
+
+
         return data_objects, data_objects[0]['text']
 
 def on_article_upload():
@@ -307,8 +316,14 @@ if st.session_state.data_objects is None:
     table_widget.empty() # If there's no data, clear the placeholder
 else:
     table_widget.data_editor(
-        # show only the text and category columns
-        st.session_state.data_objects, key="data_editor")
+        st.session_state.data_objects, 
+        #column_config={
+        #    "to_merge": st.column_config.CheckboxColumn(
+        #        "merge",
+        #        help="combine the selected rows into a single line",
+        #        default=False
+        #    )},
+        key="data_editor")
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
 
 # Once a document is ready for upload, display a message and input fields
