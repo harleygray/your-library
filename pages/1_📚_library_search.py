@@ -46,13 +46,13 @@ for key, default_value in zip(keys, default_values):
 schema = client.schema.get()
 class_list = [class_dict['class'] for class_dict in schema['classes']]
 
-selected_class, selected_tag = st.columns(2)
+#selected_class, selected_tag = st.columns(2)
+selected_tag = st.empty()
 
-
-with selected_class:
-    st.session_state.selected_class = st.selectbox('select a class (only ABCNewsArticle is available currently)', ["ABCNewsArticle"])
-
-
+#with selected_class:
+#    st.session_state.selected_class = st.selectbox('select a class (only UnstructuredDocument is available currently)', ["UnstructuredDocument"])
+#
+st.session_state.selected_class = "UnstructuredDocument"
 
 import pandas as pd
 import os
@@ -112,16 +112,21 @@ def update_csv():
     pd.DataFrame(list(tags), columns=['Tags']).to_csv(csv_path, index=False)
 
 # Button to run the query and update the .csv file
-if st.button('Update Tags'):
-    update_csv()
+#if st.button('Update Tags'):
+#    update_csv()
 
-# Read the dropdown selector list from the .csv file
-if os.path.exists(csv_path):
-    tags = pd.read_csv(csv_path)['Tags'].tolist()
-    # Create a dropdown selector for the tags
-    with selected_tag:
-        st.session_state.selected_tag = st.selectbox('Select a tag', tags)
+# Updating list of tags using function
+## Read the dropdown selector list from the .csv file
+#if os.path.exists(csv_path):
+#    tags = pd.read_csv(csv_path)['Tags'].tolist()
+#    # Create a dropdown selector for the tags
+#    with selected_tag:
+#        st.session_state.selected_tag = st.selectbox('Select a tag', tags)
 
+with selected_tag:
+    st.session_state.selected_tag = st.selectbox('Select a Party', ["OneNation", "Nationals"])
+
+# Hard code tags
 
 def reset_results():
     st.session_state['results'] = []
@@ -131,7 +136,7 @@ concepts_input, result_limit = st.columns(2)
 
 # User input for concepts, comma separated
 with concepts_input:
-    st.session_state.concepts_input = st.text_input("enter search query to use for similarity search", "indigenous recognition").split(", ")
+    st.session_state.concepts_input = st.text_input("search environmental policy proposals", "climate change").split(", ")
 with result_limit:
     st.session_state.result_limit = st.slider("result limit", 1, 10, 4)
 
@@ -149,16 +154,17 @@ with search_button:
         reset_results()
         response = (
             client.query  # start a new query
-            .get("ABCNewsArticle", ["text", "article_name", "url", "upload_note", "tags"])  
+            .get(st.session_state.selected_class, ["text", "filename", "upload_note", "tags"])  
             .with_near_text(nearText)  
             .with_limit(st.session_state.result_limit) 
             .with_where({
-                "path": ["category"],
+                "path": ["tags"],
                 "operator": "Equal",
-                "valueString": "NarrativeText"
+                "valueString": st.session_state.selected_tag
             })
             .do() 
         )
+        print(response)
         # show the objects with the selected tag
         for obj in response['data']['Get'][st.session_state.selected_class]:
             if 'tags' in obj:
@@ -180,12 +186,12 @@ with search_button:
             st.session_state.results_table = results_df
         else:
             # group by tags, input notes, and article names, and aggregate the text
-            grouped_df = df.groupby(['tags', 'upload_note', 'url', 'article_name'])['text'].agg(aggregate_texts).reset_index()
+            grouped_df = df.groupby(['tags', 'upload_note','filename'])['text'].agg(aggregate_texts).reset_index()
             results_df = st.session_state.results_table
             
-            for _, group in grouped_df.groupby(['tags', 'upload_note', 'url', 'article_name']):
+            for _, group in grouped_df.groupby(['tags', 'upload_note', 'filename']):
                 # Create a markdown string for the group header
-                group_header = f"`Article Name: ` {group['article_name'].iloc[0]}   \n`URL: ` {group['url'].iloc[0]}  \n`Tags: ` {group['tags'].iloc[0]}  \n`Upload Note: ` {group['upload_note'].iloc[0]}"
+                group_header = f"`Article Name: ` {group['filename'].iloc[0]}    \n`Tags: ` {group['tags'].iloc[0]}  \n`Upload Note: ` {group['upload_note'].iloc[0]}"
                 # Create a markdown string for the ordered list of texts
                 text_list = "\n".join(f"{text}" for text in group['text'])
                 # Append the group header and text list to the results DataFrame
@@ -202,8 +208,8 @@ for i in range(len(st.session_state.results_table)):
 
 
 
-st.button(
-    label="generate summaries (not working yet)" 
-)
-
+#st.button(
+#    label="generate summaries (not working yet)" 
+#)
+#
 

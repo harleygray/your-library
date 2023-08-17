@@ -92,8 +92,8 @@ def upload_to_weaviate(data_objects, filename, user_note, user_tags):
                 'category': d['category'],
                 'text': d['text'],
                 'filename': filename,
-                'page_number': d['page_number'],
-                'filetype': d['filetype'],
+                #'page_number': d['page_number'],
+                #'filetype': d['filetype'],
                 'date': date.today().strftime("%Y-%m-%d"),
                 'upload_note': user_note,
                 'tags': user_tags 
@@ -116,11 +116,11 @@ def reset_initial_state():
         st.session_state[key] = reset_value
 
 # Display table when there's data
-def document_contents_widget():
-    if st.session_state.document_contents is None:
-        table_widget.empty() # If there's no data, clear the placeholder
-    else:
-        table_widget.write(st.session_state.document_contents) # Update the placeholder with a table
+#def document_contents_widget():
+#    if st.session_state.document_contents is None:
+#        table_widget.empty() # If there's no data, clear the placeholder
+#    else:
+#        table_widget.write(st.session_state.document_contents) # Update the placeholder with a table
 
 # Cached function only runs with a new document upload
 @st.cache_data
@@ -135,7 +135,8 @@ def process_raw_document(raw_document):
         # Create a DataFrame from the data objects
         df = pd.DataFrame({
             'category': [data_object['category'] for data_object in data_objects],
-            'text': [data_object['text'] for data_object in data_objects]
+            'text': [data_object['text'] for data_object in data_objects],
+            'to remove': False
         })
 
         return data_objects, df, raw_document.name
@@ -171,10 +172,72 @@ if st.session_state.raw_document is not None:
 
 
 table_widget = st.empty()
-document_contents_widget()
+# Display table when there's data
+if st.session_state.document_contents is None:
+    table_widget.empty() # If there's no data, clear the placeholder
+else:
+    table_widget.data_editor(
+        st.session_state.document_contents, 
+        column_config={
+            "to remove": st.column_config.CheckboxColumn(
+                "Remove?",
+                help="Tick this box to remove the row from the upload"
+            )},
+        key="data_editor",
+        hide_index=True)
 
+    if st.session_state.data_editor['edited_rows']:
+        # If it isn't, iterate over the 'edited_rows'
+        for row_index, changes in st.session_state.data_editor['edited_rows'].items():
+            # Convert the row index to an integer
+            row_index = int(row_index)
+            # Update the corresponding row in 'document_contents' with the changes
+            for column, new_value in changes.items():
+                st.session_state.document_contents.loc[row_index,column] = new_value
+
+        # Create a mask that identifies which rows are NOT marked for removal
+        mask = st.session_state.document_contents['to remove'] == False
+
+        # Filter the rows in document_contents using the mask
+        filtered_document_contents = st.session_state.document_contents[mask]
+
+        # Initialize an empty list to store the data objects
+        data_objects = []
+
+        # Iterate through the rows of the filtered DataFrame
+        for _, row in filtered_document_contents.iterrows():
+            # Create a dictionary for each row, using the column names as keys
+            data_object = {
+                "text": row["text"],
+                "category": row["category"]
+            }
+            
+            # Append the dictionary to the list of data objects
+            data_objects.append(data_object)
+
+        # Display the data objects
+        st.write(data_objects)
+
+        # Optionally, update the session_state with the new data_objects list
+        st.session_state.data_objects = data_objects
+
+        # At this point, data_objects is a list of dictionaries, each representing a row of filtered_document_contents
+
+
+
+# Show document contents with removed rows
+
+st.header("Document contents with edits and rows removed")
+st.dataframe(pd.DataFrame(
+    {
+        'category': [data_object['category'] for data_object in st.session_state.data_objects],
+        'text': [data_object['text'] for data_object in st.session_state.data_objects]
+    }), 
+    hide_index=True)
+
+
+st.write(st.session_state.data_objects)
 input_note, input_tags, upload_button = st.empty(), st.empty(), st.empty()
-
 # Once a document is ready for upload, display a message and input fields
 if st.session_state.processed:
     # Status message
