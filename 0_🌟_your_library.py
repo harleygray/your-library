@@ -17,6 +17,23 @@ st.header("📚 your library 📚")
 
 st.write("your library is a tool to help you understand the world")
 st.write("this website is a work in progress.  here's the functionality available now")
+
+
+# link to library_search.py
+st.header("search your library")   
+st.markdown("this page is where you find information relevant to what you're looking for. let's say you have 500 news articles stored, but you only wanted to find the ones about cost of living. you can search for 'cost of living' and the most relevant sections of these articles will be returned.")
+
+iframe = """
+<iframe
+  src="https://your-library.streamlit.app/library_search/?embed=true"
+  height="450"
+  style="width:100%;border:none;"
+></iframe>
+"""
+
+components.html(iframe, height=450)
+
+
 # link to unstructured_document_upload.py
 st.header("upload a document")   
 st.markdown("this page allows you to upload any document (works best for text or pdf). any text in the document is organised, cleaned, then added to a [vector database](https://weaviate.io/). this allows you to query the information in that text - a personal search engine.")
@@ -31,25 +48,11 @@ iframe = """
 
 components.html(iframe, height=450)
 
-# link to library_search.py
-st.header("search your library")   
-st.markdown("this page is where you find information relevant to what you're looking for. let's say you have 500 news articles stored, but you only wanted to find the ones about cost of living. you can search for 'cost of living' and the most relevant sections of these articles will be returned.")
 
 
 
-iframe = """
-<iframe
-  src="https://your-library.streamlit.app/library_search/?embed=true"
-  height="450"
-  style="width:100%;border:none;"
-></iframe>
-"""
 
-components.html(iframe, height=450)
-
-
-
-# link to library_search.py
+# link to abc_article.py
 st.header("add abc news article")   
 st.markdown("""
     here you can link to an australian broadcasting corporation (abc) article and have it added to your library. the abc is a state-funded news organisation and an impactful source of information. 

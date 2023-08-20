@@ -1,0 +1,98 @@
+[
+  {
+    "filetype": "application/pdf",
+    "page_number": 1,
+    "text": "Despite 70% of Australians living within 50km of the ‘Great Southern Reef’, public recognition of this critical ecological community and knowledge of its value and signiﬁcance is alarmingly low - which is why the Greens will support increased investment in awareness, research and protection of this vital ecosystem.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 1,
+    "text": "This critical reef system and habitat has supported, and been cared for by, First Nations people since time immemorial. Despite dispossession and displacement caused by European colonisation, First Nations people maintain their connection to Country, waters, sky, songlines, language, totems and heritage areas along the Great Southern Reef.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 1,
+    "text": "Promoting and protecting the Great Southern Reef will support First Nations continued stewardship over the Great Southern Reef , protect marine tourism and the ﬁshing industry jobs and livelihoods, and help restore a vibrant marine ecology that will protect our oceans for future generations.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 1,
+    "text": "For decades, climate change has ravaged giant and golden kelp forests in the Great Southern Reef, as well as many sea grasses, Crayweed and other marine habitats. While rapid and signiﬁcant climate mitigation will be essential to the survival of these habitats, there is much more we can do to try and protect what remains and restore what has been lost. All these seaweeds generate vibratant aquatic habitats essential to marine life and commercial ﬁsheries, and have been identiﬁed as an important source of carbon sequestration. Protecting the Great Southern Reef requires investment in researching, protecting and restoring kelp forests and other marine habitats.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 2,
+    "text": "THE GREENS WILL: ▲ Fund $20 million to prioritise a Recovery Plan for giant kelp; ▲ Fund $40 million to establish an Invasive Marine Species Unit within CSIRO to bettertackle the spread of habitat destroying invasive urchins; ▲ Campaign for and support golden kelp being listed as a threatened ecological community with a full recovery plan; ▲ Appoint a Great Southern Reef Envoy in Canberra to promote the values of and threats to the Reef and the need for critical future funding support, working with coastal communities to assist with the impacts of climate change; ▲ Implement seismic testing regulations to make industry pay for scientiﬁc research into its impacts on commercial ﬁsheries and on the ecological and economic values of the Great Southern Reef areas",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 2,
+    "text": "By making billionaires and big corporations pay their fair share of tax and winding back handouts to big polluters, we can build a better life for all of us. 1 in 3 big corporations pays no tax and many big corporations and billionaires send their proﬁts offshore tax free. The Greens will tax billionaires with a new ‘billionaires tax’, require big corporations making excessive proﬁts to pay a ‘corporate super-proﬁts tax’ and axe billions of dollars in handouts to the coal, oil and gas giants that are driving the climate crisis. When big corporations and billionaires pay their fair share, we can tackle the climate crisis and support farmers.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 2,
+    "text": "Giant kelp are the world’s largest species of marine algae. Kelp forests and seaweeds of all kinds are enormously important for sea life and have been an important source of sustenance and seafood for First Nations peoples for tens of thousands of years, and are critical to the commercial and recreational ﬁshing sectors today. They can act as a cushion against storm surges, cleanse water, and absorb carbon dioxide. Kelp forests generate vibrant aquatic ecologies, creating a healthy oceanic area for marine life.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 3,
+    "text": "Despite being Australia’s ﬁrst listed “threatened ecological community'' in 2012 under the Environmental Protection and Biodiversity Conservation Act, no required giant kelp recovery plan has been enacted. Successive Labor and Liberal governments have failed to suﬃciently act. There has been no signiﬁcant investment in research funding for restoration or building other resilience measures for giant kelp ecological communities. It is estimated that the Great Southern Reef has received just $4 million in research funding over 25 years. The Greens will begin by allocating $20 million towards delivering a full recovery plan for giant kelp as required under EPBC law, including: Research targeted towards mitigating key risks to kelp communities and how best to adapt to a future of warmer oceans; Developing a cost-effective and robust strategy to understand why the last 5% of giant kelp forests have survived genetically developing warmer water tolerant species; Setting appropriate governance arrangements for restoration; Fully mapping remaining habitat and understanding how this data can be best applied to restoring these critical ecosystems.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 3,
+    "text": "We will fund $40m over ten years to re-establish an “Invasive Marine Species Unit” within the Oceans and Atmospheres Division of the CSIRO. This team will work collaboratively with ﬁsheries and other stakeholders (state and local governments, First Nations and other communities etc) to research and implement a holistic plan to tackle one of the key risks to kelp forests and marine habitat survival on the Great Southern Reef - the slow the spread of invasive Centrostephanus rodgersii sea urchins in NSW, Victoria and Tasmania.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 3,
+    "text": "Although the Great Barrier Reef has received hundreds of millions in funding to remove invasive species such as crown-of-thorns starﬁsh, the Great Southern Reef has received virtually nothing from the federal government to tackle the equally devastating spread of invasive long spined sea urchins south carried on the East Australian current. This unit would also invest in: Researching best governance structures for the eradication of urchins and restoring habitat; Comprehensive mapping of urchin barrens; Better understanding mitigation measures like predation; Changes to ﬁsheries practises and use of marine protected areas; How best to facilitate the economic removal of urchins for healthy reef restoration; Exploring all economic opportunities for urchin capture",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 3,
+    "text": "Described as the backbone of the Great Southern Reef, golden kelp also plays a vital role in the health of the reef system. It is a foundation species, providing habitat, food and shelter for hundreds of species. Like giant kelp, golden kelp take carbon out of the ocean, but are very susceptible to the impacts of warming oceans and climate change. The Greens will see that golden kelp is also proposed for EPBC listing as a Threatened Ecological Community under Federal law, and a fully funded recovery plan is implemented.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 4,
+    "text": "The Great Southern Reef is an interconnected underwater system fringing more than 8000km of Australia’s southern coast, extending from Kalbarri (WA) to the NSW/Queensland border. It is estimated to be worth more than $10 billion annually to the economy through ﬁshing and tourism dollars alone and its cultural signiﬁcance to First Nations communities is invaluable. Sixteen million Australians including thousands of First Nations communities live within 50km of the Great Southern Reef yet few politicians and decision makers or the media recognise its discrete identity and importance.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 4,
+    "text": "The Great Southern Reef’s most important stewardship has come from First Nations people. For tens of thousands of years, First Nations people have lived off, and cared for, the abundant resources available from the sea, including the Great Southern Reef. Kelp has been sustainably collected as a food source for First Nations people, as has the rich marine life of local ﬁsh, shellﬁsh and crustaceans that thrives from this habitat.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 4,
+    "text": "The Reef is also home to First Nations totems, which are objects in nature, like animals or plants, that are adopted as the emblems of a family or a clan. This connection to Country, waters and sky is an example of First Nations stewardship and science that we can all learn from.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 4,
+    "text": "The Greens will fund $500k to appoint a Special Envoy for the Great Southern Reef, whose role will include: advocacy for increased reef research and industry funding, raising awareness of the reef’s identity and importance, promoting its ecological values, providing outreach and listening to First Nations peoples, local communities and building appropriate industry partnerships. The envoy will be an expert with experience in marine sciences, oceanography or the Great Southern Reef itself. The Envoy will also consult with stakeholders to work towards building a collaborative decision making structure that will inform Government action and assist in establishing a Great Southern Reef authority body for long-term management of the reef.",
+    "category": "NarrativeText"
+  },
+  {
+    "filetype": "application/pdf",
+    "page_number": 4,
+    "text": "A Senate inquiry, initiated by the Greens in this parliament, heard an abundance of evidence detailing the risks to our oceans and ﬁsheries from ongoing seismic testing used for oil and gas exploration. The Greens believe the regulatory framework governing these risks is completely inadequate, structured to suit oil and gas proponents and does not suﬃciently protect the environment. The Greens will legislate or regulate to make sure existing voluntary ‘Good Standing Agreements” for industry-funded seismic testing research becomes compulsory or mandatory for all seismic activity. This research funding would be administered by an independent authority and would be conducted by independent research institutions such as the Institute of Marine and Antarctic Studies. Any future seismic testing surveys will need to provide a comprehensive evidence-based approach to collecting before and after baseline data showing all impacts of testing in Great Southern Reef areas. This would help protect coastal communities, help commercial ﬁshing operators seek compensation and build the body of scientiﬁc evidence necessary to tackle the uncertainty used to justify this harmful practice in our oceans.",
+    "category": "NarrativeText"
+  }
+]

@@ -124,7 +124,7 @@ def update_csv():
 #        st.session_state.selected_tag = st.selectbox('Select a tag', tags)
 
 with selected_tag:
-    st.session_state.selected_tag = st.selectbox('Select a Party', ["OneNation", "Nationals"])
+    st.session_state.selected_tag = st.selectbox('Select a Party', ["Greens", "OneNation", "Nationals"])
 
 # Hard code tags
 
