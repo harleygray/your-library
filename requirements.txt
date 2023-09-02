@@ -1,5 +1,15 @@
-unstructured[local-inference]
 langchain
-weaviate-client
+PyPDF2
 python-dotenv
-ipykernel
+streamlit
+openai
+faiss-cpu
+weaviate-client
+altair
+tiktoken
+# uncomment to use huggingface llms
+# huggingface-hub==0.14.1
+
+# uncomment to use instructor embeddings
+# InstructorEmbedding==1.0.1
+# sentence-transformers==2.2.2
