@@ -109,7 +109,6 @@ def main():
       page_icon='📚', 
       page_title="your library",
       initial_sidebar_state="collapsed")
-  st.write(css, unsafe_allow_html=True)
 
   if "messages" not in st.session_state.keys(): # Initialize the chat message history
       st.session_state.messages = [
