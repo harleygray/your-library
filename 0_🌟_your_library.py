@@ -112,24 +112,34 @@ def main():
 
   if "messages" not in st.session_state.keys(): # Initialize the chat message history
       st.session_state.messages = [
-          {"role": "assistant", "content": "ask a question about the Voice to Parliament"}
+          {"role": "assistant", "content": "what would you like to know?"}
       ]
 
   vectorstore = Weaviate(client, index_name="LangchainDocument", text_key="text")
 
-  if "conversation" not in st.session_state:
-      st.session_state.conversation = None
-#  if "chat_history" not in st.session_state:
-#      st.session_state.chat_history = None
 
-  #st.session_state.conversation = get_conversation_chain(
-  #      load_weaviate(client))
   st.header("📚 your library 📚")
 
-  st.write("your library is a tool to help you do your own research")
-  st.write("it uses information from across the political spectrum to provide answers to your questions about the upcoming referendum")
+  st.write("do your own research about the referendum. here are some questions to get you started")
+  #st.write("it uses information from across the political spectrum to provide answers to your questions about the upcoming referendum")
 
-  if prompt := st.chat_input("Your question"): # Prompt for user input and save to chat history
+  # create 3 columns for the 3 questions
+  button1, button2, button3 = st.columns(3)
+  with button1:
+    if st.button("what is the Voice, and what will it do?"):
+        st.session_state.messages.append({"role": "user", "content": "what is the Voice, and what will it do?"})
+
+  with button2:
+    if st.button("what is the case for a Yes vote?"):
+        st.session_state.messages.append({"role": "user", "content": "what is the case for a Yes vote?"})
+
+  with button3:
+    if st.button("what is the case for a No vote?"):
+        st.session_state.messages.append({"role": "user", "content": "what is the case for a No vote?"})
+  
+  st.write("otherwise ask your own question the chatbox below")
+
+  if prompt := st.chat_input("e.g. what is the Voice, and what will it do?"): # Prompt for user input and save to chat history
       st.session_state.messages.append({"role": "user", "content": prompt})
 
   for message in st.session_state.messages: # Display the prior chat messages
@@ -140,15 +150,15 @@ def main():
   if st.session_state.messages[-1]["role"] != "assistant":
       with st.chat_message("assistant"):
           with st.spinner("Thinking..."):
-            docs = vectorstore.similarity_search(prompt, top_k=10)
-            
+            docs = vectorstore.similarity_search(st.session_state.messages[-1]["content"], top_k=10)
             chain = load_qa_chain(
               ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0))
             #response = st.session_state.conversation({'question': prompt})
-            assistant_response = chain.run(input_documents=docs, question=prompt)
+            assistant_response = chain.run(input_documents=docs, question=st.session_state.messages[-1]["content"])
             st.write(assistant_response)
+            # Add response to message history
             message = {"role": "assistant", "content": assistant_response}
-            st.session_state.messages.append(message) # Add response to message history
+            st.session_state.messages.append(message) 
     
 
   with st.sidebar:
@@ -167,7 +177,6 @@ def main():
               # create vector store
               add_to_weaviate(client,text_chunks,pdf_docs[0].name, tags)
 
-              
 
 
 
