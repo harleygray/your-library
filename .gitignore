@@ -4,4 +4,4 @@ __pycache__/
 environment.yml
 data/notes.csv
 pages/todo.py
-ask-multiple-pdfs/
+ask-multiple-pdfs/open-interpreter/ 

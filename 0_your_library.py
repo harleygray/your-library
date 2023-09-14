@@ -5,14 +5,19 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS, Weaviate
-from langchain.chat_models import ChatOpenAI
+from langchain.chat_models import ChatOpenAI 
 from langchain.memory import ConversationBufferMemory
-from langchain.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain, RetrievalQAWithSourcesChain
 from langchain.llms import HuggingFaceHub
 from weaviate import Client, AuthApiKey
+from langchain.chains.qa_with_sources.loading import load_qa_with_sources_chain
 from weaviate.util import generate_uuid5
 from datetime import date
 from langchain.chains.question_answering import load_qa_chain
+
+            
+import langchain
+langchain.verbose = False            
 
 def get_pdf_text(pdf_docs):
     text = ""
@@ -32,7 +37,7 @@ def get_text_chunks(text):
     chunks = text_splitter.split_text(text)
     return chunks
 
-def add_to_weaviate(client, text_chunks, filename, user_tags):
+def add_to_weaviate(client, text_chunks, filename, url):
     embeddings = OpenAIEmbeddings()
     # embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
     
@@ -43,13 +48,13 @@ def add_to_weaviate(client, text_chunks, filename, user_tags):
     
     with client.batch(batch_size=10) as batch:
         for i, d in enumerate(text_chunks):  
-          st.write(d)
           properties = {
               'text': d,
-              'filename': filename,
+              'source': filename,
               'date': date.today().strftime("%Y-%m-%d"),
-              'tags': user_tags 
+              'url': url 
           }
+          
           batch.add_data_object(
               properties,
               'LangchainDocument',
@@ -57,35 +62,25 @@ def add_to_weaviate(client, text_chunks, filename, user_tags):
           )
 
 
-#def load_weaviate(client):
-#    
-#    return vectorstore
-
-
 def get_conversation_chain(vectorstore):
-    llm = ChatOpenAI()
-    # llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.5, "max_length":512})
+    chat_model_name = "gpt-4"
+    llm = ChatOpenAI(model_name=chat_model_name)
 
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
-    conversation_chain = ConversationalRetrievalChain.from_llm(
+    #conversation_chain = ConversationalRetrievalChain.from_llm(
+    #    llm=llm,
+    #    retriever=vectorstore.as_retriever(),
+    #    memory=memory
+    #)
+    conversation_chain = RetrievalQA.from_chain_type(
         llm=llm,
-        retriever=vectorstore.as_retriever(),
-        memory=memory
+        chain_type="stuff",
+        retriever=docsearch.as_retriever(search_kwargs={"k": num_retrieved_documents})
     )
+
     return conversation_chain
 
-#def handle_userinput(user_question):
-#    response = st.session_state.messages({'question': user_question})
-#    st.session_state.chat_history = response['chat_history']
-#
-#    for i, message in enumerate(st.session_state.chat_history):
-#        if i % 2 == 0:
-#            st.write(user_template.replace(
-#                "{{MSG}}", message.content), unsafe_allow_html=True)
-#        else:
-#            st.write(bot_template.replace(
-#                "{{MSG}}", message.content), unsafe_allow_html=True)
 
 def main():
   load_dotenv()
@@ -93,8 +88,6 @@ def main():
   WEAVIATE_URL = os.getenv("WEAVIATE_URL")
   WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY")
   OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-
 
 
   client = Client(
@@ -115,7 +108,7 @@ def main():
           {"role": "assistant", "content": "what would you like to know?"}
       ]
 
-  vectorstore = Weaviate(client, index_name="LangchainDocument", text_key="text")
+  vectorstore = Weaviate(client, index_name="LangchainDocument", text_key="text", attributes=["source", "url"])
 
 
   st.header("📚 your library 📚")
@@ -150,14 +143,37 @@ def main():
   if st.session_state.messages[-1]["role"] != "assistant":
       with st.chat_message("assistant"):
           with st.spinner("Thinking..."):
-            docs = vectorstore.similarity_search(st.session_state.messages[-1]["content"], top_k=10)
-            chain = load_qa_chain(
-              ChatOpenAI(openai_api_key=OPENAI_API_KEY, temperature=0))
-            #response = st.session_state.conversation({'question': prompt})
-            assistant_response = chain.run(input_documents=docs, question=st.session_state.messages[-1]["content"])
-            st.write(assistant_response)
+            memory = ConversationBufferMemory(
+                memory_key='chat_history', return_messages=True)
+            langchain.verbose = False
+            chain = load_qa_with_sources_chain(
+                ChatOpenAI(model_name="gpt-3.5-turbo",temperature=0), 
+                chain_type="stuff"
+                )                                                                                                                                                  
+            docs = vectorstore.similarity_search(st.session_state.messages[-1]["content"], top_k=5)
+            print(docs)
+            response_dict = chain({"input_documents": docs, "question": st.session_state.messages[-1]["content"]}, return_only_outputs=True)                                                                                                                                                                     
+            #output_text = response_dict['output_text']
+            parts = response_dict['output_text'].split('SOURCES:')                                    
+            #print(response_dict)                                                                                                    
+            answer = parts[0].strip()
+            #sources = parts[1].strip()
+            unique_sources = list(set(doc.metadata['source'] for doc in docs))
+            unique_sources_url = list(set(doc.metadata['url'] for doc in docs))
+
+            # Create a list of formatted markdown links
+            sources_links = [f"[{source}]({url})" for source, url in zip(unique_sources, unique_sources_url)]
+            sources = '\n\n'.join(sources_links)
+
+            # Replace commas with newline delimiters for the second part
+            #sources = sources.replace(', ', '\n\n')
+
+            answer += "\n\nSOURCES:\n\n" + sources
+
+            # remove duplicaes from sources
+            st.write(answer)
             # Add response to message history
-            message = {"role": "assistant", "content": assistant_response}
+            message = {"role": "assistant", "content": answer}
             st.session_state.messages.append(message) 
     
 
@@ -165,7 +181,7 @@ def main():
       st.subheader("Your documents")
       pdf_docs = st.file_uploader(
           "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
-      tags = st.text_input("tag this document with keywords")
+      url = st.text_input("add the url this document came from")
       if st.button("Process"):
           with st.spinner("Processing"):
               # get pdf text
@@ -175,7 +191,7 @@ def main():
               text_chunks = get_text_chunks(raw_text)
 
               # create vector store
-              add_to_weaviate(client,text_chunks,pdf_docs[0].name, tags)
+              add_to_weaviate(client,text_chunks,pdf_docs[0].name, url)
 
 
 
@@ -183,53 +199,3 @@ def main():
 if __name__ == '__main__':
   main()
 
-
-#  iframe = """
-#  <iframe
-#    src="https://your-library.streamlit.app/library_search/?embed=true"
-#    height="450"
-#    style="width:100%;border:none;"
-#  ></iframe>
-#  """
-#
-#  components.html(iframe, height=450)
-
-
-  ## link to unstructured_document_upload.py
-  #st.header("upload a document")   
-  #st.markdown("this page allows you to upload any document (works best for text or pdf). any text in the document is organised, cleaned, then added to a [vector database](https://weaviate.io/). this allows you to query the information in that text - a personal search engine.")
-  #
-  #iframe = """
-  #<iframe
-  #  src="https://your-library.streamlit.app/document_upload/?embed=true"
-  #  height="450"
-  #  style="width:100%;border:none;"
-  #></iframe>
-  #"""
-  #
-  #components.html(iframe, height=450)
-  #
-  #
-  #
-  #
-  #
-  ## link to abc_article.py
-  #st.header("add abc news article")   
-  #st.markdown("""
-  #    here you can link to an australian broadcasting corporation (abc) article and have it added to your library. the abc is a state-funded news organisation and an impactful source of information. 
-  #
-  #    this page will eventually be an automated pipeline; article uploaded > added to your library. for now, you can add an article by pasting the url into the text box below.
-  #    """
-  #)
-  #
-  #
-  #iframe = """
-  #<iframe
-  #  src="https://your-library.streamlit.app/abc_article/?embed=true"
-  #  height="450"
-  #  style="width:100%;border:none;"
-  #></iframe>
-  #"""
-  #
-  #components.html(iframe, height=450)
-  #
