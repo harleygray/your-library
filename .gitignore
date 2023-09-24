@@ -5,3 +5,5 @@ environment.yml
 data/notes.csv
 pages/todo.py
 ask-multiple-pdfs/open-interpreter/ 
+scripts/exploration.ipynb
+archive
