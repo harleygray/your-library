@@ -6,11 +6,8 @@ from datetime import date
 from weaviate import Client, AuthApiKey
 from weaviate.util import generate_uuid5
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.memory import ConversationBufferMemory
 from langchain.chat_models import ChatOpenAI 
 from langchain.prompts import ChatPromptTemplate
-from langchain.chains.qa_with_sources.loading import load_qa_with_sources_chain
 from langchain.vectorstores import Weaviate
 import comet_llm
 import json
@@ -22,7 +19,9 @@ langchain.verbose = False
     
 # Extract text from PDF files
 def get_pdf_text(pdf_docs):
-    return "".join(page.extract_text() for pdf in pdf_docs for page in PdfReader(pdf).pages)
+    pdf_docs.seek(0)  # Reset the file pointer to the beginning
+    return "".join(page.extract_text() for page in PdfReader(pdf_docs).pages)
+
 
 
 # Split text into manageable chunks
@@ -33,7 +32,6 @@ def get_text_chunks(text):
 
 # Add text chunks to Weaviate
 def add_to_weaviate(client, text_chunks, filename, url):
-    embeddings = OpenAIEmbeddings()
     with client.batch(batch_size=10) as batch:
         for chunk in text_chunks:
             properties = {
@@ -177,7 +175,7 @@ def main():
                 raw_text = get_pdf_text(pdf_docs)
                 text_chunks = get_text_chunks(raw_text)
                 # To do: calculate embeddings, log to Comet
-                add_to_weaviate(client,text_chunks,pdf_docs[0].name, url)
+                add_to_weaviate(client,text_chunks,pdf_docs.name, url)
 
 
 if __name__ == '__main__':
