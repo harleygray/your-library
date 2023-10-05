@@ -3,7 +3,6 @@ __pycache__/
 .env
 environment.yml
 data/notes.csv
-pages/input_pipeline.py
 ask-multiple-pdfs/open-interpreter/ 
 scripts/exploration.ipynb
 archive
