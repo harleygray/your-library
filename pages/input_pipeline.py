@@ -102,8 +102,7 @@ def main():
             # APIFY call to get scraped data
             scraped_data = apify_run(apify_client, url, only_new_articles)
             scraped_formatted_data = pd.DataFrame(columns=['url', 'title', 'date', 'author', 'publisher', 'keywords', 'tags', 'text'])
-            #st.write("outpupt:")
-            #st.write(scraped_data)
+
             # Fetch and print Actor results from the run's dataset (if there are any)
             for item in apify_client.dataset(scraped_data["defaultDatasetId"]).iterate_items():
                 scraped_formatted_data = pd.concat([
@@ -113,7 +112,7 @@ def main():
                     scraped_formatted_data], ignore_index=True)
 
             # Filter out any audio uploads
-            #scraped_formatted_data = scraped_formatted_data.loc[~scraped_formatted_data['url'].str.startswith('https://www.abc.net.au/listen/')].reset_index(drop=True)
+            scraped_formatted_data = scraped_formatted_data.loc[~scraped_formatted_data['url'].str.startswith('https://www.abc.net.au/listen/')].reset_index(drop=True)
             
 
         
@@ -137,9 +136,8 @@ def main():
             # Future: named entity recognition
 
             # Store in variable - pass to manual review/editing phase
-            st.session_state.scraped_formatted_data = pd.DataFrame(scraped_data)
+            st.session_state.scraped_formatted_data = scraped_formatted_data
 
-    st.write(st.session_state.scraped_formatted_data)
     table_widget = st.empty()
     # Display table when there's data
     if st.session_state.scraped_formatted_data is None:
