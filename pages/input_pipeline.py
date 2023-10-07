@@ -101,6 +101,7 @@ def main():
         with st.spinner("processing"):
             # APIFY call to get scraped data
             scraped_data = apify_run(apify_client, url, only_new_articles)
+            st.success('scraping done! formatting...')
             scraped_formatted_data = pd.DataFrame(columns=['url', 'title', 'date', 'author', 'publisher', 'keywords', 'tags', 'text'])
 
             # Fetch and print Actor results from the run's dataset (if there are any)
@@ -120,16 +121,24 @@ def main():
 
             # Classify as pro-voice / anti-voice
             # Todo: allow refresh for missed classifications
-            #with st.spinner("classification"):
-            #    for idx, row in scraped_formatted_data.iterrows():
-            #        st.write(row['url'])
-            #        # classification
-            #        
-            #        st.write(classification_query(HUGGINGFACE_API_KEY, {
-            #            "inputs": row['text'],
-            #            "parameters": {"candidate_labels": ['pro-voice', 'anti-voice']}}))
-
-
+            classification = pd.DataFrame(columns=['pro-voice', 'anti-voice'])
+            with st.spinner("classifying documents..."):
+                for idx, row in scraped_formatted_data.iterrows():
+                    # get response from huggingface
+                    data = classification_query(HUGGINGFACE_API_KEY, {
+                        "inputs": row['text'],
+                        "parameters": {"candidate_labels": ['pro-voice', 'anti-voice']},
+                        "options": {"wait_for_model": True}})
+                    st.write(row['title'])
+                    st.write('[{0}]({1})'.format(row['title'], row['url']))
+                    st.write('output from classification call:')
+                    
+                    classification = pd.concat([
+                        classification,
+                        pd.DataFrame([[data['scores'][0], data['scores'][1]]], columns=classification.columns)], ignore_index=True)
+                    st.write(classification.iloc[idx])
+                # Append to scraped_formatted_data
+                scraped_formatted_data = pd.concat([scraped_formatted_data, classification], axis=1)
 
             # Summary of chunk
 
@@ -145,11 +154,14 @@ def main():
     else:
         table_widget.data_editor(
             st.session_state.scraped_formatted_data, 
+            # Use column_config to show in one of first columns the level of bias in the article
             column_config={
-                "to remove": st.column_config.CheckboxColumn(
-                    "Remove?",
-                    help="Tick this box to remove the row from the upload"
-                )},
+                "pro-voice": st.column_config.ProgressColumn(
+                    "Pro-Voice Bias",
+                    help="Classified using the facebook/bart-large-mnli LLM"),
+                "anti-voice": st.column_config.ProgressColumn(
+                    "Anti-Voice Bias",
+                    help="Classified using the facebook/bart-large-mnli LLM")},
             key="data_editor",
             hide_index=True)
 
@@ -162,31 +174,6 @@ def main():
                 for column, new_value in changes.items():
                     st.session_state.scraped_formatted_data.loc[row_index,column] = new_value
 
-            # Create a mask that identifies which rows are NOT marked for removal
-            mask = st.session_state.scraped_formatted_data['to remove'] == False
-
-            # Filter the rows in scraped_formatted_data using the mask
-            filtered_scraped_formatted_data = st.session_state.scraped_formatted_data[mask]
-
-            # Initialize an empty list to store the data objects
-            data_objects = []
-
-            # Iterate through the rows of the filtered DataFrame
-            for _, row in filtered_scraped_formatted_data.iterrows():
-                # Create a dictionary for each row, using the column names as keys
-                data_object = {
-                    "text": row["text"],
-                    "category": row["category"]
-                }
-                
-                # Append the dictionary to the list of data objects
-                data_objects.append(data_object)
-
-            # Display the data objects
-            st.write(data_objects)
-
-            # Optionally, update the session_state with the new data_objects list
-            st.session_state.scraped_formatted_data = data_objects
 
 
 
