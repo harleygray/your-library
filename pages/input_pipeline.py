@@ -181,3 +181,12 @@ def main():
 if __name__ == '__main__':
   main()
 
+
+
+
+# Pseudocode for Parliamentary divisions
+
+## API call to get 100 most recent divisions. Likely only needs to be run every day or so.
+
+
+## Assign a UUID for each. If new UUID, add to databases. If not, do nothing. 

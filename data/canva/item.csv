@@ -1,0 +1,3679 @@
+id,restaurant_id,name,chill_rating,ingredents_array,category,currency_code,sizes,has_gst
+1,1,Sichuan Style Pork Dumplings,0,"34, 67, 99, 12, 123, 3","Main
+",AUD,"Standard
+",1
+2,1,Spring Rolls,0,"2, 66, 13, 12",Side,AUD,"Standard
+",1
+3,1,Prawn and Pork Wonton Soup,0,"12, 78, 45, 113","Main
+",AUD,"Standard
+",1
+4,1,Stir Fried Shredded Pork,1,"12, 54, 88, 19","Main
+",AUD,"Standard
+",1
+5,1,"Special Braised Beef
+",1,"1, 8, 16, 55","Main
+",AUD,"Standard
+",1
+6,1,Braised Pork Belly,0,"12, 45, 31, 88, 136","Main
+",AUD,"Standard
+",1
+7,8,Pad Thai,0,"55,8,81,77","Main
+",AUD,"Standard
+",1
+8,8,Masaman Beef,0,"64,84,47,48","Main
+",AUD,"Standard
+",1
+9,8,Sad See Ew,0,"31,16,46,38","Main
+",AUD,"Standard
+",1
+10,8,"Pad Kra Prao
+",2,"71,67,97,55","Main
+",AUD,"Standard
+",1
+11,8,Pad Ped,2,"56,55,91,68","Main
+",AUD,"Standard
+",1
+12,4,Rice With Beef and Cumin,2,"45,55,65,77","Main
+",AUD,"Standard
+",1
+13,1,Lightly Battered Scallops,1,"93,90,40,91","Main
+",AUD,"Standard
+",1
+14,8,Tom Yum,0,"9,57,95,33","Main
+",AUD,"Standard
+",1
+15,4,"Kung Pao Chicken
+",1,"1,39,71,1","Main
+",AUD,"Standard
+",1
+16,1,Noodle with Tomato and Egg,3,"95,95,36,4","Main
+",AUD,"Standard
+",1
+17,8,Thai Red Curry,2,"84,84,5,86","Main
+",AUD,"Standard
+",1
+18,1,Noodle with Braised Beef,3,"99,15,16,66,39","Main
+",AUD,"Standard
+",1
+19,8,Guay Teow,1,"6,74,98,50,33","Main
+",AUD,"Standard
+",1
+20,8,Laab Na,1,"15,79,45,38,27","Main
+",AUD,"Standard
+",1
+21,6,Hoeddeok,3,"91,47,70,47,55","Main
+",AUD,"Standard
+",1
+22,6,Bulgogi Beef,2,"78,45,70,58,54","Main
+",AUD,"Standard
+",1
+23,6,Samgyeopsal,0,"17,72,53,40,78","Main
+",AUD,"Standard
+",1
+24,6,Japchae,3,"94,78,60,33,23","Main
+",AUD,"Standard
+",1
+25,6,Kimchi Fried Rice,2,"40,9,8,75,28","Main
+",AUD,"Standard
+",1
+26,6,Ddukbokki,0,"49,96,85,67,19","Main
+",AUD,"Standard
+",1
+27,6,Sundubu-jjigae,3,"19,83,13,56,5","Main
+",AUD,"Standard
+",1
+28,6,Bibimbap,0,"41,3,66,7,53","Main
+",AUD,"Standard
+",1
+29,6,Seolleongtang,1,"81,43,46,37,27","Main
+",AUD,"Standard
+",1
+30,6,Haemul Pajeon,2,"9,54,99,70,92","Main
+",AUD,"Standard
+",1
+31,6,Samgyetang,0,"31,74,10,51,38","Main
+",AUD,"Standard
+",1
+32,6,Soondae,1,"79,15,7,70,22","Main
+",AUD,"Standard
+",1
+33,6,Naengmyeon,0,"36,27,8,23,82","Main
+",AUD,"Standard
+",1
+34,6,Hobakjuk,3,"75,29,5,46,44","Main
+",AUD,"Standard
+",1
+35,2,Nasi Rawon,1,"58,83,17,28,2","Main
+",AUD,"Standard
+",1
+36,2,Sop Buntut,1,"11,6,37,43,85","Main
+",AUD,"Standard
+",1
+37,2,Siomay,0,"41,87,81,25,24","Main
+",AUD,"Standard
+",1
+38,2,Indomie,0,"21,64,24,67","Main
+",AUD,"Standard
+",1
+39,2,Nasi Uduk,3,"19,75,55,52","Main
+",AUD,"Standard
+",1
+40,2,Pempek,2,"15,4,47,73","Main
+",AUD,"Standard
+",1
+41,2,Mee goreng mamak,0,"40,93,84,59","Main
+",AUD,"Standard
+",1
+42,2,Apam balik,3,"64,83,19,71","Main
+",AUD,"Standard
+",1
+43,2,Nasi kerabu,2,"96,99,5,37","Main
+",AUD,"Standard
+",1
+44,2,Ayam percik,2,"6,3,2,6","Main
+",AUD,"Standard
+",1
+45,2,Nasi lemak,0,"18,71,52,48","Main
+",AUD,"Standard
+",1
+46,2,Roti john,0,"81,46,5,5","Main
+",AUD,"Standard
+",1
+47,2,Rendang,3,"89,46,49,26","Main
+",AUD,"Standard
+",1
+48,2,Kuih,2,"80,17,85,35","Main
+",AUD,"Standard
+",1
+49,2,Nasi kandar,1,"68,95,97,49","Main
+",AUD,"Standard
+",1
+50,2,Laksa,3,"12,81,65","Main
+",AUD,"Standard
+",1
+51,2,Popia basah,3,"21,73,16","Main
+",AUD,"Standard
+",1
+52,2,Roti jala,2,"51,85,61","Main
+",AUD,"Standard
+",1
+53,2,Cendawan goreng,3,"10,15,82","Main
+",AUD,"Standard
+",1
+54,2,Sambal udang,1,"45,55,32","Main
+",AUD,"Standard
+",1
+55,2,Murtabak,0,"91,26,57","Main
+",AUD,"Standard
+",1
+56,2,Asam pedas,1,"71,31,65,35,8","Main
+",AUD,"Standard
+",1
+57,2,Lemang,1,"76,25,70,97,26","Main
+",AUD,"Standard
+",1
+58,2,Otak-otak,2,"37,13,94,52,26","Main
+",AUD,"Standard
+",1
+59,2,Tepung pelita,3,"2,8,14,30,94","Main
+",AUD,"Standard
+",1
+60,2,Rempeyek,2,"12,55,64,7,71","Main
+",AUD,"Standard
+",1
+61,2,Putu piring,0,"23,71,68,52,85","Main
+",AUD,"Standard
+",1
+62,2,Satar,1,"41,91,69,84,31","Main
+",AUD,"Standard
+",1
+63,2,Roti canai,2,"88,16,95,57,28","Main
+",AUD,"Standard
+",1
+64,2,Mee rebus,2,"34,37,43,82,78","Main
+",AUD,"Standard
+",1
+65,2,Gulai ayam kampung,1,"91,87,30,23","Main
+",AUD,"Standard
+",1
+66,2,Lor bak,1,"20,54,2,88","Main
+",AUD,"Standard
+",1
+67,2,Ikan bakar,3,"55,25,56,50","Main
+",AUD,"Standard
+",1
+68,2,Char kuey teow,3,"6,8,75,89","Main
+",AUD,"Standard
+",1
+69,2,Chai tow kway,1,"34,59,98,71","Main
+",AUD,"Standard
+",1
+70,2,Goreng pisang,3,"75,48,40,17","Main
+",AUD,"Standard
+",1
+71,2,Chicken curry kapitan,0,"67,29,57,47","Main
+",AUD,"Standard
+",1
+72,2,Ketupat,1,"97,77,2,22","Main
+",AUD,"Standard
+",1
+73,2,Char kuey teow,1,"29,88,92,80","Main
+",AUD,"Standard
+",1
+74,23,Murg Makhani,3,"58,90,1,52","Main
+",AUD,"Standard
+",1
+75,23,Chicken Tikka Masala,1,"55,83,95,60","Main
+",AUD,"Standard
+",1
+76,23,Tandoori Chicken,3,"27,100,8","Main
+",AUD,"Standard
+",1
+77,23,Rogan Josh,3,"65,66,97","Main
+",AUD,"Standard
+",1
+78,23,Malia Kofta,0,"10,70,10","Main
+",AUD,"Standard
+",1
+79,23,Chole,3,"52,11,37","Main
+",AUD,"Standard
+",1
+80,23,Palak Paneer,3,"40,63,76","Main
+",AUD,"Standard
+",1
+81,23,Kaali Daal,1,"8,18,57","Main
+",AUD,"Standard
+",1
+82,23,Papdi Chaat,2,"21,82,89","Main
+",AUD,"Standard
+",1
+83,23,Naan,2,"85,77,68","Main
+",AUD,"Standard
+",1
+84,15,Chow mein,1,"12,43,6","Main
+",AUD,"Standard
+",1
+85,15,Spring rolls,0,"61,13,75","Main
+",AUD,"Standard
+",1
+86,15,Sweet and sour pork,0,"80,59,50","Main
+",AUD,"Standard
+",1
+87,15,Fried shrimp with cashew nuts,2,"91,41,15","Main
+",AUD,"Standard
+",1
+88,15,Dumplings,1,"23,30,69","Main
+",AUD,"Standard
+",1
+89,15,Spicy tofu,3,"12,43,6,13,48","Main
+",AUD,"Standard
+",1
+90,15,Won ton soup,0,"61,13,75,5,44","Main
+",AUD,"Standard
+",1
+91,15,Peking roasted duck,0,"80,59,50,61,5","Main
+",AUD,"Standard
+",1
+92,24,Beef Vindaloo,3,"91,41,15,65,50","Main
+",AUD,"Standard
+",1
+93,24,Chicken Kadai,3,"23,30,69,54,3","Main
+",AUD,"Standard
+",1
+94,24,Lamb Madras,1,"30,36,42,95,18","Main
+",AUD,"Standard
+",1
+95,24,Lamb Kolhapuri,0,"68,22,95,35,33","Main
+",AUD,"Standard
+",1
+96,24,Handi Gosht,2,"100,79,98,26,75","Main
+",AUD,"Standard
+",1
+97,24,Lamb Holhapuri,2,"38,98,77,40,50","Main
+",AUD,"Standard
+",1
+98,24,Goanese Praws,2,"59,96,19,64,47","Main
+",AUD,"Standard
+",1
+99,24,Lamb Biryani,2,"82,11,26,62,15","Main
+",AUD,"Standard
+",1
+100,24,Chicken Chettinad,3,"19,100,6,40","Main
+",AUD,"Standard
+",1
+101,24,Goan Fish Curry,2,"45,2,6,29","Main
+",AUD,"Standard
+",1
+102,24,Tawa Goat,0,"95,51,28,11","Main
+",AUD,"Standard
+",1
+103,24,Goat Masala,0,"51,72,92,63","Main
+",AUD,"Standard
+",1
+104,24,Dal Tadka,2,"31,65,78,49","Main
+",AUD,"Standard
+",1
+105,24,Chana Jor Garam,1,"83,54,61,99","Main
+",AUD,"Standard
+",1
+106,24,Paneer Ka Salan,1,"27,15,48,11","Main
+",AUD,"Standard
+",1
+107,24,Saag Paneer,3,"30,28,35,54","Main
+",AUD,"Standard
+",1
+108,24,Aloo Matar,3,"43,96,97,69","Main
+",AUD,"Standard
+",1
+109,24,Aloo Gobi,1,"12,12,86,3","Main
+",AUD,"Standard
+",1
+110,24,"Kumb Palak
+",1,"44,76,29,65","Main
+",AUD,"Standard
+",1
+111,24,Shabnam Curry,1,"29,41,80,49,40","Main
+",AUD,"Standard
+",1
+112,24,Korma,0,"74,2,31,92,81","Main
+",AUD,"Standard
+",1
+113,24,Bhuna,0,"72,75,13,18,33","Main
+",AUD,"Standard
+",1
+114,24,Saagwala,2,"25,14,50,42,30","Main
+",AUD,"Standard
+",1
+115,24,Vindaloo,2,"95,35,66,40,86","Main
+",AUD,"Standard
+",1
+116,24,Chicken Balti,2,"32,17,41,31,80","Main
+",AUD,"Standard
+",1
+117,20,BBQ Pork in Honey Soya,0,"97,68,30,59,61","Main
+",AUD,"Standard
+",1
+118,20,Stir Fried Long Bean Minced Pork,0,"30,73,16,93,70","Main
+",AUD,"Standard
+",1
+119,20,Mongolian Lamb Fillet,0,"97,29,27,54,64","Main
+",AUD,"Standard
+",1
+120,20,Roasted Duck in Shandong Sauce,3,"36,68,8,90,63","Main
+",AUD,"Standard
+",1
+121,20,Szechuan Chilli Beef,0,"66,83,11,57,59","Main
+",AUD,"Standard
+",1
+122,20,Satay Beef,1,"55,37,20,86,50","Main
+",AUD,"Standard
+",1
+123,20,Beef with Black Pepper Sauce,2,"61,30,75,16,31","Main
+",AUD,"Standard
+",1
+124,20,Fillet Steak Chinese Style,1,"39,26,21,28,21","Main
+",AUD,"Standard
+",1
+125,20,Beef with Mixed Vegetables,3,"31,48,21,60,78","Main
+",AUD,"Standard
+",1
+126,20,Chicken Fried Egg Noodle,1,"78,54,57,98,59","Main
+",AUD,"Standard
+",1
+127,20,Seafood Fried Egg Noodle,3,"5,49,93,13,81","Main
+",AUD,"Standard
+",1
+128,20,Singapore Fried Egg Noodle,2,"52,3,3,73,29","Main
+",AUD,"Standard
+",1
+129,20,King Prawn Fried Egg Noodle,1,"30,2,82,87","Main
+",AUD,"Standard
+",1
+130,20,Beef Congee,1,"64,77,83,46","Main
+",AUD,"Standard
+",1
+131,20,Choi Sum Congee,3,"95,79,27,72","Main
+",AUD,"Standard
+",1
+132,20,Wonton Noodle Soup,0,"19,80,53,50","Main
+",AUD,"Standard
+",1
+133,20,Black Pepper Beef Noodle Soup,1,"84,7,85,85","Main
+",AUD,"Standard
+",1
+134,20,Shredded Pork and Pickled Vegetable Noodle Soup,2,"62,74,26,39","Main
+",AUD,"Standard
+",1
+135,20,Beef Brisket and Radish Noodle Soupe,0,"63,49,20,71","Main
+",AUD,"Standard
+",1
+136,20,Roasted Pork Noodle Soup,0,"37,70,13,39","Main
+",AUD,"Standard
+",1
+137,20,Roasted Duck Noodle Soup,2,"34,82,36,13","Main
+",AUD,"Standard
+",1
+138,20,Roasted Pork and BBQ Noodle Soup,2,"5,64,48,45","Main
+",AUD,"Standard
+",1
+139,20,"Combination Wonton Noodle Soup
+",0,"19,55,11,93","Main
+",AUD,"Standard
+",1
+140,18,Mhu Bhing,3,"75,26,82,11","Main
+",AUD,"Standard
+",1
+141,18,Gai Satay,1,"57,92,38,39","Main
+",AUD,"Standard
+",1
+142,18,Louk Chin Bhing,2,"64,15,94","Main
+",AUD,"Standard
+",1
+143,18,Som Dtum Thai,2,"10,37,31","Main
+",AUD,"Standard
+",1
+144,18,Sai Ouah,0,"33,5,66","Main
+",AUD,"Standard
+",1
+145,18,Kor Dook Mhu Yaang,1,"31,81,86","Main
+",AUD,"Standard
+",1
+146,18,Som Tum Thai-Bpu,0,"70,47,35","Main
+",AUD,"Standard
+",1
+147,18,"Larpb Gai
+",3,"12,66,100","Main
+",AUD,"Standard
+",1
+148,18,Green Curry,2,"25,71,39","Main
+",AUD,"Standard
+",1
+149,18,Panang Curry,0,"59,17,6","Main
+",AUD,"Standard
+",1
+150,18,Yellow Curry,0,"17,29,68","Main
+",AUD,"Standard
+",1
+151,18,Massman Curry,2,"85,56,63","Main
+",AUD,"Standard
+",1
+152,18,Red Curry Duck,1,"15,6,10","Main
+",AUD,"Standard
+",1
+153,18,Cashew Nut Sauce,1,"67,24,96,65,2","Main
+",AUD,"Standard
+",1
+154,18,Chilli Basil Sauce,0,"14,98,49,23,78","Main
+",AUD,"Standard
+",1
+155,18,Oyster Sauce,1,"34,33,75,21,61","Main
+",AUD,"Standard
+",1
+156,18,Garlic and Pepper,1,"59,64,10,52,79","Main
+",AUD,"Standard
+",1
+157,18,Sweet and Sour Pork,3,"67,70,86,32,13","Main
+",AUD,"Standard
+",1
+158,18,Thai Fried Rice,2,"17,42,47,21,13","Main
+",AUD,"Standard
+",1
+159,18,"Red Lemon Fried Rice
+",2,"58,1,33,30,95","Main
+",AUD,"Standard
+",1
+160,18,Prawn Cracker,1,"5,23,74,76,2","Main
+",AUD,"Standard
+",1
+161,18,Spring Rolls,0,"55,51,34,83,8","Main
+",AUD,"Standard
+",1
+162,18,Fish Cake,1,"1,52,58,78,5","Main
+",AUD,"Standard
+",1
+163,18,Crab and Prawn Rolls,0,"52,10,22,54,34","Main
+",AUD,"Standard
+",1
+164,18,Curry Puffs,2,"66,93,38,62,34","Main
+",AUD,"Standard
+",1
+165,18,Satay Chicken Skewers,0,"9,35,14,52,59","Main
+",AUD,"Standard
+",1
+166,18,"Money Bags
+",3,"84,55,29,61,47","Main
+",AUD,"Standard
+",1
+167,18,Red Curry Beef,2,"95,38,43,96,30","Main
+",AUD,"Standard
+",1
+168,18,Pad Thai,1,"17,62,44,17,33","Main
+",AUD,"Standard
+",1
+169,18,Singapore Noodles,3,"9,28,19,57,12","Main
+",AUD,"Standard
+",1
+170,18,Deep Fried Fish,2,"97,65,37,94,91","Main
+",AUD,"Standard
+",1
+171,18,Stir Fried Basil and Chilli Sauce,2,"40,85,95,5,15","Main
+",AUD,"Standard
+",1
+172,18,Stir Fried with Garlic Sauce,0,"40,35,32,51,99","Main
+",AUD,"Standard
+",1
+173,25,Tebasaki Sweet and Sour Chicken Wing,3,"52,9,80,33,14","Main
+",AUD,"Standard
+",1
+174,25,Fried Pork Loin Fillet Katsu,2,"4,80,23,61,97","Main
+",AUD,"Standard
+",1
+175,25,Chicken Karage,1,"84,63,42,37,50","Main
+",AUD,"Standard
+",1
+176,25,Teriyaki Chicken Thaigh Fillet,0,"13,26,10,49,23","Main
+",AUD,"Standard
+",1
+177,25,Grilled Whole Eel,1,"7,11,37,59,47","Main
+",AUD,"Standard
+",1
+178,25,Teriyaki Wagyu Steak,1,"78,91,32,39,98","Main
+",AUD,"Standard
+",1
+179,25,Teriyaki Salmon,2,"30,13,5,61,55","Main
+",AUD,"Standard
+",1
+180,25,Ramen,3,"57,81,36,62,58","Main
+",AUD,"Standard
+",1
+181,25,Donburi with Egg Omlette,1,"94,52,33,95,71","Main
+",AUD,"Standard
+",1
+182,25,Fried Chicken Thigh with Omlette on Rice,2,"32,46,65,84,87","Main
+",AUD,"Standard
+",1
+183,25,Fried Prawn with Omlette on Rice,2,"49,84,61,20,44","Main
+",AUD,"Standard
+",1
+184,25,Miso Soup,3,"41,86,65,99,44","Main
+",AUD,"Standard
+",1
+185,25,Pork Chasu Bun,1,"34,19,33,35,72","Main
+",AUD,"Standard
+",1
+186,25,"Wagyu Beef Bun
+",3,"56,91,56,7,62","Main
+",AUD,"Standard
+",1
+187,25,Seaweed Salad,0,"51,74,51,80,5","Main
+",AUD,"Standard
+",1
+188,25,Cooked Prawn Salad,2,"16,11,97,50,37","Main
+",AUD,"Standard
+",1
+189,9,"Banh cuon
+",3,"21,60,88,48,92","Main
+",AUD,"Standard
+",1
+190,9,Pho ga,0,"78,73,88,33,88","Main
+",AUD,"Standard
+",1
+191,9,Pho ba,2,"45,40,92,97,44","Main
+",AUD,"Standard
+",1
+192,9,Bun cha,2,"34,49,66,83,44","Main
+",AUD,"Standard
+",1
+193,9,Goi cuon,1,"75,27,29,71,76","Main
+",AUD,"Standard
+",1
+194,9,Banh mi,3,"100,29,67,25,75","Main
+",AUD,"Standard
+",1
+195,9,Ca Kho To,0,"8,39,2,63,36","Main
+",AUD,"Standard
+",1
+196,9,Banh xeo,2,"95,38,43,96","Main
+",AUD,"Standard
+",1
+197,9,Canh,0,"17,62,44,17","Main
+",AUD,"Standard
+",1
+198,9,Banh ran,1,"9,28,19,57","Main
+",AUD,"Standard
+",1
+199,9,Banh chung,3,"97,65,37,94","Main
+",AUD,"Standard
+",1
+200,9,Banh tet,1,"40,85,95,5","Main
+",AUD,"Standard
+",1
+201,9,Chao,0,"40,35,32,51","Main
+",AUD,"Standard
+",1
+202,9,Com tam,1,"52,9,80,33","Main
+",AUD,"Standard
+",1
+203,9,Rau muong,1,"4,80,23,61","Main
+",AUD,"Standard
+",1
+204,9,Cha ca hanoi,3,"84,63,42,37","Main
+",AUD,"Standard
+",1
+205,9,Cao lau,0,"13,26,10,49","Main
+",AUD,"Standard
+",1
+206,9,Hot vit lon,3,"7,11,37,59","Main
+",AUD,"Standard
+",1
+207,9,Nuoc cham,1,"78,91,32,39","Main
+",AUD,"Standard
+",1
+208,9,Banh xeo,2,"30,13,5,61","Main
+",AUD,"Standard
+",1
+209,12,Tom yum gung,3,"57,81,36,62","Main
+",AUD,"Standard
+",1
+210,12,Gang som pak ruam,2,"94,52,33,95","Main
+",AUD,"Standard
+",1
+211,12,Gang keow wan,0,"32,46,65,84","Main
+",AUD,"Standard
+",1
+212,12,Panang gai,0,"49,84,61,20","Main
+",AUD,"Standard
+",1
+213,12,Gai pad pongali,3,"41,86,65,99","Main
+",AUD,"Standard
+",1
+214,12,Gang jued,1,"34,19,33,35","Main
+",AUD,"Standard
+",1
+215,12,Jim jum,0,"56,91,56,7","Main
+",AUD,"Standard
+",1
+216,12,Kao na phet,0,"25,43,79,81,34","Main
+",AUD,"Standard
+",1
+217,12,Kai jiew moo saap,0,"69,88,45,94,12","Main
+",AUD,"Standard
+",1
+218,12,Kao niew moo yang,3,"93,75,91,95,19","Main
+",AUD,"Standard
+",1
+219,12,Moo dad diew,3,"55,51,47,84,100","Main
+",AUD,"Standard
+",1
+220,12,Yam khor moo yang,2,"81,95,16,49,27","Main
+",AUD,"Standard
+",1
+221,12,Gai yang,0,"27,87,69,26,12","Main
+",AUD,"Standard
+",1
+222,12,Kao mok gai,0,"54,79,91,31,40","Main
+",AUD,"Standard
+",1
+223,12,Kao moo dang,0,"63,63,19,40,85","Main
+",AUD,"Standard
+",1
+224,12,"Kao man gai
+",1,"6,34,100,62,99","Main
+",AUD,"Standard
+",1
+225,12,Nam tok moo,1,"73,73,22,59,38","Main
+",AUD,"Standard
+",1
+226,12,Larb moo,2,"15,76,1,1,60","Main
+",AUD,"Standard
+",1
+227,12,Gai pad met ma muang,1,"89,19,61,85,63","Main
+",AUD,"Standard
+",1
+228,12,Plah kah pung neung manow,0,"65,92,23,56,82","Main
+",AUD,"Standard
+",1
+229,12,Gang som plah chon,2,"71,98,73,41,57","Main
+",AUD,"Standard
+",1
+230,12,Plah plow,3,"4,15,15,17,35","Main
+",AUD,"Standard
+",1
+231,12,Yam plah duk foo,1,"26,39,45,82,14","Main
+",AUD,"Standard
+",1
+232,12,Som tam,3,"90,96,69,16,18","Main
+",AUD,"Standard
+",1
+233,12,Kanom jeen,1,"41,95,99","Main
+",AUD,"Standard
+",1
+234,12,Gai pad king,1,"16,16,25","Main
+",AUD,"Standard
+",1
+235,15,Wood ear mushroom salad,1,"95,57,14","Main
+",AUD,"Standard
+",1
+236,15,Smashed cucumber salad,3,"91,50,18","Main
+",AUD,"Standard
+",1
+237,15,Cold tofu salad,3,"85,84,36","Main
+",AUD,"Standard
+",1
+238,15,Spicy potato salad,1,"60,78,92","Main
+",AUD,"Standard
+",1
+239,15,Schezuan cold noodles,2,"51,38,22","Main
+",AUD,"Standard
+",1
+240,15,Lotus root salad,2,"99,24,54","Main
+",AUD,"Standard
+",1
+241,15,Seasme wonton,3,"43,94,74","Main
+",AUD,"Standard
+",1
+242,15,Okra salad,0,"88,19,43","Main
+",AUD,"Standard
+",1
+243,15,Liangfen chinese jelly noodles,3,"21,35,23","Main
+",AUD,"Standard
+",1
+244,15,Pork and mushroom stir fry,2,"5,38,83","Main
+",AUD,"Standard
+",1
+245,15,Easy chinese broccoli with garlic,2,"69,47,10","Main
+",AUD,"Standard
+",1
+246,15,Shrimp and vegetable stir fry,2,"4,14,14","Main
+",AUD,"Standard
+",1
+247,26,Avial,0,"70,79,39","Main
+",AUD,"Standard
+",1
+248,26,Baghara baingan,1,"74,87,6","Main
+",AUD,"Standard
+",1
+249,26,Bisi bele bhaath,3,"92,3,9","Main
+",AUD,"Standard
+",1
+250,26,Channa dal,0,"64,84,10","Main
+",AUD,"Standard
+",1
+251,26,Chholey,0,"28,27,99","Main
+",AUD,"Standard
+",1
+252,26,Daal baati,2,"99,11,72","Main
+",AUD,"Standard
+",1
+253,26,Dal makhani,0,"17,13,6","Main
+",AUD,"Standard
+",1
+254,26,Dalcha,0,"75,99,15","Main
+",AUD,"Standard
+",1
+255,26,Dalma,0,"78,48,30","Main
+",AUD,"Standard
+",1
+256,26,Hyderabadi biriyani,2,"48,94,99","Main
+",AUD,"Standard
+",1
+257,26,Kachi biryani,3,"5,42,16","Main
+",AUD,"Standard
+",1
+258,26,Kofta,2,"23,62,19","Main
+",AUD,"Standard
+",1
+259,26,Malai kofta,2,"35,50,53","Main
+",AUD,"Standard
+",1
+260,26,Puliyogare,2,"8,41,33","Main
+",AUD,"Standard
+",1
+261,26,Ragi mudde,3,"72,36,53","Main
+",AUD,"Standard
+",1
+262,17,Hainese Chicken Rice,0,"63,60,89","Main
+",AUD,"Standard
+",1
+263,17,Xiao Long Bao,2,"88,74,26","Main
+",AUD,"Standard
+",1
+264,17,Cha Siu Bao,2,"64,87,26","Main
+",AUD,"Standard
+",1
+265,17,Dan tat,1,"42,34,12","Main
+",AUD,"Standard
+",1
+266,17,Beef chow fun,3,"37,97,90","Main
+",AUD,"Standard
+",1
+267,17,Lo bak go,1,"94,57,70","Main
+",AUD,"Standard
+",1
+268,17,Claypot rice,0,"87,93,38","Main
+",AUD,"Standard
+",1
+269,17,Red bean soup,0,"6,49,16","Main
+",AUD,"Standard
+",1
+270,17,Laznhou Lamian,3,"80,19,16","Main
+",AUD,"Standard
+",1
+271,17,"Congee
+",1,"90,20,14","Main
+",AUD,"Standard
+",1
+272,27,Tonkatsu,3,"14,24,52,3,28","Main
+",AUD,"Standard
+",1
+273,27,Karaage,1,"41,95,99,99,50","Main
+",AUD,"Standard
+",1
+274,27,Yakitori,3,"16,16,25,37,58","Main
+",AUD,"Standard
+",1
+275,27,Yakiniku,3,"95,57,14,33,49","Main
+",AUD,"Standard
+",1
+276,27,Sashimi,3,"91,50,18,56,66","Main
+",AUD,"Standard
+",1
+277,27,Robatayaki,2,"85,84,36,81,52","Main
+",AUD,"Standard
+",1
+278,27,Shabushabu,3,"60,78,92,33,67","Main
+",AUD,"Standard
+",1
+279,27,Gyutanyaki,2,"51,38,22,98,54","Main
+",AUD,"Standard
+",1
+280,27,Kaiseki ryori,0,"99,24,54,11,4","Main
+",AUD,"Standard
+",1
+281,27,Gyudon,1,"43,94,74,38,86","Main
+",AUD,"Standard
+",1
+282,27,Chankonabe,3,"88,19,43,14,48","Main
+",AUD,"Standard
+",1
+283,27,Motsunabe,2,"21,35,23,16,78","Main
+",AUD,"Standard
+",1
+284,27,Onigiri,2,"5,38,83,10,24","Main
+",AUD,"Standard
+",1
+285,11,Phad Thai,2,"69,47,10,1,13","Main
+",AUD,"Standard
+",1
+286,11,Tom Yam Goong,3,"4,14,14,92,91","Main
+",AUD,"Standard
+",1
+287,11,"Som Tum Isan
+",1,"94,57,70,56","Main
+",AUD,"Standard
+",1
+288,11,"Polla Mai Ruam
+",3,"87,93,38,19","Main
+",AUD,"Standard
+",1
+289,11,Tab Tim Krob,3,"6,49,16,60","Main
+",AUD,"Standard
+",1
+290,11,Gai Reu Nuesa Satay,0,"80,19,16,10","Main
+",AUD,"Standard
+",1
+291,11,Kean Om Nuea,0,"90,20,14,26","Main
+",AUD,"Standard
+",1
+292,11,Chang Mai Prik Ong,1,"14,40,9,94","Main
+",AUD,"Standard
+",1
+293,11,Lab Ped Yang,2,"15,78,18,79","Main
+",AUD,"Standard
+",1
+294,11,Goong Phad Phong Kra Ree,0,"49,58,62,87","Main
+",AUD,"Standard
+",1
+295,11,Pho Pia Thod,3,"57,54,45,86","Main
+",AUD,"Standard
+",1
+296,11,Sago Nam Krati Sai Karum,0,"36,75,91,81","Main
+",AUD,"Standard
+",1
+297,11,Hor Muok Gai,2,"21,50,67,14","Main
+",AUD,"Standard
+",1
+298,11,Pad Prak Rum,2,"49,83,80,19","Main
+",AUD,"Standard
+",1
+299,11,Nuea Phad Bai Ka Prow,2,"50,17,56,82","Main
+",AUD,"Standard
+",1
+300,11,Kiang Hang Lay,0,"90,32,4,17","Main
+",AUD,"Standard
+",1
+301,11,Kery Bu Se,1,"68,29,63,4","Main
+",AUD,"Standard
+",1
+302,11,Keang Lueng Pla,3,"12,42,89,60","Main
+",AUD,"Standard
+",1
+303,11,"Khao Phad Gai
+",0,"42,77,55","Main
+",AUD,"Standard
+",1
+304,11,Kao Neaw Mamuang,0,"1,68,72","Main
+",AUD,"Standard
+",1
+305,11,Hor Muok Pla,2,"56,32,45","Main
+",AUD,"Standard
+",1
+306,11,Gai Ruo Nuao Ped Ghing Onn,0,"11,7,26","Main
+",AUD,"Standard
+",1
+307,11,Keang Phet Gai,0,"38,27,88","Main
+",AUD,"Standard
+",1
+308,11,Sangkaya Bai Toey,2,"32,14,90","Main
+",AUD,"Standard
+",1
+309,11,Tom Jued Phak,3,"22,96,65","Main
+",AUD,"Standard
+",1
+310,11,Ym Tao-Hoo Ma,1,"72,38,24","Main
+",AUD,"Standard
+",1
+311,11,Goong Phad Haw,1,"38,72,51","Main
+",AUD,"Standard
+",1
+312,22,Roa Jia Mao,1,"25,50,13","Main
+",AUD,"Standard
+",1
+313,22,Knife Cut Noodles,0,"90,58,96","Main
+",AUD,"Standard
+",1
+314,22,Liang Pi,0,"99,51,8","Main
+",AUD,"Standard
+",1
+315,22,Black Bean Sauce Noodles,3,"9,46,5","Main
+",AUD,"Standard
+",1
+316,22,Biang Biang Noodles,1,"98,10,98","Main
+",AUD,"Standard
+",1
+317,22,Chilli Oil Cucumbers,1,"89,93,73","Main
+",AUD,"Standard
+",1
+318,22,Mantou,0,"54,38,19","Main
+",AUD,"Standard
+",1
+319,22,Cumin stir fried lamb,0,"96,5,40","Main
+",AUD,"Standard
+",1
+320,22,Lamb soup,0,"50,87,43","Main
+",AUD,"Standard
+",1
+321,22,Tang hulu,3,"8,5,25","Main
+",AUD,"Standard
+",1
+322,28,Nasi lemak,3,"87,92,18","Main
+",AUD,"Standard
+",1
+323,28,Nasi kerabu,3,"21,22,65","Main
+",AUD,"Standard
+",1
+324,28,Beef rendang,2,"76,26,38,97","Main
+",AUD,"Standard
+",1
+325,28,Assam laksa,0,"56,73,13,51","Main
+",AUD,"Standard
+",1
+326,28,Curry laksa,3,"84,96,95,43","Main
+",AUD,"Standard
+",1
+327,28,Hainese Chicken Rice,3,"87,84,52,2","Main
+",AUD,"Standard
+",1
+328,28,Banana leaf rice,1,"60,56,13,30","Main
+",AUD,"Standard
+",1
+329,28,Bak kut teh,0,"76,36,51,79","Main
+",AUD,"Standard
+",1
+330,28,Soupy lou shu fan,0,"74,33,43,95","Main
+",AUD,"Standard
+",1
+331,28,Briyani,1,"60,41,11,69","Main
+",AUD,"Standard
+",1
+332,28,Roti canai,3,"71,74,28,18","Main
+",AUD,"Standard
+",1
+333,28,Roti tisu,0,"98,87,20,24","Main
+",AUD,"Standard
+",1
+334,28,Maggi goreng,0,"31,19,8,47","Main
+",AUD,"Standard
+",1
+335,28,Kaya pau,0,"16,15,81,81","Main
+",AUD,"Standard
+",1
+336,28,Pisang goreng,1,"43,29,80,38","Main
+",AUD,"Standard
+",1
+337,29,Yeongol,2,"91,87,17,5","Main
+",AUD,"Standard
+",1
+338,29,Ramyeon,3,"1,24,3,77","Main
+",AUD,"Standard
+",1
+339,29,Bibimbap,2,"42,77,55,17","Main
+",AUD,"Standard
+",1
+340,29,Sannakji,1,"1,68,72,77","Main
+",AUD,"Standard
+",1
+341,29,LA galbi,2,"56,32,45,79","Main
+",AUD,"Standard
+",1
+342,29,Ojingeo Boggeumbap,3,"11,7,26,59","Main
+",AUD,"Standard
+",1
+343,29,Juk,0,"38,27,88,25","Main
+",AUD,"Standard
+",1
+344,29,Deonjang Jigae,2,"32,14,90,63","Main
+",AUD,"Standard
+",1
+345,29,Origogi,2,"22,96,65,36","Main
+",AUD,"Standard
+",1
+346,29,Bulgogi,3,"72,38,24,28","Main
+",AUD,"Standard
+",1
+347,29,Kalguksu,1,"38,72,51,63","Main
+",AUD,"Standard
+",1
+348,29,Bo ssam,2,"25,50,13,43","Main
+",AUD,"Standard
+",1
+349,29,Gyeranppang,3,"90,58,96,17","Main
+",AUD,"Standard
+",1
+350,29,Sundubujjigae,1,"99,51,8,10","Main
+",AUD,"Standard
+",1
+351,29,Jokbal,0,"9,46,5,31","Main
+",AUD,"Standard
+",1
+352,29,Jjim Dalk,0,"98,10,98,11","Main
+",AUD,"Standard
+",1
+353,30,Kimchi Mandu,2,"89,93,73,48","Main
+",AUD,"Standard
+",1
+354,30,Kimchi Jjigae,2,"54,38,19,28","Main
+",AUD,"Standard
+",1
+355,30,Chi-Mek,3,"96,5,40,10","Main
+",AUD,"Standard
+",1
+356,30,Tteok Galbi,1,"50,87,43,62","Main
+",AUD,"Standard
+",1
+357,30,Kimchi Boggeumbap,0,"8,5,25,36","Main
+",AUD,"Standard
+",1
+358,30,Chamchi Kimbap,1,"87,92,18,15","Main
+",AUD,"Standard
+",1
+359,30,Samgyeopsal,1,"21,22,65,6","Main
+",AUD,"Standard
+",1
+360,30,Yangnyeom Tongdak,0,"41,22,100,74","Main
+",AUD,"Standard
+",1
+361,30,Jeyukdeopbap,0,"81,17,57,43","Main
+",AUD,"Standard
+",1
+362,30,Dak Galbi,2,"100,19,11,48","Main
+",AUD,"Standard
+",1
+363,30,Galbi Jjim,2,"75,50,85,79","Main
+",AUD,"Standard
+",1
+364,30,Ppyeohaejangguk,1,"73,21,77,5","Main
+",AUD,"Standard
+",1
+365,14,Bakso,1,"63,79,41,8","Main
+",AUD,"Standard
+",1
+366,14,Soto Ayam,2,"88,29,19,74","Main
+",AUD,"Standard
+",1
+367,14,Nasi goreng,0,"70,31,12,29","Main
+",AUD,"Standard
+",1
+368,14,Gado-Gado,1,"41,83,14,61","Main
+",AUD,"Standard
+",1
+369,14,Nasi padang,1,"88,77,28","Main
+",AUD,"Standard
+",1
+370,14,Bakmie Goreng,2,"84,18,96","Main
+",AUD,"Standard
+",1
+371,14,Ayam Goreng,3,"35,97,84","Main
+",AUD,"Standard
+",1
+372,14,Gudeg,0,"8,78,90","Main
+",AUD,"Standard
+",1
+373,14,Pecel lele,0,"63,43,8","Main
+",AUD,"Standard
+",1
+374,14,Opor Ayam,2,"91,9,12","Main
+",AUD,"Standard
+",1
+375,14,Mie Ayam,3,"42,59,75","Main
+",AUD,"Standard
+",1
+376,14,Babi Guling,0,"9,49,75","Main
+",AUD,"Standard
+",1
+377,14,Burbur Ayam,3,"47,17,98","Main
+",AUD,"Standard
+",1
+378,14,Bakpao,0,"98,26,46","Main
+",AUD,"Standard
+",1
+379,13,Asinan Sayur,1,"52,91,70","Main
+",AUD,"Standard
+",1
+380,13,Cah Kangkung,1,"87,44,98","Main
+",AUD,"Standard
+",1
+381,13,Pepes Ikan,3,"93,35,75","Main
+",AUD,"Standard
+",1
+382,13,Pempek,2,"55,71,82","Main
+",AUD,"Standard
+",1
+383,13,Perkadel,3,"51,76,76","Main
+",AUD,"Standard
+",1
+384,13,Sayur Asem,0,"46,78,37","Main
+",AUD,"Standard
+",1
+385,13,Sop Buntut,2,"87,18,82","Main
+",AUD,"Standard
+",1
+386,13,Ketoprak,0,"30,16,55","Main
+",AUD,"Standard
+",1
+387,13,Balado Terong,0,"24,28,6","Main
+",AUD,"Standard
+",1
+388,13,Lontong Sayur,1,"57,68,62","Main
+",AUD,"Standard
+",1
+389,13,Tahu Gejrot,0,"52,93,54","Main
+",AUD,"Standard
+",1
+390,13,Beef Rendang,0,"81,53,73","Main
+",AUD,"Standard
+",1
+391,13,Siomay,3,"100,2,74","Main
+",AUD,"Standard
+",1
+392,13,Ikan Bakar,3,"35,59,99","Main
+",AUD,"Standard
+",1
+393,13,Otak-Otak,3,"9,8,21","Main
+",AUD,"Standard
+",1
+394,13,Bebek Goreng,0,"61,88,41","Main
+",AUD,"Standard
+",1
+395,13,Krupuk Udang,3,"29,93,55","Main
+",AUD,"Standard
+",1
+396,31,Tonkatsu,3,"11,44,64","Main
+",AUD,"Standard
+",1
+397,31,Sushi,2,"24,64,16","Main
+",AUD,"Standard
+",1
+398,31,Chirashi-don,0,"100,85,3","Main
+",AUD,"Standard
+",1
+399,31,Tempura,2,"44,24,60,58,90","Main
+",AUD,"Standard
+",1
+400,31,Ramen,1,"28,84,82,68,24","Main
+",AUD,"Standard
+",1
+401,31,Te-uchi soba,0,"29,98,30,49,43","Main
+",AUD,"Standard
+",1
+402,31,Sanuki udon,2,"40,70,52,55,57","Main
+",AUD,"Standard
+",1
+403,31,Japanese curry rice,1,"53,58,86,82,73","Main
+",AUD,"Standard
+",1
+404,31,Gyoza,3,"23,86,86,82,74","Main
+",AUD,"Standard
+",1
+405,31,Yaki-imo,0,"71,9,6,39,6","Main
+",AUD,"Standard
+",1
+406,31,Takoyaki,3,"54,19,98,10,100","Main
+",AUD,"Standard
+",1
+407,31,Onigiri,1,"84,17,52,59,83","Main
+",AUD,"Standard
+",1
+408,31,Natto,1,"4,54,32,45,26","Main
+",AUD,"Standard
+",1
+409,31,Yakitori,2,"70,48,51,68,38","Main
+",AUD,"Standard
+",1
+410,31,Okonomiyaki,3,"23,44,33,67,35","Main
+",AUD,"Standard
+",1
+411,31,Miso,3,"1,39,51,14,7","Main
+",AUD,"Standard
+",1
+412,31,Taco rice,3,"80,8,66,86,87","Main
+",AUD,"Standard
+",1
+413,31,Nabe,2,"95,43,75,46,72","Main
+",AUD,"Standard
+",1
+414,31,Taiyaki,3,"71,73,98,50,82","Main
+",AUD,"Standard
+",1
+415,31,Kabayaki,1,"16,73,56,95,29","Main
+",AUD,"Standard
+",1
+416,31,Ochazuke,2,"1,65,13,58,45","Main
+",AUD,"Standard
+",1
+417,10,Guay Teow,3,"93,16,51,35,35","Main
+",AUD,"Standard
+",1
+418,10,Tom Yum Goong,3,"86,90,58,26,69","Main
+",AUD,"Standard
+",1
+419,10,Tom Kha Gai,3,"57,10,33,83,36","Main
+",AUD,"Standard
+",1
+420,10,Som Tam,3,"24,56,45,87,96","Main
+",AUD,"Standard
+",1
+421,10,Yam Pla Dook Foo,3,"12,75,78,86,55","Main
+",AUD,"Standard
+",1
+422,10,Yam Talay,3,"51,94,65,98,46","Main
+",AUD,"Standard
+",1
+423,10,Laab,1,"8,47,98,11,10","Main
+",AUD,"Standard
+",1
+424,10,Pad Phuk Tong,0,"60,30,24,14,32","Main
+",AUD,"Standard
+",1
+425,10,Pad Thai,0,"79,80,13,65,23","Main
+",AUD,"Standard
+",1
+426,10,Pad See Eiw,2,"49,47,39,2,86","Main
+",AUD,"Standard
+",1
+427,10,Pak Boong,0,"52,11,59,47,15","Main
+",AUD,"Standard
+",1
+428,10,Khao Pad,0,"57,60,14,91,21","Main
+",AUD,"Standard
+",1
+429,19,Pad Krapow,0,"42,20,100,39,39","Main
+",AUD,"Standard
+",1
+430,19,Panang,2,"23,68,3,55,49","Main
+",AUD,"Standard
+",1
+431,19,Gaeng Keow Wan,3,"99,73,33,26,3","Main
+",AUD,"Standard
+",1
+432,19,Khao Soi,0,"26,12,69,28,84","Main
+",AUD,"Standard
+",1
+433,19,Gai Tod,2,"29,3,92,50,96","Main
+",AUD,"Standard
+",1
+434,19,Pad Phak,0,"80,52,56,12,11","Main
+",AUD,"Standard
+",1
+435,19,Kai Med Ma Muang,0,"66,87,26,90,16","Main
+",AUD,"Standard
+",1
+436,19,Kai Jeow,0,"64,3,9,100,10","Main
+",AUD,"Standard
+",1
+437,19,Kao Niew Ma Muang,0,"96,12,100,51,13","Main
+",AUD,"Standard
+",1
+438,32,Rava Dosas,1,"34,17,62,60,45","Main
+",AUD,"Standard
+",1
+439,32,Spiced chicken with tomato and cream,0,"21,94,97,69,6","Main
+",AUD,"Standard
+",1
+440,32,Chicken tikka masala,2,"95,86,29,46","Main
+",AUD,"Standard
+",1
+441,32,Baby back ribs with tamarind glaze,1,"30,97,53,66","Main
+",AUD,"Standard
+",1
+442,32,Butter chicken,0,"51,5,69,35","Main
+",AUD,"Standard
+",1
+443,32,Cucumber raita with black mustard and cilantro,2,"59,71,90,35","Main
+",AUD,"Standard
+",1
+444,32,Shrimp poached in coconut milk,2,"54,39,45,89","Main
+",AUD,"Standard
+",1
+445,32,Stir fried green beans with coconut,3,"27,43,89,24","Main
+",AUD,"Standard
+",1
+446,32,Chicken roasted with ginger and cilantro,2,"82,80,93,46","Main
+",AUD,"Standard
+",1
+447,32,Cabbage stir fry with coconut and lemon,1,"96,46,52,86","Main
+",AUD,"Standard
+",1
+448,32,Cumin scented potatoes with tomatoes,3,"4,64,44,100","Main
+",AUD,"Standard
+",1
+449,32,"Eggplant, chicken and tomato skewers",0,"92,3,96,24","Main
+",AUD,"Standard
+",1
+450,32,Tandoori octopus,3,"72,53,20,89","Main
+",AUD,"Standard
+",1
+451,32,Paneer and broccoli masala,1,"22,74,91,10","Main
+",AUD,"Standard
+",1
+452,32,Curried yellow split pea soup with spiced coconut,2,"36,81,68,15","Main
+",AUD,"Standard
+",1
+453,32,"Tiger shrimp with lime, giner and mustard seeds",3,"64,90,74,9","Main
+",AUD,"Standard
+",1
+454,7,Stir fried sweet shrimp,2,"2,61,66,33","Main
+",AUD,"Standard
+",1
+455,7,Lemongrass tamarind chicken,2,"63,43,31","Main
+",AUD,"Standard
+",1
+456,7,"Cabbage roll soup
+",0,"99,28,98","Main
+",AUD,"Standard
+",1
+457,7,Lemongrass marinated lamb chops,1,"85,92,39","Main
+",AUD,"Standard
+",1
+458,7,Stir fried mixed vegetables,2,"23,14,28","Main
+",AUD,"Standard
+",1
+459,7,Vietnamese fried rice,0,"87,56,52","Main
+",AUD,"Standard
+",1
+460,7,Pomelo and shrimp salad,1,"71,54,59","Main
+",AUD,"Standard
+",1
+461,7,Pandan rice and mung bean cake,1,"53,27,46","Main
+",AUD,"Standard
+",1
+462,7,Pork bone and green papaya soup,1,"70,82,75","Main
+",AUD,"Standard
+",1
+463,7,Vietnamese beef and noodle salad,1,"38,87,4","Main
+",AUD,"Standard
+",1
+464,7,Pickled bitter melon salad,1,"43,70,54","Main
+",AUD,"Standard
+",1
+465,7,Pho bo,3,"4,55,29","Main
+",AUD,"Standard
+",1
+466,7,Pho ga,3,"65,73,19","Main
+",AUD,"Standard
+",1
+467,5,Spicy potato salad,1,"24,86,48","Main
+",AUD,"Standard
+",1
+468,5,Schezuan cold noodles,2,"69,100,35","Main
+",AUD,"Standard
+",1
+469,5,Lotus root salad,2,"71,15,89,40,16","Main
+",AUD,"Standard
+",1
+470,5,Seasme wonton,2,"83,91,97,8,64","Main
+",AUD,"Standard
+",1
+471,5,Okra salad,1,"99,91,7,63,35","Main
+",AUD,"Standard
+",1
+472,5,Liangfen chinese jelly noodles,1,"22,37,94,87,2","Main
+",AUD,"Standard
+",1
+473,5,Shredded Pork and Pickled Vegetable Noodle Soup,2,"51,37,78,48,9","Main
+",AUD,"Standard
+",1
+474,5,Beef Brisket and Radish Noodle Soupe,2,"98,18,80,90,84","Main
+",AUD,"Standard
+",1
+475,5,Roasted Pork Noodle Soup,1,"38,27,33,95,33","Main
+",AUD,"Standard
+",1
+476,5,Roasted Duck Noodle Soup,0,"17,46,31,79,11","Main
+",AUD,"Standard
+",1
+477,5,Mongolian Lamb Fillet,3,"95,25,26,49,22","Main
+",AUD,"Standard
+",1
+478,5,Roasted Duck in Shandong Sauce,2,"29,96,74,24,61","Main
+",AUD,"Standard
+",1
+479,5,Szechuan Chilli Beef,0,"61,82,5,85,38","Main
+",AUD,"Standard
+",1
+480,5,Satay Beef,1,"79,19,53,23,4","Main
+",AUD,"Standard
+",1
+481,5,Beef with Black Pepper Sauce,3,"15,33,59,9,6","Main
+",AUD,"Standard
+",1
+482,5,Fillet Steak Chinese Style,1,"90,2,92,61,89","Main
+",AUD,"Standard
+",1
+483,5,Beef with Mixed Vegetables,2,"32,91,92,58,66","Main
+",AUD,"Standard
+",1
+484,5,Chicken Fried Egg Noodle,2,"74,99,40,56","Main
+",AUD,"Standard
+",1
+485,3,Dim Sums,0,"29,38,51,15","Main
+",AUD,"Standard
+",1
+486,3,Hot and Sour Soup,2,"58,40,21,7","Main
+",AUD,"Standard
+",1
+487,3,Szechwan Chilli Chicken,0,"88,29,87,29","Main
+",AUD,"Standard
+",1
+488,3,Spring Rolls,0,"96,35,65,49","Main
+",AUD,"Standard
+",1
+489,3,Stir Fried Tofu with Rice,3,"80,47,11,74","Main
+",AUD,"Standard
+",1
+490,3,Shitake Fried Rice with Water Chestnuts,0,"9,56,4,72","Main
+",AUD,"Standard
+",1
+491,3,Chicken with Chestnuts,3,"92,45,34,66","Main
+",AUD,"Standard
+",1
+492,3,Honey Chilli Potato,3,"48,22,64,18","Main
+",AUD,"Standard
+",1
+493,3,Wok Tossed Veggies in Honey and Black Bean Glaze,3,"25,30,1,9","Main
+",AUD,"Standard
+",1
+494,3,Cantonese Chicken Soup,0,"11,25,5,88","Main
+",AUD,"Standard
+",1
+495,3,Vegetable Fried Rice,0,"35,9,12,38","Main
+",AUD,"Standard
+",1
+496,3,Garlic Soya Chicken,2,"70,3,38,89","Main
+",AUD,"Standard
+",1
+497,3,Vegetable Manchow Soup,3,"4,93,25,1","Main
+",AUD,"Standard
+",1
+498,16,Nasi padang,3,"14,72,50,69","Main
+",AUD,"Standard
+",1
+499,16,Bakmie Goreng,1,"15,86,51,25","Main
+",AUD,"Standard
+",1
+500,16,Ayam Goreng,3,"48,98,93,92","Main
+",AUD,"Standard
+",1
+501,16,Gudeg,3,"61,25,64,50","Main
+",AUD,"Standard
+",1
+502,16,Pecel lele,1,"74,59,32,81","Main
+",AUD,"Standard
+",1
+503,16,Tahu Gejrot,2,"42,17,54,91","Main
+",AUD,"Standard
+",1
+504,16,Beef Rendang,2,"79,3,48,44,58","Main
+",AUD,"Standard
+",1
+505,16,Siomay,3,"36,74,24,61,17","Main
+",AUD,"Standard
+",1
+506,16,Asinan Sayur,3,"1,46,4,28,76","Main
+",AUD,"Standard
+",1
+507,16,Cah Kangkung,3,"100,95,15,69,20","Main
+",AUD,"Standard
+",1
+508,16,Pepes Ikan,2,"87,100,18,29,45","Main
+",AUD,"Standard
+",1
+509,16,Pempek,1,"50,83,28,79,68","Main
+",AUD,"Standard
+",1
+510,16,Perkadel,2,"67,83,38,55,32","Main
+",AUD,"Standard
+",1
+511,21,Chowmein,1,"6,61,7,49,48","Main
+",AUD,"Standard
+",1
+512,21,Manchurian,1,"36,60,5,27,29","Main
+",AUD,"Standard
+",1
+513,21,Spicy Tofu,3,"73,78,55,83,35","Main
+",AUD,"Standard
+",1
+514,21,Egg-Fried Rice,3,"7,49,56,5,68","Main
+",AUD,"Standard
+",1
+515,21,Kung Pao Chicken,2,"50,46,75,90,80","Main
+",AUD,"Standard
+",1
+516,21,Wonton Soup,3,"68,3,46,71,35","Main
+",AUD,"Standard
+",1
+517,21,Sweet and Sour Pork,3,"98,57,28,94,82","Main
+",AUD,"Standard
+",1
+518,21,Peking Roasted Duck,1,"78,91,76,98,50","Main
+",AUD,"Standard
+",1
+519,21,Spring Rolls,0,"11,19,68,99,28","Main
+",AUD,"Standard
+",1
+520,21,Chilli Chicken,2,"54,10,35,48,27","Main
+",AUD,"Standard
+",1
+521,21,Monchow Soup,3,"73,79,41,65,57","Main
+",AUD,"Standard
+",1
+522,21,Chicken Manchurian,2,"20,50,21,63,96","Main
+",AUD,"Standard
+",1
+523,21,Egg Noodles,0,"69,32,89,86,94","Main
+",AUD,"Standard
+",1
+524,21,Darsaan,3,"71,27,70,70,92","Main
+",AUD,"Standard
+",1
+525,21,American Chop Suey,2,"38,22,35,2,81","Main
+",AUD,"Standard
+",1
+526,21,Chilli Potato,0,"99,72,39,45,78","Main
+",AUD,"Standard
+",1
+527,21,Fried Shrimps with Cashews,3,"95,42,90,100,53","Main
+",AUD,"Standard
+",1
+528,21,Gong Bao Chicken,3,"91,38,90,43,83","Main
+",AUD,"Standard
+",1
+529,21,Dimpsums,3,"74,25,88,15,64","Main
+",AUD,"Standard
+",1
+530,44,Roasted Duck Noodle Soup,2,"32,37,32,46,31","Main
+",AUD,"Standard
+",1
+531,45,Seafood Fried Egg Noodle,1,"53,24,97,9,7","Main
+",AUD,"Standard
+",1
+532,46,Black Pepper Beef Noodle Soup,2,"46,92,16,69,40","Main
+",AUD,"Standard
+",1
+533,47,Chicken with Chestnuts,1,"94,87,92,85,77","Main
+",AUD,"Standard
+",1
+534,48,Wonton Noodle Soup,3,"41,14,67,50,24","Main
+",AUD,"Standard
+",1
+535,49,Chilli Chicken,1,"64,27,70,4,47","Main
+",AUD,"Standard
+",1
+536,50,Liangfen chinese jelly noodles,0,"42,84,60,97,23","Main
+",AUD,"Standard
+",1
+537,51,Cold tofu salad,2,"82,45,26,47,60","Main
+",AUD,"Standard
+",1
+538,70,Spicy Tofu,3,"61,78,88,95,90","Main
+",AUD,"Standard
+",1
+539,75,Garlic Soya Chicken,1,"99,90,18,44,42","Main
+",AUD,"Standard
+",1
+540,76,Braised Pork Belly,0,"64,7,61,11,5","Main
+",AUD,"Standard
+",1
+541,77,Won ton soup,3,"74,17,4,96,16","Main
+",AUD,"Standard
+",1
+542,78,Chilli Oil Cucumbers,0,"12,60,20,6,4","Main
+",AUD,"Standard
+",1
+543,79,Beef with Mixed Vegetables,3,"12,95,42,79,76","Main
+",AUD,"Standard
+",1
+544,80,Schezuan cold noodles,1,"98,52,66,29,95","Main
+",AUD,"Standard
+",1
+545,82,Chow mein,2,"36,32,32,43,69","Main
+",AUD,"Standard
+",1
+546,84,Liangfen chinese jelly noodles,2,"4,42,31,33,88","Main
+",AUD,"Standard
+",1
+547,44,Darsaan,3,"87,30,30,28,42","Main
+",AUD,"Standard
+",1
+548,45,Seasme wonton,0,"77,50,11,35,99","Main
+",AUD,"Standard
+",1
+549,46,Okra salad,3,"79,29,22,33,45","Main
+",AUD,"Standard
+",1
+550,47,Beef with Black Pepper Sauce,2,"6,9,30,46,61","Main
+",AUD,"Standard
+",1
+551,48,Combination Wonton Noodle Soup,3,"91,47,63,4,51","Main
+",AUD,"Standard
+",1
+552,49,Chicken Fried Egg Noodle,1,"80,98,54,10,16","Main
+",AUD,"Standard
+",1
+553,50,Beef with Mixed Vegetables,1,"56,59,68,46,99","Main
+",AUD,"Standard
+",1
+554,51,Cantonese Chicken Soup,3,"5,70,95,51,39","Main
+",AUD,"Standard
+",1
+555,70,Vegetable Fried Rice,2,"15,100,67,95,6","Main
+",AUD,"Standard
+",1
+556,75,Gong Bao Chicken,1,"7,95,66,84,96","Main
+",AUD,"Standard
+",1
+557,76,Stir Fried Shredded Pork,0,"85,61,85,45,8","Main
+",AUD,"Standard
+",1
+558,77,Lotus root salad,2,"26,96,47,92,6","Main
+",AUD,"Standard
+",1
+559,78,Special Braised Beef,0,"28,97,11,82,15","Main
+",AUD,"Standard
+",1
+560,79,Roa Jia Mao,2,"29,52,21,54,32","Main
+",AUD,"Standard
+",1
+561,80,Roasted Pork Noodle Soup,0,"31,36,29,61,91","Main
+",AUD,"Standard
+",1
+562,82,Beef Brisket and Radish Noodle Soupe,1,"65,45,46,85,36","Main
+",AUD,"Standard
+",1
+563,84,Prawn and Pork Wonton Soup,0,"80,49,38,18,88","Main
+",AUD,"Standard
+",1
+564,44,Wonton Soup,1,"41,92,18,32,16","Main
+",AUD,"Standard
+",1
+565,45,Schezuan cold noodles,0,"27,4,20,82,76","Main
+",AUD,"Standard
+",1
+566,46,Szechuan Chilli Beef,1,"30,97,44,25,48","Main
+",AUD,"Standard
+",1
+567,47,Roasted Duck Noodle Soup,3,"6,76,53,88,77","Main
+",AUD,"Standard
+",1
+568,48,Beef Congee,1,"11,4,25,6,45","Main
+",AUD,"Standard
+",1
+569,49,Lamb soup,3,"15,38,85,77,78","Main
+",AUD,"Standard
+",1
+570,50,Biang Biang Noodles,0,"98,25,99,58,50","Main
+",AUD,"Standard
+",1
+571,51,Spring Rolls,0,"46,72,57,64,48","Main
+",AUD,"Standard
+",1
+572,70,Smashed cucumber salad,0,"32,14,57,96,88","Main
+",AUD,"Standard
+",1
+573,75,Beef Brisket and Radish Noodle Soupe,3,"3,50,92,89,77","Main
+",AUD,"Standard
+",1
+574,76,Spring Rolls,1,"98,36,68,88","Main
+",AUD,"Standard
+",1
+575,77,American Chop Suey,3,"49,87,46,66","Main
+",AUD,"Standard
+",1
+576,78,Monchow Soup,0,"53,82,91,87","Main
+",AUD,"Standard
+",1
+577,79,Satay Beef,3,"24,37,62,23","Main
+",AUD,"Standard
+",1
+578,80,Wok Tossed Veggies in Honey and Black Bean Glaze,1,"37,32,91,28","Main
+",AUD,"Standard
+",1
+579,82,Pork and mushroom stir fry,2,"28,55,36,1","Main
+",AUD,"Standard
+",1
+580,84,Szechuan Chilli Beef,3,"2,24,90,94","Main
+",AUD,"Standard
+",1
+581,44,Dan tat,0,"71,12,67,96","Main
+",AUD,"Standard
+",1
+582,45,Sweet and sour pork,3,"41,4,16,59","Main
+",AUD,"Standard
+",1
+583,46,Chicken Manchurian,0,"68,36,63,37","Main
+",AUD,"Standard
+",1
+584,47,Manchurian,2,"37,69,96,100","Main
+",AUD,"Standard
+",1
+585,48,Manchurian,0,"55,27,99,31","Main
+",AUD,"Standard
+",1
+586,49,Okra salad,2,"28,100,36,73","Main
+",AUD,"Standard
+",1
+587,50,Choi Sum Congee,0,"2,90,76,14","Main
+",AUD,"Standard
+",1
+588,51,Roasted Duck in Shandong Sauce,0,"14,27,85,73","Main
+",AUD,"Standard
+",1
+589,70,Chowmein,1,"2,3,37,68","Main
+",AUD,"Standard
+",1
+590,75,Stir Fried Long Bean Minced Pork,2,"95,6,1,40","Main
+",AUD,"Standard
+",1
+591,76,Mongolian Lamb Fillet,1,"63,67,70,68","Main
+",AUD,"Standard
+",1
+592,77,Singapore Fried Egg Noodle,2,"11,63,83,6","Main
+",AUD,"Standard
+",1
+593,78,Roasted Pork Noodle Soup,3,"76,36,63,77","Main
+",AUD,"Standard
+",1
+594,79,Dumplings,2,"80,37,2,89","Main
+",AUD,"Standard
+",1
+595,80,Chicken Fried Egg Noodle,2,"8,49,70,22","Main
+",AUD,"Standard
+",1
+596,82,Hainese Chicken Rice,1,"62,100,97,13","Main
+",AUD,"Standard
+",1
+597,84,Laznhou Lamian,0,"26,76,7,14","Main
+",AUD,"Standard
+",1
+598,44,Tang hulu,2,"89,93,39,70","Main
+",AUD,"Standard
+",1
+599,45,Cha Siu Bao,3,"99,1,1,35","Main
+",AUD,"Standard
+",1
+600,46,Fillet Steak Chinese Style,3,"86,66,72,95","Main
+",AUD,"Standard
+",1
+601,47,Spicy potato salad,1,"55,37,32,1","Main
+",AUD,"Standard
+",1
+602,48,Beef chow fun,2,"42,52,79,2","Main
+",AUD,"Standard
+",1
+603,49,Shredded Pork and Pickled Vegetable Noodle Soup,1,"99,72,90,92","Main
+",AUD,"Standard
+",1
+604,50,Easy chinese broccoli with garlic,2,"84,33,54,71","Main
+",AUD,"Standard
+",1
+605,51,Noodle with Braised Beef,1,"66,84,47,60","Main
+",AUD,"Standard
+",1
+606,70,Rice With Beef and Cumin,1,"73,63,36,36","Main
+",AUD,"Standard
+",1
+607,75,Peking roasted duck,3,"86,23,97,63","Main
+",AUD,"Standard
+",1
+608,76,Mongolian Lamb Fillet,2,"37,54,38,47","Main
+",AUD,"Standard
+",1
+609,77,King Prawn Fried Egg Noodle,3,"26,31,61,54","Main
+",AUD,"Standard
+",1
+610,78,Spicy potato salad,1,"34,45,23,4","Main
+",AUD,"Standard
+",1
+611,79,Spring rolls,0,"74,98,27,16","Main
+",AUD,"Standard
+",1
+612,80,Chilli Potato,2,"10,15,81,38","Main
+",AUD,"Standard
+",1
+613,82,Congee,2,"62,94,60,42","Main
+",AUD,"Standard
+",1
+614,84,Stir Fried Tofu with Rice,1,"28,17,2,43","Main
+",AUD,"Standard
+",1
+615,44,Fried shrimp with cashew nuts,1,"34,87,10,35","Main
+",AUD,"Standard
+",1
+616,45,Kung Pao Chicken,3,"35,73,76,36","Main
+",AUD,"Standard
+",1
+617,46,Shitake Fried Rice with Water Chestnuts,3,"7,54,82,2","Main
+",AUD,"Standard
+",1
+618,47,Chicken Fried Egg Noodle,2,"62,68,6,66","Main
+",AUD,"Standard
+",1
+619,48,Hainese Chicken Rice,0,"79,41,9,77","Main
+",AUD,"Standard
+",1
+620,49,Laznhou Lamian,2,"83,32,21,12","Main
+",AUD,"Standard
+",1
+621,50,Tang hulu,2,"28,62,19,77","Main
+",AUD,"Standard
+",1
+622,51,Cha Siu Bao,0,"23,11,95,92","Main
+",AUD,"Standard
+",1
+623,70,Fillet Steak Chinese Style,3,"74,33,83,2","Main
+",AUD,"Standard
+",1
+624,75,Spicy potato salad,1,"57,47,95,28","Main
+",AUD,"Standard
+",1
+625,76,Roasted Duck Noodle Soup,2,"24,15,37,83","Main
+",AUD,"Standard
+",1
+626,77,Seafood Fried Egg Noodle,3,"71,4,6,97","Main
+",AUD,"Standard
+",1
+627,78,Black Pepper Beef Noodle Soup,0,"70,4,15,17","Main
+",AUD,"Standard
+",1
+628,79,Chicken with Chestnuts,1,"31,96,64,12","Main
+",AUD,"Standard
+",1
+629,80,Wonton Noodle Soup,0,"82,71,78,11","Main
+",AUD,"Standard
+",1
+630,82,Chilli Chicken,2,"72,51,71,47","Main
+",AUD,"Standard
+",1
+631,84,Liangfen chinese jelly noodles,1,"51,28,66,30","Main
+",AUD,"Standard
+",1
+632,44,Cold tofu salad,1,"61,17,93,79","Main
+",AUD,"Standard
+",1
+633,45,Spicy Tofu,1,"7,93,10,27","Main
+",AUD,"Standard
+",1
+634,46,Garlic Soya Chicken,0,"40,21,6,49","Main
+",AUD,"Standard
+",1
+635,47,Braised Pork Belly,2,"79,59,55,10","Main
+",AUD,"Standard
+",1
+636,48,Won ton soup,3,"75,93,82,89","Main
+",AUD,"Standard
+",1
+637,49,Chilli Oil Cucumbers,3,"51,69,53,56","Main
+",AUD,"Standard
+",1
+638,50,Chow mein,0,"9,6,11,97","Main
+",AUD,"Standard
+",1
+639,51,Liangfen chinese jelly noodles,2,"40,85,29,79","Main
+",AUD,"Standard
+",1
+640,70,Darsaan,3,"35,27,98,20","Main
+",AUD,"Standard
+",1
+641,75,Seasme wonton,3,"49,33,21,50","Main
+",AUD,"Standard
+",1
+642,76,Okra salad,0,"15,95,97,73","Main
+",AUD,"Standard
+",1
+643,77,Beef with Black Pepper Sauce,0,"15,63,87,63","Main
+",AUD,"Standard
+",1
+644,78,Combination Wonton Noodle Soup,1,"98,26,68,8","Main
+",AUD,"Standard
+",1
+645,79,Chicken Fried Egg Noodle,2,"52,69,26,64","Main
+",AUD,"Standard
+",1
+646,80,Beef with Mixed Vegetables,0,"88,44,22,56","Main
+",AUD,"Standard
+",1
+647,82,Cantonese Chicken Soup,2,"39,9,65,83","Main
+",AUD,"Standard
+",1
+648,84,Vegetable Fried Rice,0,"37,29,99,14","Main
+",AUD,"Standard
+",1
+649,44,Gong Bao Chicken,1,"62,22,7,94","Main
+",AUD,"Standard
+",1
+650,45,Stir Fried Shredded Pork,3,"14,16,99,96","Main
+",AUD,"Standard
+",1
+651,46,Spring Rolls,0,"99,72,89,38","Main
+",AUD,"Standard
+",1
+652,47,Chicken Fried Egg Noodle,0,"1,1,83,99","Main
+",AUD,"Standard
+",1
+653,48,Seafood Fried Egg Noodle,2,"75,100,29,1","Main
+",AUD,"Standard
+",1
+654,49,Roasted Duck Noodle Soup,2,"73,14,68,51","Main
+",AUD,"Standard
+",1
+655,50,Spring Rolls,3,"36,85,12,88","Main
+",AUD,"Standard
+",1
+656,51,Garlic Soya Chicken,3,"98,81,90,90","Main
+",AUD,"Standard
+",1
+657,70,Fried Shrimps with Cashews,2,"65,42,84","Main
+",AUD,"Standard
+",1
+658,75,Shrimp and vegetable stir fry,0,"89,13,43","Main
+",AUD,"Standard
+",1
+659,76,Noodle with Tomato and Egg,3,"13,65,24","Main
+",AUD,"Standard
+",1
+660,77,Spicy Tofu,0,"36,66,89","Main
+",AUD,"Standard
+",1
+661,78,Peking roasted duck,2,"40,17,8","Main
+",AUD,"Standard
+",1
+662,79,Liang Pi,1,"73,35,52","Main
+",AUD,"Standard
+",1
+663,80,Beef chow fun,1,"56,3,43","Main
+",AUD,"Standard
+",1
+664,82,Dimpsums,2,"53,51,95","Main
+",AUD,"Standard
+",1
+665,84,Wood ear mushroom salad,1,"71,23,82","Main
+",AUD,"Standard
+",1
+666,44,Combination Wonton Noodle Soup,0,"98,69,92","Main
+",AUD,"Standard
+",1
+667,45,Shredded Pork and Pickled Vegetable Noodle Soup,1,"11,21,32","Main
+",AUD,"Standard
+",1
+668,46,Wonton Soup,3,"94,15,17","Main
+",AUD,"Standard
+",1
+669,47,Rice With Beef and Cumin,2,"100,6,60","Main
+",AUD,"Standard
+",1
+670,48,Gong Bao Chicken,2,"43,57,55","Main
+",AUD,"Standard
+",1
+671,49,Spicy potato salad,1,"41,83,72","Main
+",AUD,"Standard
+",1
+672,50,Easy chinese broccoli with garlic,1,"9,64,62","Main
+",AUD,"Standard
+",1
+673,51,Kung Pao Chicken,1,"83,38,84","Main
+",AUD,"Standard
+",1
+674,70,Mongolian Lamb Fillet,3,"26,9,71","Main
+",AUD,"Standard
+",1
+675,75,Beef with Mixed Vegetables,1,"29,76,65","Main
+",AUD,"Standard
+",1
+676,76,Liangfen chinese jelly noodles,0,"68,10,80","Main
+",AUD,"Standard
+",1
+677,77,Stir Fried Tofu with Rice,1,"1,51,14","Main
+",AUD,"Standard
+",1
+678,78,Black Pepper Beef Noodle Soup,0,"56,5,31","Main
+",AUD,"Standard
+",1
+679,79,Mongolian Lamb Fillet,1,"11,51,4","Main
+",AUD,"Standard
+",1
+680,80,Chicken with Chestnuts,3,"95,39,23","Main
+",AUD,"Standard
+",1
+681,82,Okra salad,0,"8,34,21","Main
+",AUD,"Standard
+",1
+682,44,Shitake Fried Rice with Water Chestnuts,0,"76,76,49","Main
+",AUD,"Standard
+",1
+683,45,Vegetable Fried Rice,3,"73,68,47","Main
+",AUD,"Standard
+",1
+684,46,Szechuan Chilli Beef,0,"35,88,56","Main
+",AUD,"Standard
+",1
+685,47,Cha Siu Bao,1,"41,37,86","Main
+",AUD,"Standard
+",1
+686,48,Fillet Steak Chinese Style,0,"100,23,76","Main
+",AUD,"Standard
+",1
+687,49,Biang Biang Noodles,3,"9,74,20","Main
+",AUD,"Standard
+",1
+688,50,Roasted Pork and BBQ Noodle Soup,1,"18,10,87","Main
+",AUD,"Standard
+",1
+689,51,Stir Fried Shredded Pork,0,"42,73,100","Main
+",AUD,"Standard
+",1
+690,70,Sichuan Style Pork Dumplings,1,"97,42,97","Main
+",AUD,"Standard
+",1
+691,75,Mantou,3,"98,61,5","Main
+",AUD,"Standard
+",1
+692,76,Braised Pork Belly,2,"24,42,85","Main
+",AUD,"Standard
+",1
+693,77,Beef with Mixed Vegetables,0,"69,17,24","Main
+",AUD,"Standard
+",1
+694,78,Roasted Pork Noodle Soup,3,"86,90,45","Main
+",AUD,"Standard
+",1
+695,79,Satay Beef,2,"38,50,70","Main
+",AUD,"Standard
+",1
+696,80,Claypot rice,0,"40,32,87","Main
+",AUD,"Standard
+",1
+697,82,Prawn and Pork Wonton Soup,3,"85,24,67","Main
+",AUD,"Standard
+",1
+698,84,Beef with Black Pepper Sauce,3,"36,7,1","Main
+",AUD,"Standard
+",1
+699,44,Tang hulu,1,"87,77,24","Main
+",AUD,"Standard
+",1
+700,45,Knife Cut Noodles,0,"67,13,57,47","Main
+",AUD,"Standard
+",1
+701,46,Satay Beef,1,"22,68,47,6","Main
+",AUD,"Standard
+",1
+702,47,Laznhou Lamian,2,"44,55,83,13","Main
+",AUD,"Standard
+",1
+703,48,Cold tofu salad,3,"29,26,13,33","Main
+",AUD,"Standard
+",1
+704,49,Lamb soup,2,"55,12,5,3","Main
+",AUD,"Standard
+",1
+705,50,Singapore Fried Egg Noodle,3,"1,47,26,83","Main
+",AUD,"Standard
+",1
+706,44,Lo bak go,0,"16,87,12,79","Main
+",AUD,"Standard
+",1
+707,45,Roasted Duck Noodle Soup,1,"97,98,19,77","Main
+",AUD,"Standard
+",1
+708,46,Wonton Noodle Soup,2,"40,22,86,25","Main
+",AUD,"Standard
+",1
+709,47,Beef Brisket and Radish Noodle Soupe,3,"3,96,16,64","Main
+",AUD,"Standard
+",1
+710,48,Noodle with Braised Beef,1,"53,22,76,67","Main
+",AUD,"Standard
+",1
+711,49,Dumplings,1,"6,81,37,89","Main
+",AUD,"Standard
+",1
+712,50,Red bean soup,2,"9,16,57,51","Main
+",AUD,"Standard
+",1
+713,51,Congee,2,"21,46,78,5","Main
+",AUD,"Standard
+",1
+714,70,Chilli Potato,1,"96,94,62,64","Main
+",AUD,"Standard
+",1
+715,75,Wok Tossed Veggies in Honey and Black Bean Glaze,1,"49,14,14,88","Main
+",AUD,"Standard
+",1
+716,76,Spring Rolls,2,"49,24,4,55","Main
+",AUD,"Standard
+",1
+717,77,Won ton soup,3,"34,85,100,42","Main
+",AUD,"Standard
+",1
+718,78,Schezuan cold noodles,2,"31,97,66,43","Main
+",AUD,"Standard
+",1
+719,44,Chilli Oil Cucumbers,2,"41,87,42,85","Main
+",AUD,"Standard
+",1
+720,45,Beef with Black Pepper Sauce,0,"15,37,95,76","Main
+",AUD,"Standard
+",1
+721,46,Sweet and Sour Pork,3,"59,91,47,95","Main
+",AUD,"Standard
+",1
+722,47,Smashed cucumber salad,1,"52,57,84,98","Main
+",AUD,"Standard
+",1
+723,48,Roasted Pork Noodle Soup,3,"42,23,79,57","Main
+",AUD,"Standard
+",1
+724,49,Szechwan Chilli Chicken,0,"18,73,5,76","Main
+",AUD,"Standard
+",1
+725,50,Darsaan,1,"37,95,41,52","Main
+",AUD,"Standard
+",1
+726,51,Special Braised Beef,2,"86,42,63,13","Main
+",AUD,"Standard
+",1
+727,70,Chow mein,2,"6,52,64,14","Main
+",AUD,"Standard
+",1
+728,75,Cantonese Chicken Soup,3,"40,41,79,34","Main
+",AUD,"Standard
+",1
+729,76,Manchurian,3,"85,26,99,33","Main
+",AUD,"Standard
+",1
+730,77,Roa Jia Mao,1,"79,46,94,79","Main
+",AUD,"Standard
+",1
+731,78,Hot and Sour Soup,3,"57,9,72,72","Main
+",AUD,"Standard
+",1
+732,79,Honey Chilli Potato,2,"79,23,34,86","Main
+",AUD,"Standard
+",1
+733,80,American Chop Suey,2,"37,48,8,17","Main
+",AUD,"Standard
+",1
+734,82,Pork and mushroom stir fry,2,"99,39,56,87","Main
+",AUD,"Standard
+",1
+735,84,Vegetable Manchow Soup,1,"68,7,87,85","Main
+",AUD,"Standard
+",1
+736,44,Lightly Battered Scallops,2,"75,10,99,81","Main
+",AUD,"Standard
+",1
+737,45,Seasme wonton,1,"75,19,76,73","Main
+",AUD,"Standard
+",1
+738,46,Szechuan Chilli Beef,0,"24,82,48,89","Main
+",AUD,"Standard
+",1
+739,47,Black Bean Sauce Noodles,2,"59,68,79,59","Main
+",AUD,"Standard
+",1
+740,48,Dim Sums,2,"79,4,7,74","Main
+",AUD,"Standard
+",1
+741,49,Okra salad,3,"82,61,5,78","Main
+",AUD,"Standard
+",1
+742,50,Cumin stir fried lamb,2,"86,32,10,81","Main
+",AUD,"Standard
+",1
+743,51,Beef Brisket and Radish Noodle Soupe,3,"84,75,55","Main
+",AUD,"Standard
+",1
+744,70,Sweet and sour pork,2,"15,49,70","Main
+",AUD,"Standard
+",1
+745,75,Peking Roasted Duck,3,"45,28,12","Main
+",AUD,"Standard
+",1
+746,76,Dimpsums,0,"79,57,71","Main
+",AUD,"Standard
+",1
+747,77,Congee,0,"9,32,48","Main
+",AUD,"Standard
+",1
+748,78,Shrimp and vegetable stir fry,1,"42,61,88","Main
+",AUD,"Standard
+",1
+749,79,Beef with Black Pepper Sauce,0,"28,13,77","Main
+",AUD,"Standard
+",1
+750,80,Beef with Black Pepper Sauce,2,"67,3,93","Main
+",AUD,"Standard
+",1
+751,82,Roasted Duck Noodle Soup,1,"100,48,91","Main
+",AUD,"Standard
+",1
+752,84,Roasted Pork and BBQ Noodle Soup,0,"100,41,33","Main
+",AUD,"Standard
+",1
+753,44,Sichuan Style Pork Dumplings,0,"19,75,80","Main
+",AUD,"Standard
+",1
+754,45,Shredded Pork and Pickled Vegetable Noodle Soup,3,"5,99,14","Main
+",AUD,"Standard
+",1
+755,46,Black Bean Sauce Noodles,0,"72,37,59","Main
+",AUD,"Standard
+",1
+756,47,Schezuan cold noodles,3,"65,24,72","Main
+",AUD,"Standard
+",1
+757,48,Spring Rolls,1,"31,61,13","Main
+",AUD,"Standard
+",1
+758,49,Biang Biang Noodles,0,"39,20,77","Main
+",AUD,"Standard
+",1
+759,50,Dan tat,2,"46,58,81","Main
+",AUD,"Standard
+",1
+760,51,Spicy potato salad,3,"8,48,15","Main
+",AUD,"Standard
+",1
+761,70,Szechwan Chilli Chicken,2,"96,58,8","Main
+",AUD,"Standard
+",1
+762,75,Wok Tossed Veggies in Honey and Black Bean Glaze,1,"69,43,98","Main
+",AUD,"Standard
+",1
+763,76,Wonton Soup,3,"47,26,88","Main
+",AUD,"Standard
+",1
+764,77,Stir Fried Long Bean Minced Pork,1,"31,52,50","Main
+",AUD,"Standard
+",1
+765,78,Tang hulu,3,"45,37,65","Main
+",AUD,"Standard
+",1
+766,79,Okra salad,1,"29,31,5","Main
+",AUD,"Standard
+",1
+767,80,Spring Rolls,2,"94,12,91","Main
+",AUD,"Standard
+",1
+768,82,Beef with Mixed Vegetables,1,"89,14,48","Main
+",AUD,"Standard
+",1
+769,84,Mantou,3,"24,48,55","Main
+",AUD,"Standard
+",1
+770,44,Lightly Battered Scallops,3,"99,4,47","Main
+",AUD,"Standard
+",1
+771,45,Xiao Long Bao,2,"76,68,42","Main
+",AUD,"Standard
+",1
+772,46,Spring rolls,0,"53,95,56","Main
+",AUD,"Standard
+",1
+773,47,Chicken Manchurian,0,"19,84,13","Main
+",AUD,"Standard
+",1
+774,48,Stir Fried Tofu with Rice,0,"64,15,12","Main
+",AUD,"Standard
+",1
+775,49,Manchurian,2,"10,37,98","Main
+",AUD,"Standard
+",1
+776,50,Beef with Mixed Vegetables,0,"91,92,44","Main
+",AUD,"Standard
+",1
+777,51,Kung Pao Chicken,1,"89,44,29","Main
+",AUD,"Standard
+",1
+778,70,Gong Bao Chicken,0,"9,63,21","Main
+",AUD,"Standard
+",1
+779,75,American Chop Suey,1,"5,61,82","Main
+",AUD,"Standard
+",1
+780,76,Dumplings,0,"6,32,12","Main
+",AUD,"Standard
+",1
+781,77,Lotus root salad,2,"44,33,40","Main
+",AUD,"Standard
+",1
+782,78,Seasme wonton,3,"9,16,52","Main
+",AUD,"Standard
+",1
+783,79,Dim Sums,0,"30,44,80","Main
+",AUD,"Standard
+",1
+784,80,Special Braised Beef,0,"8,19,79","Main
+",AUD,"Standard
+",1
+785,82,Roasted Duck Noodle Soup,1,"73,85,2","Main
+",AUD,"Standard
+",1
+786,84,Pork and mushroom stir fry,0,"37,7,84","Main
+",AUD,"Standard
+",1
+787,44,Braised Pork Belly,3,"11,30,57","Main
+",AUD,"Standard
+",1
+788,45,Sweet and Sour Pork,3,"3,88,29","Main
+",AUD,"Standard
+",1
+789,46,Roasted Duck in Shandong Sauce,3,"86,8,17","Main
+",AUD,"Standard
+",1
+790,47,Shitake Fried Rice with Water Chestnuts,2,"36,1,65","Main
+",AUD,"Standard
+",1
+791,48,Lo bak go,0,"32,14,95","Main
+",AUD,"Standard
+",1
+792,49,Fillet Steak Chinese Style,1,"55,14,27","Main
+",AUD,"Standard
+",1
+793,50,Mongolian Lamb Fillet,0,"44,47,34","Main
+",AUD,"Standard
+",1
+794,51,Fried Shrimps with Cashews,0,"96,81,99","Main
+",AUD,"Standard
+",1
+795,70,Monchow Soup,2,"97,44,18","Main
+",AUD,"Standard
+",1
+796,75,Beef Brisket and Radish Noodle Soupe,3,"9,55,29","Main
+",AUD,"Standard
+",1
+797,76,Beef chow fun,3,"12,19,6","Main
+",AUD,"Standard
+",1
+798,77,Hot and Sour Soup,2,"27,35,80","Main
+",AUD,"Standard
+",1
+799,78,Szechuan Chilli Beef,0,"79,64,20","Main
+",AUD,"Standard
+",1
+800,79,Lamb soup,1,"58,53,48","Main
+",AUD,"Standard
+",1
+801,80,Honey Chilli Potato,1,"81,65,41","Main
+",AUD,"Standard
+",1
+802,82,Easy chinese broccoli with garlic,0,"42,54,13","Main
+",AUD,"Standard
+",1
+803,84,Chicken Fried Egg Noodle,0,"33,15,88","Main
+",AUD,"Standard
+",1
+804,44,Sweet and sour pork,1,"18,59,1","Main
+",AUD,"Standard
+",1
+805,45,Roa Jia Mao,2,"95,89,15","Main
+",AUD,"Standard
+",1
+806,46,Noodle with Tomato and Egg,3,"47,62,47","Main
+",AUD,"Standard
+",1
+807,47,Lotus root salad,3,"76,44,49","Main
+",AUD,"Standard
+",1
+808,48,Claypot rice,3,"93,66,34","Main
+",AUD,"Standard
+",1
+809,49,Spicy Tofu,0,"58,62,35","Main
+",AUD,"Standard
+",1
+810,50,Spring Rolls,3,"2,4,70","Main
+",AUD,"Standard
+",1
+811,51,Chow mein,1,"7,49,94","Main
+",AUD,"Standard
+",1
+812,70,Fillet Steak Chinese Style,2,"21,39,95,69,93","Main
+",AUD,"Standard
+",1
+813,75,Chilli Potato,3,"51,9,81,43,44","Main
+",AUD,"Standard
+",1
+814,76,Peking Roasted Duck,3,"12,26,40,1,12","Main
+",AUD,"Standard
+",1
+815,77,Wonton Noodle Soup,3,"32,73,79,80,89","Main
+",AUD,"Standard
+",1
+816,78,BBQ Pork in Honey Soya,3,"38,53,47,6,11","Main
+",AUD,"Standard
+",1
+817,79,Black Pepper Beef Noodle Soup,2,"12,79,38,8,77","Main
+",AUD,"Standard
+",1
+818,80,Satay Beef,2,"12,57,88,60,17","Main
+",AUD,"Standard
+",1
+819,82,Spicy potato salad,2,"87,64,6,45,83","Main
+",AUD,"Standard
+",1
+820,84,Cold tofu salad,1,"53,39,18,58,69","Main
+",AUD,"Standard
+",1
+821,44,Cumin stir fried lamb,1,"50,23,59,90,64","Main
+",AUD,"Standard
+",1
+822,45,Vegetable Manchow Soup,0,"47,80,72,13,53","Main
+",AUD,"Standard
+",1
+823,46,Chowmein,0,"61,21,6,27,52","Main
+",AUD,"Standard
+",1
+824,47,Red bean soup,1,"98,9,17,44,66","Main
+",AUD,"Standard
+",1
+825,48,Roasted Duck in Shandong Sauce,1,"97,36,58,55,99","Main
+",AUD,"Standard
+",1
+826,49,Stir Fried Shredded Pork,3,"66,63,65,50,84","Main
+",AUD,"Standard
+",1
+827,50,Beef Brisket and Radish Noodle Soupe,1,"25,1,25,90,47","Main
+",AUD,"Standard
+",1
+828,51,Spicy tofu,1,"87,36,7,37,81","Main
+",AUD,"Standard
+",1
+829,70,Knife Cut Noodles,0,"94,98,45,71,32","Main
+",AUD,"Standard
+",1
+830,75,Hainese Chicken Rice,1,"28,64,20,28,85","Main
+",AUD,"Standard
+",1
+831,76,Choi Sum Congee,1,"31,83,33,77,82","Main
+",AUD,"Standard
+",1
+832,77,Peking roasted duck,0,"37,9,79,28,80","Main
+",AUD,"Standard
+",1
+833,78,Mongolian Lamb Fillet,2,"92,64,60,22,73","Main
+",AUD,"Standard
+",1
+834,79,Shredded Pork and Pickled Vegetable Noodle Soup,3,"74,79,12,34,51","Main
+",AUD,"Standard
+",1
+835,80,Egg-Fried Rice,2,"61,78,21,21,78","Main
+",AUD,"Standard
+",1
+836,82,Roasted Pork Noodle Soup,0,"19,45,58,86,28","Main
+",AUD,"Standard
+",1
+837,84,Kung Pao Chicken,1,"69,16,53,76,58","Main
+",AUD,"Standard
+",1
+838,44,Roasted Pork Noodle Soup,1,"15,50,40,45,95","Main
+",AUD,"Standard
+",1
+839,45,Beef Congee,1,"50,16,59,41,65","Main
+",AUD,"Standard
+",1
+840,46,Singapore Fried Egg Noodle,2,"18,3,63,56,33","Main
+",AUD,"Standard
+",1
+841,47,Liangfen chinese jelly noodles,3,"98,87,76,60,25","Main
+",AUD,"Standard
+",1
+842,48,Rice With Beef and Cumin,1,"74,77,28,79,12","Main
+",AUD,"Standard
+",1
+843,49,Laznhou Lamian,0,"81,80,11,62,47","Main
+",AUD,"Standard
+",1
+844,50,Noodle with Braised Beef,3,"64,68,63,13,57","Main
+",AUD,"Standard
+",1
+845,51,Satay Beef,2,"100,94,34,44,30","Main
+",AUD,"Standard
+",1
+846,70,Darsaan,2,"58,84,37,53,83","Main
+",AUD,"Standard
+",1
+847,75,King Prawn Fried Egg Noodle,0,"70,24,85,28,6","Main
+",AUD,"Standard
+",1
+848,76,Szechuan Chilli Beef,1,"23,2,82,33,14","Main
+",AUD,"Standard
+",1
+849,77,Cha Siu Bao,0,"65,51,43,12,42","Main
+",AUD,"Standard
+",1
+850,78,Vegetable Fried Rice,3,"56,35,53,90,65","Main
+",AUD,"Standard
+",1
+851,79,Okra salad,2,"65,73,23,98,8","Main
+",AUD,"Standard
+",1
+852,80,Won ton soup,2,"43,98,82,92,75","Main
+",AUD,"Standard
+",1
+853,82,Smashed cucumber salad,1,"66,35,3,78,3","Main
+",AUD,"Standard
+",1
+854,84,Combination Wonton Noodle Soup,2,"11,72,5,9,43","Main
+",AUD,"Standard
+",1
+855,44,Liang Pi,2,"18,15,73,67,12","Main
+",AUD,"Standard
+",1
+856,45,Garlic Soya Chicken,3,"32,63,61,36,62","Main
+",AUD,"Standard
+",1
+857,46,Wood ear mushroom salad,2,"28,32,61,20,29","Main
+",AUD,"Standard
+",1
+858,47,Prawn and Pork Wonton Soup,1,"84,44,84,26,85","Main
+",AUD,"Standard
+",1
+859,48,Seasme wonton,1,"21,87,2,61,46","Main
+",AUD,"Standard
+",1
+860,49,Cantonese Chicken Soup,1,"52,75,34,21,53","Main
+",AUD,"Standard
+",1
+861,50,Seafood Fried Egg Noodle,1,"74,43,10,88,81","Main
+",AUD,"Standard
+",1
+862,51,Chilli Chicken,2,"90,97,49,5,43","Main
+",AUD,"Standard
+",1
+863,70,Chicken Fried Egg Noodle,2,"2,74,43,91,55","Main
+",AUD,"Standard
+",1
+864,75,Fried shrimp with cashew nuts,2,"59,22,9,93,38","Main
+",AUD,"Standard
+",1
+865,76,Chilli Oil Cucumbers,2,"32,56,100,21,74","Main
+",AUD,"Standard
+",1
+866,77,Schezuan cold noodles,2,"28,50,26,22,21","Main
+",AUD,"Standard
+",1
+867,78,Egg Noodles,0,"76,16,39,3,52","Main
+",AUD,"Standard
+",1
+868,79,Liangfen chinese jelly noodles,3,"26,69,1,39,19","Main
+",AUD,"Standard
+",1
+869,80,Chicken with Chestnuts,3,"74,74,77,13,47","Main
+",AUD,"Standard
+",1
+870,82,Stir Fried Long Bean Minced Pork,0,"65,59,82,48,73","Main
+",AUD,"Standard
+",1
+871,84,Seasme wonton,2,"56,9,87,33,28","Main
+",AUD,"Standard
+",1
+872,44,Szechuan Chilli Beef,0,"83,3,42,98,92","Main
+",AUD,"Standard
+",1
+873,45,Dimpsums,3,"78,19,14,62,25","Main
+",AUD,"Standard
+",1
+874,46,Red bean soup,3,"45,27,8,35,84","Main
+",AUD,"Standard
+",1
+875,47,Spicy Tofu,3,"91,18,26,53,83","Main
+",AUD,"Standard
+",1
+876,48,Spicy tofu,0,"46,31,75,35,42","Main
+",AUD,"Standard
+",1
+877,49,Lotus root salad,3,"72,95,75,90,51","Main
+",AUD,"Standard
+",1
+878,50,Wonton Soup,3,"63,63,20,1,86","Main
+",AUD,"Standard
+",1
+879,51,Okra salad,0,"2,72,27,7,62","Main
+",AUD,"Standard
+",1
+880,70,Lotus root salad,1,"20,17,87,63,64","Main
+",AUD,"Standard
+",1
+881,75,Shitake Fried Rice with Water Chestnuts,0,"39,96,27,41,60","Main
+",AUD,"Standard
+",1
+882,76,Satay Beef,0,"63,27,7,10,68","Main
+",AUD,"Standard
+",1
+883,77,Special Braised Beef,1,"10,9,83,23,48","Main
+",AUD,"Standard
+",1
+884,78,Beef chow fun,0,"51,28,88,50,31","Main
+",AUD,"Standard
+",1
+885,79,Chicken with Chestnuts,3,"86,82,28,54,63","Main
+",AUD,"Standard
+",1
+886,80,Roasted Duck Noodle Soup,0,"39,27,45,88,64","Main
+",AUD,"Standard
+",1
+887,82,Beef with Mixed Vegetables,2,"63,77,72,67,69","Main
+",AUD,"Standard
+",1
+888,84,Fillet Steak Chinese Style,0,"26,42,38,42,54","Main
+",AUD,"Standard
+",1
+889,44,Vegetable Manchow Soup,0,"3,74,9,50,18","Main
+",AUD,"Standard
+",1
+890,45,Gong Bao Chicken,1,"63,71,40,43,54","Main
+",AUD,"Standard
+",1
+891,46,Chilli Potato,2,"59,7,7,80,39","Main
+",AUD,"Standard
+",1
+892,47,Stir Fried Shredded Pork,0,"58,77,12,46,16","Main
+",AUD,"Standard
+",1
+893,48,Kung Pao Chicken,0,"29,68,58,97,48","Main
+",AUD,"Standard
+",1
+894,49,Fried Shrimps with Cashews,2,"17,52,4,49,68","Main
+",AUD,"Standard
+",1
+895,50,Claypot rice,1,"44,41,28,79,24","Main
+",AUD,"Standard
+",1
+896,51,Sweet and Sour Pork,0,"34,17,36,5,22","Main
+",AUD,"Standard
+",1
+897,70,Tang hulu,3,"52,44,55,85,10","Main
+",AUD,"Standard
+",1
+898,75,Seasme wonton,1,"66,73,23,71,53","Main
+",AUD,"Standard
+",1
+899,76,Vegetable Fried Rice,2,"61,47,22,19,88","Main
+",AUD,"Standard
+",1
+900,77,Dumplings,3,"91,22,7,99,69","Main
+",AUD,"Standard
+",1
+901,78,Lo bak go,3,"38,25,17,23,29","Main
+",AUD,"Standard
+",1
+902,79,Satay Beef,0,"30,98,57,99,60","Main
+",AUD,"Standard
+",1
+903,80,Schezuan cold noodles,1,"68,33,71,39,97","Main
+",AUD,"Standard
+",1
+904,82,American Chop Suey,0,"40,18,8,38,23","Main
+",AUD,"Standard
+",1
+905,44,Liangfen chinese jelly noodles,2,"91,38,21,35,24","Main
+",AUD,"Standard
+",1
+906,45,Stir Fried Tofu with Rice,1,"59,3,10,33,8","Main
+",AUD,"Standard
+",1
+907,46,Congee,1,"33,79,50,9,23","Main
+",AUD,"Standard
+",1
+908,47,Monchow Soup,3,"77,22,66,41,5","Main
+",AUD,"Standard
+",1
+909,48,Wood ear mushroom salad,2,"66,55,49,64,30","Main
+",AUD,"Standard
+",1
+910,49,Wok Tossed Veggies in Honey and Black Bean Glaze,2,"2,54,94,39,9","Main
+",AUD,"Standard
+",1
+911,50,Beef with Mixed Vegetables,1,"36,7,93,31,6","Main
+",AUD,"Standard
+",1
+912,51,Knife Cut Noodles,0,"23,88,70,92,88","Main
+",AUD,"Standard
+",1
+913,70,Roa Jia Mao,3,"73,3,5,79,23","Main
+",AUD,"Standard
+",1
+914,75,Noodle with Braised Beef,2,"26,39,62,73,66","Main
+",AUD,"Standard
+",1
+915,76,Fillet Steak Chinese Style,2,"69,28,27,76,54","Main
+",AUD,"Standard
+",1
+916,77,Schezuan cold noodles,1,"70,55,86,51,53","Main
+",AUD,"Standard
+",1
+917,78,Liang Pi,1,"5,2,9,60,28","Main
+",AUD,"Standard
+",1
+918,79,Rice With Beef and Cumin,2,"48,82,93,94,19","Main
+",AUD,"Standard
+",1
+919,80,Singapore Fried Egg Noodle,2,"41,59,80,1,55","Main
+",AUD,"Standard
+",1
+920,82,Shrimp and vegetable stir fry,0,"48,41,86,17,88","Main
+",AUD,"Standard
+",1
+921,84,Shredded Pork and Pickled Vegetable Noodle Soup,3,"94,34,62,45,55","Main
+",AUD,"Standard
+",1
+922,44,Sweet and sour pork,2,"68,67,2,75,73","Main
+",AUD,"Standard
+",1
+923,45,Spring Rolls,3,"38,65,21,58,13","Main
+",AUD,"Standard
+",1
+924,46,Honey Chilli Potato,3,"94,52,52,70,85","Main
+",AUD,"Standard
+",1
+925,47,Mongolian Lamb Fillet,1,"26,24,9,5,53","Main
+",AUD,"Standard
+",1
+926,48,Roasted Pork Noodle Soup,3,"92,92,77,7,33","Main
+",AUD,"Standard
+",1
+927,49,Cantonese Chicken Soup,2,"67,24,71,94,60","Main
+",AUD,"Standard
+",1
+928,50,Spring Rolls,1,"77,61,48,46,65","Main
+",AUD,"Standard
+",1
+929,44,Okra salad,1,"49,27,84,10,61","Main
+",AUD,"Standard
+",1
+930,45,Xiao Long Bao,3,"54,38,51","Main
+",AUD,"Standard
+",1
+931,46,Dim Sums,3,"24,2,15","Main
+",AUD,"Standard
+",1
+932,47,Hot and Sour Soup,0,"38,88,69","Main
+",AUD,"Standard
+",1
+933,48,Roasted Pork and BBQ Noodle Soup,0,"27,73,98","Main
+",AUD,"Standard
+",1
+934,49,Won ton soup,1,"37,100,25","Main
+",AUD,"Standard
+",1
+935,50,Kung Pao Chicken,1,"8,65,96","Main
+",AUD,"Standard
+",1
+936,51,Spicy potato salad,3,"75,11,3","Main
+",AUD,"Standard
+",1
+937,70,Beef Congee,3,"37,48,29","Main
+",AUD,"Standard
+",1
+938,75,Chowmein,2,"78,33,84","Main
+",AUD,"Standard
+",1
+939,76,Roasted Pork Noodle Soup,3,"55,14,17","Main
+",AUD,"Standard
+",1
+940,77,Mongolian Lamb Fillet,3,"55,14,17,16,18","Main
+",AUD,"Standard
+",1
+941,78,Garlic Soya Chicken,2,"94,65,17,93,17","Main
+",AUD,"Standard
+",1
+942,44,Lightly Battered Scallops,1,"59,75,57,82,85","Main
+",AUD,"Standard
+",1
+943,45,Hainese Chicken Rice,1,"9,86,78,80,22","Main
+",AUD,"Standard
+",1
+944,46,Beef Brisket and Radish Noodle Soupe,2,"10,2,19,65,62","Main
+",AUD,"Standard
+",1
+945,47,Beef with Black Pepper Sauce,2,"21,61,81,95,79","Main
+",AUD,"Standard
+",1
+946,48,Pork and mushroom stir fry,1,"90,41,30,79,33","Main
+",AUD,"Standard
+",1
+947,49,Prawn and Pork Wonton Soup,3,"78,87,86,78,59","Main
+",AUD,"Standard
+",1
+948,50,Spring rolls,2,"9,15,80,61,93","Main
+",AUD,"Standard
+",1
+949,51,Combination Wonton Noodle Soup,1,"20,49,23,30,76","Main
+",AUD,"Standard
+",1
+950,70,Mantou,0,"21,29,34,62,18","Main
+",AUD,"Standard
+",1
+951,75,Peking roasted duck,3,"22,48,76,7,18","Main
+",AUD,"Standard
+",1
+952,76,Braised Pork Belly,1,"9,7,86,62","Main
+",AUD,"Standard
+",1
+953,77,Cha Siu Bao,0,"20,30,7,22","Main
+",AUD,"Standard
+",1
+954,78,Beef with Black Pepper Sauce,2,"68,25,47,12","Main
+",AUD,"Standard
+",1
+955,79,Fried shrimp with cashew nuts,2,"51,75,39,24","Main
+",AUD,"Standard
+",1
+956,80,Egg-Fried Rice,3,"92,12,55,56","Main
+",AUD,"Standard
+",1
+957,82,Smashed cucumber salad,0,"34,28,6,58","Main
+",AUD,"Standard
+",1
+958,84,Szechuan Chilli Beef,0,"47,53,89,1","Main
+",AUD,"Standard
+",1
+959,44,Chilli Oil Cucumbers,1,"37,61,24,81","Main
+",AUD,"Standard
+",1
+960,45,Spring Rolls,3,"66,41,8,81","Main
+",AUD,"Standard
+",1
+961,46,Roasted Duck in Shandong Sauce,2,"61,25,9,1","Main
+",AUD,"Standard
+",1
+962,47,Chilli Chicken,0,"83,66,20,32","Main
+",AUD,"Standard
+",1
+963,48,Dan tat,2,"74,21,49,31","Main
+",AUD,"Standard
+",1
+964,49,Choi Sum Congee,0,"10,72,20,35","Main
+",AUD,"Standard
+",1
+965,50,Cold tofu salad,3,"65,68,24,2","Main
+",AUD,"Standard
+",1
+966,51,Wonton Noodle Soup,3,"27,63,63,21","Main
+",AUD,"Standard
+",1
+967,70,Lamb soup,2,"41,89,56,35","Main
+",AUD,"Standard
+",1
+968,75,Chicken Fried Egg Noodle,3,"35,64,31,52","Main
+",AUD,"Standard
+",1
+969,76,Peking Roasted Duck,0,"70,22,44,52","Main
+",AUD,"Standard
+",1
+970,77,Shredded Pork and Pickled Vegetable Noodle Soup,0,"48,12,83,25","Main
+",AUD,"Standard
+",1
+971,78,Noodle with Tomato and Egg,0,"59,20,17,63","Main
+",AUD,"Standard
+",1
+972,79,Chicken Fried Egg Noodle,3,"77,68,54,32","Main
+",AUD,"Standard
+",1
+973,80,Laznhou Lamian,2,"17,4,30,42","Main
+",AUD,"Standard
+",1
+974,82,Manchurian,1,"8,15,79,25","Main
+",AUD,"Standard
+",1
+975,84,Darsaan,3,"98,2,61,56","Main
+",AUD,"Standard
+",1
+976,101,Cabbage stir fry with coconut and lemon,1,"2,45,100,8","Main
+",AUD,"Standard
+",1
+977,101,Dal makhani,0,"59,10,46,91","Main
+",AUD,"Standard
+",1
+978,101,Avial,3,"37,34,60,16","Main
+",AUD,"Standard
+",1
+979,101,Lamb Madras,3,"1,78,42,80","Main
+",AUD,"Standard
+",1
+980,101,Lamb Biryani,0,"5,18,32,57","Main
+",AUD,"Standard
+",1
+981,101,Paneer Ka Salan,0,"21,43,81,86","Main
+",AUD,"Standard
+",1
+982,101,Chana Jor Garam,2,"91,14,25,30","Main
+",AUD,"Standard
+",1
+983,101,Hyderabadi biriyani,3,"62,41,84,51","Main
+",AUD,"Standard
+",1
+984,101,Puliyogare,1,"39,94,59,22","Main
+",AUD,"Standard
+",1
+985,101,Murg Makhani,3,"11,81,19,74","Main
+",AUD,"Standard
+",1
+986,101,Curried yellow split pea soup with spiced coconut,1,"31,35,100,48","Main
+",AUD,"Standard
+",1
+987,102,Handi Gosht,2,"69,93,76,92","Main
+",AUD,"Standard
+",1
+988,102,Chole,2,"49,2,25,96,83","Main
+",AUD,"Standard
+",1
+989,102,Kumb Palak,3,"69,9,11,46,31","Main
+",AUD,"Standard
+",1
+990,102,Tandoori octopus,0,"46,92,89,1,56","Main
+",AUD,"Standard
+",1
+991,102,Chicken tikka masala,2,"97,80,95,45,50","Main
+",AUD,"Standard
+",1
+992,102,Baby back ribs with tamarind glaze,3,"17,66,66,15,57","Main
+",AUD,"Standard
+",1
+993,102,Chicken Balti,2,"87,33,23,24,89","Main
+",AUD,"Standard
+",1
+994,102,Paneer and broccoli masala,0,"47,12,34,86,49","Main
+",AUD,"Standard
+",1
+995,102,Spiced chicken with tomato and cream,3,"68,34,49,100,86","Main
+",AUD,"Standard
+",1
+996,102,Palak Paneer,2,"28,41,85,15,33","Main
+",AUD,"Standard
+",1
+997,103,Dalma,0,"31,10,1,75,1","Main
+",AUD,"Standard
+",1
+998,103,Vindaloo,1,"49,35,42,34,13","Main
+",AUD,"Standard
+",1
+999,103,Malai kofta,3,"60,45,15,79,3","Main
+",AUD,"Standard
+",1
+1000,103,Kofta,3,"81,92,41,17,32","Main
+",AUD,"Standard
+",1
+1001,103,"Eggplant, chicken and tomato skewers",3,"90,38,81,50,86","Main
+",AUD,"Standard
+",1
+1002,103,Ragi mudde,2,"8,88,74,89,53","Main
+",AUD,"Standard
+",1
+1003,103,Kaali Daal,2,"67,3,49,88,11","Main
+",AUD,"Standard
+",1
+1004,103,Chicken Kadai,3,"76,74,64,84,94","Main
+",AUD,"Standard
+",1
+1005,103,Saagwala,2,"98,97,32,34,58","Main
+",AUD,"Standard
+",1
+1006,103,Handi Gosht,1,"11,98,16,36,85","Main
+",AUD,"Standard
+",1
+1007,103,Chole,1,"43,93,10,66,5","Main
+",AUD,"Standard
+",1
+1008,103,Beef Vindaloo,3,"60,12,82,95,82","Main
+",AUD,"Standard
+",1
+1009,56,Som Dtum Thai,2,"19,94,7,73,40","Main
+",AUD,"Standard
+",1
+1010,57,Garlic and Pepper,2,"85,44,2,22,2","Main
+",AUD,"Standard
+",1
+1011,58,Chilli Basil Sauce,2,"84,79,2,47,30","Main
+",AUD,"Standard
+",1
+1012,59,Laab Na,0,"75,49,91,23,3","Main
+",AUD,"Standard
+",1
+1013,60,Kor Dook Mhu Yaang,1,"95,28,82,70,37","Main
+",AUD,"Standard
+",1
+1014,73,Panang gai,2,"46,57,18,91","Main
+",AUD,"Standard
+",1
+1015,74,Pad Krapow,0,"87,57,20,16","Main
+",AUD,"Standard
+",1
+1016,56,Kai Med Ma Muang,1,"80,27,4,96","Main
+",AUD,"Standard
+",1
+1017,57,Gai Tod,0,"92,70,44,46","Main
+",AUD,"Standard
+",1
+1018,58,Gang som plah chon,3,"28,33,9,4","Main
+",AUD,"Standard
+",1
+1019,59,Pad Ped,3,"61,80,3,52","Main
+",AUD,"Standard
+",1
+1020,60,Keang Phet Gai,3,"77,47,97,53","Main
+",AUD,"Standard
+",1
+1021,73,Gai pad met ma muang,3,"58,84,6,34","Main
+",AUD,"Standard
+",1
+1022,74,Khao Pad,3,"6,74,73,20","Main
+",AUD,"Standard
+",1
+1023,56,Gang som pak ruam,3,"4,6,66,46","Main
+",AUD,"Standard
+",1
+1024,57,Stir Fried Basil and Chilli Sauce,2,"89,3,97,61","Main
+",AUD,"Standard
+",1
+1025,58,Thai Fried Rice,3,"31,96,36,100","Main
+",AUD,"Standard
+",1
+1026,59,Gai Reu Nuesa Satay,1,"79,48,86,9","Main
+",AUD,"Standard
+",1
+1027,60,Kao Niew Ma Muang,0,"78,89,85,20","Main
+",AUD,"Standard
+",1
+1028,73,Som Tam,3,"20,75,82,95","Main
+",AUD,"Standard
+",1
+1029,74,Gai yang,2,"85,84,24,78","Main
+",AUD,"Standard
+",1
+1030,56,Kao man gai,3,"85,75,80,65","Main
+",AUD,"Standard
+",1
+1031,57,Sweet and Sour Pork,1,"74,92,57,23","Main
+",AUD,"Standard
+",1
+1032,58,Hor Muok Gai,2,"28,75,8,95","Main
+",AUD,"Standard
+",1
+1033,59,Pad Thai,3,"29,85,95,83","Main
+",AUD,"Standard
+",1
+1034,60,Som tam,1,"5,73,67,74","Main
+",AUD,"Standard
+",1
+1035,73,Sad See Ew,2,"83,36,39,12","Main
+",AUD,"Standard
+",1
+1036,74,Guay Teow,3,"87,11,47,48","Main
+",AUD,"Standard
+",1
+1037,56,Guay Teow,2,"80,1,83,91","Main
+",AUD,"Standard
+",1
+1038,57,Cashew Nut Sauce,3,"48,76,42,57","Main
+",AUD,"Standard
+",1
+1039,58,Chang Mai Prik Ong,0,"13,60,4,29","Main
+",AUD,"Standard
+",1
+1040,59,Som Tum Thai-Bpu,2,"100,51,86,30","Main
+",AUD,"Standard
+",1
+1041,60,Pad Thai,3,"46,61,43,51","Main
+",AUD,"Standard
+",1
+1042,73,Gai Ruo Nuao Ped Ghing Onn,3,"21,41,92,76","Main
+",AUD,"Standard
+",1
+1043,74,Gaeng Keow Wan,3,"42,31,7,69","Main
+",AUD,"Standard
+",1
+1044,56,Pad Kra Prao,2,"78,86,42","Main
+",AUD,"Standard
+",1
+1045,57,Yam Pla Dook Foo,3,"65,72,94","Main
+",AUD,"Standard
+",1
+1046,58,Panang Curry,2,"64,100,95","Main
+",AUD,"Standard
+",1
+1047,59,Tom Kha Gai,0,"13,64,81","Main
+",AUD,"Standard
+",1
+1048,60,Lab Ped Yang,1,"13,9,49","Main
+",AUD,"Standard
+",1
+1049,73,Pad See Eiw,3,"4,43,8","Main
+",AUD,"Standard
+",1
+1050,74,Louk Chin Bhing,1,"76,75,34","Main
+",AUD,"Standard
+",1
+1051,56,Tom yum gung,1,"35,83,11","Main
+",AUD,"Standard
+",1
+1052,57,Kanom jeen,1,"81,29,99","Main
+",AUD,"Standard
+",1
+1053,58,Gai Satay,3,"37,55,40","Main
+",AUD,"Standard
+",1
+1054,59,Kai jiew moo saap,2,"34,65,34","Main
+",AUD,"Standard
+",1
+1055,60,Kao moo dang,2,"2,7,26","Main
+",AUD,"Standard
+",1
+1056,73,Moo dad diew,1,"12,24,61","Main
+",AUD,"Standard
+",1
+1057,74,Kean Om Nuea,0,"73,14,37","Main
+",AUD,"Standard
+",1
+1058,56,Red Curry Beef,1,"32,5,97","Main
+",AUD,"Standard
+",1
+1059,57,Kao Neaw Mamuang,0,"45,59,10","Main
+",AUD,"Standard
+",1
+1060,58,Tab Tim Krob,2,"64,24,53","Main
+",AUD,"Standard
+",1
+1061,59,Sangkaya Bai Toey,2,"65,86,8","Main
+",AUD,"Standard
+",1
+1062,60,Thai Red Curry,3,"40,45,37","Main
+",AUD,"Standard
+",1
+1063,73,Gang jued,2,"89,83,47","Main
+",AUD,"Standard
+",1
+1064,74,Kai Jeow,1,"15,95,28","Main
+",AUD,"Standard
+",1
+1065,56,Gang keow wan,0,"82,59,41","Main
+",AUD,"Standard
+",1
+1066,57,Satay Chicken Skewers,0,"48,59,98","Main
+",AUD,"Standard
+",1
+1067,58,Larpb Gai,2,"31,65,80","Main
+",AUD,"Standard
+",1
+1068,59,Ym Tao-Hoo Ma,2,"34,42,80","Main
+",AUD,"Standard
+",1
+1069,60,Keang Lueng Pla,2,"90,21,8","Main
+",AUD,"Standard
+",1
+1070,73,Nuea Phad Bai Ka Prow,3,"69,39,13","Main
+",AUD,"Standard
+",1
+1071,74,Prawn Cracker,3,"78,23,85","Main
+",AUD,"Standard
+",1
+1072,56,Massman Curry,1,"29,31,58","Main
+",AUD,"Standard
+",1
+1073,57,Som Tum Isan,3,"80,69,76,59,44","Main
+",AUD,"Standard
+",1
+1074,58,Red Curry Duck,0,"57,81,70,7,18","Main
+",AUD,"Standard
+",1
+1075,59,Khao Soi,3,"69,46,56,98,77","Main
+",AUD,"Standard
+",1
+1076,60,Tom Yam Goong,1,"13,44,86,29,20","Main
+",AUD,"Standard
+",1
+1077,73,Goong Phad Haw,1,"53,82,62,79,25","Main
+",AUD,"Standard
+",1
+1078,74,Plah plow,3,"74,75,35,26,71","Main
+",AUD,"Standard
+",1
+1079,52,Rau muong,3,"75,42,52,42,34","Main
+",AUD,"Standard
+",1
+1080,54,Goi cuon,1,"3,36,33,77,64","Main
+",AUD,"Standard
+",1
+1081,55,Banh chung,0,"36,32,51,28,61","Main
+",AUD,"Standard
+",1
+1082,95,Cabbage roll soup,0,"95,40,68,95,34","Main
+",AUD,"Standard
+",1
+1083,96,Cha ca hanoi,0,"97,51,93,32,55","Main
+",AUD,"Standard
+",1
+1084,97,Lemongrass marinated lamb chops,1,"55,93,34,2,29","Main
+",AUD,"Standard
+",1
+1085,98,Banh tet,1,"58,36,83,19,90","Main
+",AUD,"Standard
+",1
+1086,99,Ca Kho To,2,"91,65,35,62,22","Main
+",AUD,"Standard
+",1
+1087,122,Lemongrass tamarind chicken,1,"17,47,40,32,11","Main
+",AUD,"Standard
+",1
+1088,52,Pickled bitter melon salad,0,"42,92,88,24,75","Main
+",AUD,"Standard
+",1
+1089,54,Pork bone and green papaya soup,1,"65,67,86,24,27","Main
+",AUD,"Standard
+",1
+1090,55,Banh xeo,0,"21,8,58,66,60","Main
+",AUD,"Standard
+",1
+1091,95,Vietnamese fried rice,1,"22,100,36,17,87","Main
+",AUD,"Standard
+",1
+1092,96,Com tam,2,"86,87,7,12,90","Main
+",AUD,"Standard
+",1
+1093,97,Banh cuon,3,"69,67,84,21,12","Main
+",AUD,"Standard
+",1
+1094,98,Pomelo and shrimp salad,0,"10,75,62,64,17","Main
+",AUD,"Standard
+",1
+1095,99,Chao,3,"86,66,72,44,99","Main
+",AUD,"Standard
+",1
+1096,122,Pho ga,3,"1,27,6,2,82","Main
+",AUD,"Standard
+",1
+1097,52,Banh mi,3,"100,62,84,12,69","Main
+",AUD,"Standard
+",1
+1098,54,Canh,0,"41,41,4,39,77","Main
+",AUD,"Standard
+",1
+1099,55,Vietnamese beef and noodle salad,1,"52,46,95,68,74","Main
+",AUD,"Standard
+",1
+1100,95,Nuoc cham,2,"41,21,19,61,20","Main
+",AUD,"Standard
+",1
+1101,96,Pho ba,2,"71,39,72,45,45","Main
+",AUD,"Standard
+",1
+1102,97,Banh ran,3,"68,60,47,37,87","Main
+",AUD,"Standard
+",1
+1103,98,Banh xeo,0,"19,92,36,88,73","Main
+",AUD,"Standard
+",1
+1104,99,Stir fried mixed vegetables,0,"19,32,67,33,4","Main
+",AUD,"Standard
+",1
+1105,122,Stir fried sweet shrimp,3,"63,31,81,2,37","Main
+",AUD,"Standard
+",1
+1106,52,Pho ga,2,"10,78,12,40,77","Main
+",AUD,"Standard
+",1
+1107,54,Pandan rice and mung bean cake,0,"67,30,66,11,16","Main
+",AUD,"Standard
+",1
+1108,55,Bun cha,1,"39,47,39,15,16","Main
+",AUD,"Standard
+",1
+1109,95,Pho bo,3,"59,46,37,42,40","Main
+",AUD,"Standard
+",1
+1110,96,Cao lau,0,"34,6,9,56,77","Main
+",AUD,"Standard
+",1
+1111,97,Hot vit lon,1,"94,56,36,13,25","Main
+",AUD,"Standard
+",1
+1112,98,Rau muong,3,"69,52,9,96,21","Main
+",AUD,"Standard
+",1
+1113,99,Stir fried sweet shrimp,1,"94,96,86,45,62","Main
+",AUD,"Standard
+",1
+1114,122,Bun cha,2,"96,49,83,38,44","Main
+",AUD,"Standard
+",1
+1115,52,Banh chung,0,"49,62,58,4,59","Main
+",AUD,"Standard
+",1
+1116,54,Pho ba,1,"12,65,89,61,71","Main
+",AUD,"Standard
+",1
+1117,55,Banh xeo,2,"42,97,21,64,66","Main
+",AUD,"Standard
+",1
+1118,95,Chao,1,"82,63,3,72,93","Main
+",AUD,"Standard
+",1
+1119,96,Banh ran,1,"69,83,36,33,44","Main
+",AUD,"Standard
+",1
+1120,97,Lemongrass marinated lamb chops,0,"36,59,94,49","Main
+",AUD,"Standard
+",1
+1121,98,Pho ga,2,"48,66,29,76","Main
+",AUD,"Standard
+",1
+1122,99,Pandan rice and mung bean cake,3,"16,55,74,37","Main
+",AUD,"Standard
+",1
+1123,122,Cabbage roll soup,0,"27,86,3,41","Main
+",AUD,"Standard
+",1
+1124,52,Banh cuon,1,"87,85,26,93","Main
+",AUD,"Standard
+",1
+1125,54,Banh mi,2,"57,94,38,22","Main
+",AUD,"Standard
+",1
+1126,55,Pho bo,1,"69,64,100,97","Main
+",AUD,"Standard
+",1
+1127,95,Nuoc cham,2,"98,81,90,14","Main
+",AUD,"Standard
+",1
+1128,96,Hot vit lon,1,"44,99,77,37","Main
+",AUD,"Standard
+",1
+1129,97,Cao lau,3,"65,56,81,45","Main
+",AUD,"Standard
+",1
+1130,98,Cha ca hanoi,1,"79,55,82,68","Main
+",AUD,"Standard
+",1
+1131,99,Lemongrass tamarind chicken,0,"9,99,60,81","Main
+",AUD,"Standard
+",1
+1132,122,Pomelo and shrimp salad,0,"72,38,14,51","Main
+",AUD,"Standard
+",1
+1133,52,Goi cuon,3,"34,83,82,43","Main
+",AUD,"Standard
+",1
+1134,54,Pho ga,3,"88,60,37,22","Main
+",AUD,"Standard
+",1
+1135,55,Pickled bitter melon salad,1,"59,71,81,17","Main
+",AUD,"Standard
+",1
+1136,95,Canh,1,"92,63,31,11","Main
+",AUD,"Standard
+",1
+1137,96,Stir fried mixed vegetables,0,"73,76,11,30","Main
+",AUD,"Standard
+",1
+1138,97,Vietnamese beef and noodle salad,0,"5,93,99,53","Main
+",AUD,"Standard
+",1
+1139,98,Banh tet,0,"11,44,47,92","Main
+",AUD,"Standard
+",1
+1140,99,Ca Kho To,3,"17,21,60,19","Main
+",AUD,"Standard
+",1
+1141,122,Pork bone and green papaya soup,0,"79,100,33,31","Main
+",AUD,"Standard
+",1
+1142,52,Banh xeo,0,"44,27,92,49","Main
+",AUD,"Standard
+",1
+1143,54,Vietnamese fried rice,0,"63,72,11,79","Main
+",AUD,"Standard
+",1
+1144,55,Com tam,3,"88,16,77,69","Main
+",AUD,"Standard
+",1
+1145,95,Rau muong,2,"87,96,83,24","Main
+",AUD,"Standard
+",1
+1146,96,Cha ca hanoi,0,"92,22,97,31","Main
+",AUD,"Standard
+",1
+1147,97,Pho ga,2,"100,92,63,33","Main
+",AUD,"Standard
+",1
+1148,98,Hot vit lon,2,"35,12,67,40","Main
+",AUD,"Standard
+",1
+1149,99,Ca Kho To,0,"38,43,62,43","Main
+",AUD,"Standard
+",1
+1150,122,Pomelo and shrimp salad,1,"69,8,55,47","Main
+",AUD,"Standard
+",1
+1151,52,Canh,1,"21,73,15,68","Main
+",AUD,"Standard
+",1
+1152,54,Banh xeo,2,"62,100,13,22","Main
+",AUD,"Standard
+",1
+1153,55,Cabbage roll soup,0,"1,32,36,35","Main
+",AUD,"Standard
+",1
+1154,95,Pork bone and green papaya soup,3,"56,25,45,79","Main
+",AUD,"Standard
+",1
+1155,96,Cao lau,1,"13,79,68,88","Main
+",AUD,"Standard
+",1
+1156,97,Pho ba,3,"4,79,10,39,19","Main
+",AUD,"Standard
+",1
+1157,98,Stir fried mixed vegetables,2,"67,25,83,25,5","Main
+",AUD,"Standard
+",1
+1158,99,Lemongrass tamarind chicken,1,"99,15,16,66,39","Main
+",AUD,"Standard
+",1
+1159,122,Pickled bitter melon salad,0,"6,74,98,50,33","Main
+",AUD,"Standard
+",1
+1160,52,Banh xeo,3,"15,79,45,38,27","Main
+",AUD,"Standard
+",1
+1161,54,Vietnamese fried rice,2,"91,47,70,47,55","Main
+",AUD,"Standard
+",1
+1162,55,Banh tet,3,"78,45,70,58,54","Main
+",AUD,"Standard
+",1
+1163,95,Stir fried sweet shrimp,3,"17,72,53,40,78","Main
+",AUD,"Standard
+",1
+1164,96,Banh cuon,3,"94,78,60,33,23","Main
+",AUD,"Standard
+",1
+1165,97,Pandan rice and mung bean cake,1,"40,9,8,75,28","Main
+",AUD,"Standard
+",1
+1166,98,Vietnamese beef and noodle salad,2,"49,96,85,67,19","Main
+",AUD,"Standard
+",1
+1167,99,Pho bo,0,"19,83,13,56,5","Main
+",AUD,"Standard
+",1
+1168,122,Banh ran,3,"41,3,66,7,53","Main
+",AUD,"Standard
+",1
+1169,52,Com tam,1,"81,43,46,37,27","Main
+",AUD,"Standard
+",1
+1170,54,Pho ga,2,"9,54,99,70,92","Main
+",AUD,"Standard
+",1
+1171,55,Banh mi,3,"31,74,10,51,38","Main
+",AUD,"Standard
+",1
+1172,95,Lemongrass marinated lamb chops,3,"79,15,7,70,22","Main
+",AUD,"Standard
+",1
+1173,96,Banh chung,2,"36,27,8,23,82","Main
+",AUD,"Standard
+",1
+1174,97,Nuoc cham,0,"75,29,5,46,44","Main
+",AUD,"Standard
+",1
+1175,98,Chao,0,"58,83,17,28,2","Main
+",AUD,"Standard
+",1
+1176,99,Goi cuon,3,"11,6,37,43,85","Main
+",AUD,"Standard
+",1
+1177,122,Bun cha,0,"41,87,81,25,24","Main
+",AUD,"Standard
+",1
+1178,52,Rau muong,3,"58,83,17,28","Main
+",AUD,"Standard
+",1
+1179,54,Banh xeo,1,"11,6,37,43","Main
+",AUD,"Standard
+",1
+1180,55,Banh tet,2,"41,87,81,25","Main
+",AUD,"Standard
+",1
+1181,95,Pomelo and shrimp salad,0,"35,44,68,8","Main
+",AUD,"Standard
+",1
+1182,96,Pork bone and green papaya soup,1,"8,90,76,61","Main
+",AUD,"Standard
+",1
+1183,97,Stir fried sweet shrimp,2,"47,11,46,48","Main
+",AUD,"Standard
+",1
+1184,98,Hot vit lon,2,"16,9,76,53","Main
+",AUD,"Standard
+",1
+1185,99,Bun cha,2,"15,18,43,73","Main
+",AUD,"Standard
+",1
+1186,122,Chao,1,"47,15,96,90","Main
+",AUD,"Standard
+",1
+1187,52,Cao lau,3,"21,66,60,10","Main
+",AUD,"Standard
+",1
+1188,54,Lemongrass tamarind chicken,2,"8,97,71,21","Main
+",AUD,"Standard
+",1
+1189,55,Vietnamese fried rice,2,"96,8,65,31","Main
+",AUD,"Standard
+",1
+1190,95,Pickled bitter melon salad,2,"62,18,26,60","Main
+",AUD,"Standard
+",1
+1191,96,Banh mi,2,"19,42,92,50,95","Main
+",AUD,"Standard
+",1
+1192,97,Pho ga,2,"26,46,6,69,22","Main
+",AUD,"Standard
+",1
+1193,98,Goi cuon,1,"42,63,69,85,55","Main
+",AUD,"Standard
+",1
+1194,99,Nuoc cham,0,"33,32,84,16,2","Main
+",AUD,"Standard
+",1
+1195,122,Banh xeo,3,"78,66,61,29,12","Main
+",AUD,"Standard
+",1
+1196,52,Canh,2,"12,38,70,60,44","Main
+",AUD,"Standard
+",1
+1197,54,Cha ca hanoi,3,"38,42,17,53,45","Main
+",AUD,"Standard
+",1
+1198,55,Pho ga,3,"77,73,15,69,7","Main
+",AUD,"Standard
+",1
+1199,95,Banh chung,0,"43,95,60,89,11","Main
+",AUD,"Standard
+",1
+1200,96,Com tam,2,"16,55,63,69,26","Main
+",AUD,"Standard
+",1
+1201,97,Banh cuon,2,"87,88,57,83,26","Main
+",AUD,"Standard
+",1
+1202,98,Cabbage roll soup,2,"44,5,28,98,1","Main
+",AUD,"Standard
+",1
+1203,99,Ca Kho To,2,"23,11,76,10,67","Main
+",AUD,"Standard
+",1
+1204,122,Vietnamese beef and noodle salad,0,"4,64,17,62,19","Main
+",AUD,"Standard
+",1
+1205,52,Stir fried mixed vegetables,2,"53,34,78,38,79","Main
+",AUD,"Standard
+",1
+1206,54,Pandan rice and mung bean cake,2,"26,46,6,69","Main
+",AUD,"Standard
+",1
+1207,55,Pho bo,1,"42,63,69,85","Main
+",AUD,"Standard
+",1
+1208,95,Banh ran,1,"38,42,17","Main
+",AUD,"Standard
+",1
+1209,96,Pho ba,1,"77,73,15","Main
+",AUD,"Standard
+",1
+1210,97,Lemongrass marinated lamb chops,1,"43,95,60","Main
+",AUD,"Standard
+",1
+1211,98,Banh tet,1,"16,55,63","Main
+",AUD,"Standard
+",1
+1212,99,Stir fried sweet shrimp,0,"87,88,57","Main
+",AUD,"Standard
+",1
+1213,122,Banh cuon,3,"44,5,28","Main
+",AUD,"Standard
+",1
+1214,52,Pandan rice and mung bean cake,1,"23,11,76","Main
+",AUD,"Standard
+",1
+1215,54,Vietnamese beef and noodle salad,1,"4,64,17","Main
+",AUD,"Standard
+",1
+1216,55,Pho bo,2,"53,34,78","Main
+",AUD,"Standard
+",1
+1217,95,Banh ran,2,"74,60,45","Main
+",AUD,"Standard
+",1
+1218,96,Com tam,1,"12,39,48","Main
+",AUD,"Standard
+",1
+1219,97,Pho ga,3,"24,80,67","Main
+",AUD,"Standard
+",1
+1220,98,Banh mi,1,"46,48,99","Main
+",AUD,"Standard
+",1
+1221,99,Lemongrass marinated lamb chops,0,"9,40,15","Main
+",AUD,"Standard
+",1

@@ -1,0 +1,111 @@
+id,name,address,rating,type,delivers,pick_ups,state,verified,verified_on,closed,open_date,owner_id,abn,is_gst_registered,website_url,"phone_number
+",google_maps_id,min_delivery_value,is_boosted
+1,Chinese BBQ Ultimo,"67 Hay Street, Ultimo, NSW, 2007",3,Chinese,1,1,New South Wales,1,6/06/2019,0,19/01/2011,1,95716204261,1,NULL,02 5550 6542,92648870,5,1
+2,Panang Paradise,"654 George Street, Sydney, NSW, 2000",2,Malaysian,1,1,New South Wales,1,6/06/2019,0,2010-04-33,2,90329624765,1,NULL,02 7010 9323,51714557,0,1
+3,Hong's Kong,"14 Forrest Street, Hurstville, NSW, 2220",5,Chinese,1,1,New South Wales,1,6/06/2019,0,17/04/2013,3,88290439714,1,NULL,02 5550 2238,58157324,10,0
+4,Fortune Village,"18 Railway Parade, Hurstville, NSW, 2220",4,Chinese,1,1,New South Wales,1,6/06/2019,0,4/03/2017,4,67868871294,1,NULL,02 7010 9615,36031436,20,1
+5,Dumpling Noodle House,"14 Quay Street, Haymarket, NSW, 2000",5,Chinese,1,1,New South Wales,1,6/06/2019,0,12/04/2007,5,56609418025,1,NULL,02 5550 0215,42408483,5,0
+6,Drunk Chicken,"68 Redmyre Road, Strathfield, NSW, 2135",3,Korean,1,1,New South Wales,1,6/06/2019,,12/12/2008,6,62979759260,1,NULL,02 7010 8151,75783047,15,0
+7,Pho Central,"145 Rouse Street, Port Melbourne, VIC, 3207",3,Vietnamese,0,1,Victoria,0,,,13/12/2009,7,39495206577,1,NULL,03 5550 2113,65098290,,0
+8,Do Do Paidang,"37 Crockford Street, Port Melbourne, VIC, 3207",2,Thai,1,1,Victoria,1,7/06/2019,1,12/03/2012,8,77020183482,1,NULL,03 7010 2377,39711562,0,0
+9,Saigon Summer,"120 Swan Street, Richmond, VIC, 3121",2,Vietnamese,1,1,Victoria,1,7/06/2019,0,9/05/2011,9,35458156859,1,NULL,03 5550 6191,96900188,0,0
+10,Thai Pothong,"80 Boundary Street, West End, QLD, 4101",0,Thai,0,1,Queensland,0,7/06/2019,,11/01/2013,2,71488888098,1,NULL,07 5550 9045,72152440,,0
+11,Papaya Paradise,"163 Elizabeth Street, Brisbane City, QLD, 4000",4,Thai,1,1,Queensland,1,7/06/2019,1,12/11/2010,10,92020729334,1,NULL,07 7010 2061,74143459,10,0
+12,Thai Time,"220 Adelaide Street, Brisbane City, QLD, 4000",0,Thai,0,1,Queensland,1,7/06/2019,0,1/05/2015,11,71401044346,1,NULL,07 5550 4619,96069854,,0
+13,Ayam Goreng,"14 Kingsford Smith Drive, Albion, QLD, 4010",2,Indonesian,1,1,Queensland,1,7/06/2019,0,12/07/2012,12,94339038809,1,NULL,07 7010 6111,80511407,10,0
+14,Ralston Rendang,"588 Glenferrie Rd, Hawthorn, VIC, 3122",0,Indonesian,0,1,Victoria,1,7/06/2019,0,12/09/2016,2,82558827591,1,NULL,03 7010 2085,91919641,,0
+15,Siam Central,"299 Dandenong Road, Windsor, VIC, 3181",5,Chinese,1,1,Victoria,1,7/06/2019,0,22/05/2017,3,40738197021,1,NULL,03 5550 4550,69617499,5,0
+16,Nasi Rawon,"388 Anzac Parade, Kingsford, NSW, 2032",5,Indonesian,0,1,New South Wales,1,7/06/2019,0,27/05/2017,13,43013733040,1,NULL,02 5550 2287,73955037,,0
+17,Sichuan Sydney,"12 Dixon Street, Haymarket, NSW, 2000",4,Chinese,1,1,New South Wales,1,7/06/2019,0,12/04/2017,14,44776302216,1,NULL,02 7010 7560,84974227,20,0
+18,Lemongrass Thailandia,"197 Plenty Rd, Preston, VIC, 3072",3,Thai,1,1,Victoria,1,7/06/2019,1,12/04/2001,3,72811642202,1,NULL,03 5550 6706,90588360,10,1
+19,Tawandang,"12 Albion Street, Brunswick East, VIC, 3057",2,Thai,1,1,Victoria,1,7/06/2019,,28/04/2006,15,62074637275,1,NULL,03 7010 2929,37928799,10,0
+20,Into Noodle,"643 Sydney Rd, Brunswick, VIC, 3056",1,Chinese,1,1,Victoria,1,7/06/2019,0,13/11/2016,16,89883057559,1,NULL,03 5550 9196,85627887,NULL,0
+21,Red Noodle,"401 Lane Cove Rd, North Ryde, NSW, 2113",3,Chinese,0,1,New South Wales,1,7/06/2019,0,23/02/2017,2,67352551035,1,NULL,02 7010 7597,95175130,,0
+22,Yummy Yum Cha,"30 Station Street East, Harris Park, NSW, 2150",1,Chinese,1,1,New South Wales,1,7/06/2019,0,13/11/2016,17,69282457387,1,NULL,02 5550 1275,44735009,10,0
+23,Bombay House,"12 Smith Street, Parramatta, NSW, 2150",4,Indian,1,1,New South Wales,1,8/06/2019,0,9/09/2018,23,52306953171,1,NULL,02 5550 8809,36196417,NULL,0
+24,Tandoori Toongabbie,"34 Station Road, Toongabbie, NSW, 2146",2,Indian,1,1,New South Wales,1,8/06/2019,0,28/06/2017,25,44597998063,1,NULL,02 7010 6235,84307895,NULL,0
+25,Tokyo Tower,"333 George Street, Sydney, NSW, 2000",5,Japanese,1,1,New South Wales,1,8/06/2019,0,28/07/2016,51,54973056930,1,NULL,02 5550 4830,53656194,20,0
+26,Shergeel's,"12 Crown Street, Wollongong, NSW, 2500",5,Indian,1,1,New South Wales,1,8/06/2019,0,28/02/2016,38,60020894864,1,NULL,02 7010 9676,63419567,10,0
+27,Miru's Kitchen,"98 Fitzroy St, Surry Hills NSW 2010",1,Japanese,1,1,New South Wales,1,8/06/2019,0,16/05/2019,57,75262620376,1,NULL,02 5550 6707,66987465,20,0
+28,Nasi North Sydney,"6/5 Potter St, Waterloo NSW 2017",3,Malaysian,1,1,New South Wales,1,8/06/2019,0,27/07/2018,28,79853489430,1,NULL,02 7010 4187,59504716,10,1
+29,Incheon A-ha,"100 Coronation Parade, Strathfield, NSW, 2135
+",2,Korean,1,1,New South Wales,1,8/06/2019,0,24/02/2016,53,35830200428,1,NULL,02 5550 8432,43209689,10,0
+30,Danjee,"1-5 Albion Place, Sydney, NSW, 2000",0,Korean,1,1,New South Wales,1,8/06/2019,0,19/12/2017,23,85273396144,1,NULL,02 7010 0120,68945171,20,0
+31,Kazu Karaage,"100 Milligan Street, Perth, WA, 6000",0,Japanese,1,1,Western Australia,1,8/06/2019,0,26/10/2018,40,44299258473,1,NULL,08 5550 9414,77374640,,0
+32,Raj,"1128 Hay Street, Perth, WA, 6000",3,Indian,1,1,Western Australia,1,8/06/2019,0,1/10/2016,43,92286865280,1,NULL,08 7010 2260,86088952,20,0
+33,"Tikka Turban
+","250 William Street, Perth, WA, 6000",2,Indian,1,1,Western Australia,1,9/06/2019,1,10/08/2017,24,79744924501,1,NULL,08 5550 8650,83864287,20,0
+34,Long Chim Wok,"9/200 Hay Street, Perth, WA, 6000",0,Thai,1,1,Western Australia,1,9/06/2019,0,14/06/2018,32,37173155925,1,NULL,08 7010 5718,79014133,10,0
+35,Thai Gourmet,"102 Grosvenor Road, Mount Lawley, WA, 6050",4,Thai,1,1,Western Australia,1,9/06/2019,0,17/11/2016,19,71430979840,1,NULL,08 5550 3288,99247061,10,0
+36,"Tom's Yum Cafe
+","130 Oxford Street, Leederville, WA, 6007",3,Thai,1,0,Western Australia,1,9/06/2019,0,12/01/2017,17,89501310365,1,NULL,08 7010 3029,41359313,,0
+37,Red Dragon,"80 Walcott Street, Mount Lawley, WA, 6050",1,Chinese,1,1,Western Australia,1,9/06/2019,0,7/07/2017,33,99300626781,1,NULL,08 5550 0977,84399963,10,0
+38,Fat Dragon,"130B Mounts Bay Rd, Perth, WA, 6000",0,Chinese,1,1,Western Australia,1,9/06/2019,0,2/06/2018,32,92349134447,1,NULL,08 7010 0880,88020777,10,0
+39,Hainanese House,"74-76 Bennett Street, Perth, WA, 6004",1,Chinese,1,1,Western Australia,1,9/06/2019,0,7/08/2016,60,39292594250,1,NULL,08 5550 9916,59509605,20,0
+40,Panda Chicken,"101 Oxford Street, Leederville, WA, 6007",0,Chinese,1,0,Western Australia,1,9/06/2019,1,31/03/2018,18,95765979221,1,NULL,08 7010 7729,47040794,10,0
+41,Ria's House,"80 Walcott Street, Mount Lawley, WA, 6050",2,Malaysian,1,1,Western Australia,1,9/06/2019,0,20/07/2016,44,68246471447,1,NULL,08 5550 7155,62913687,10,0
+42,Pho's Pho,"917 Beaufort Street, Inglewood, WA, 6052",5,Vietnamese,1,1,Western Australia,1,9/06/2019,0,20/10/2016,19,57425680672,1,NULL,08 7010 7148,56100031,10,1
+43,Sparrow's Fart,"201 Fort Street, Highgate, WA, 6003",3,Indonesian,1,1,Western Australia,1,9/06/2019,0,4/03/2019,48,67300847112,1,NULL,08 5550 0977,86459563,10,0
+44,Rice Rice,"58 Murray Street, Bayswater, WA, 6053",0,Chinese,1,1,Western Australia,1,9/06/2019,0,14/10/2018,43,64326812176,1,NULL,08 7010 0880,82363163,0,0
+45,House of Chau,"566 Glenferrie Rd, Hawthorne, VIC, 3122",4,Chinese,1,1,Victoria,1,9/06/2019,0,10/03/2018,23,48763546191,1,NULL,08 5550 6646,39672999,0,0
+46,Red Chilli Restaurant,"18A Camberwell Rd, Hawthorn East VIC 3123",2,Chinese,1,1,Victoria,1,10/06/2019,0,31/12/2018,39,90572591951,1,NULL,08 7010 7575,46290829,10,0
+47,Ming's Mess Hall,"1 Evans Pl, Camberwell VIC 3124",2,Chinese,1,1,Victoria,1,10/06/2019,0,24/07/2016,36,81028230914,1,NULL,08 5550 2186,92504849,10,0
+48,Chow Chi,"815 Glenferrie Rd, Hawthorn VIC 3122",5,Chinese,1,1,Victoria,1,10/06/2019,0,28/04/2019,31,81768363733,1,NULL,08 7010 0468,88859680,NULL,0
+49,Ying's,"57 Swan St, Richmond VIC 3121",4,Chinese,1,1,Victoria,1,10/06/2019,0,28/09/2016,22,58126621862,1,NULL,08 5550 4799,47278248,NULL,0
+50,Dragon Boat Express,"387 Victoria St, Abbotsford VIC 3067",5,Chinese,1,1,Victoria,1,10/06/2019,0,17/12/2017,21,35725658598,1,NULL,08 7010 5923,75747780,10,0
+51,Thanh's,"370 Victoria St, Richmond VIC 3121",0,Chinese,1,1,Victoria,1,10/06/2019,0,6/06/2016,45,75457937130,1,NULL,08 5550 6136,46908776,10,0
+52,Pho Express,"57 Swan St, Richmond VIC 3121",0,Vietnamese,1,1,Victoria,1,10/06/2019,0,8/08/2018,25,81899039176,1,NULL,08 7010 0009,53598785,10,0
+54,"Saigon Express
+","244 High St, Kew VIC 3101",5,Vietnamese,1,1,Victoria,1,10/06/2019,0,10/01/2016,46,53440219475,1,NULL,08 5550 8673,78186794,,0
+55,Vietnam Village,"708 Glenferrie Rd, Hawthorn VIC 3122",0,Vietnamese,1,1,Victoria,1,10/06/2019,0,20/11/2017,38,70105857837,1,NULL,08 7010 8684,81658903,10,0
+56,Nu Thai,"186 Riversdale Rd, Hawthorn VIC 3122",0,"Thai
+",1,1,Victoria,1,10/06/2019,0,16/02/2018,25,55688686305,1,NULL,08 5550 2451,63610574,20,0
+57,Thai Summer,"370 Victoria St, Richmond VIC 3121",2,Thai,1,1,Victoria,1,10/06/2019,0,1/03/2017,31,85163428068,1,NULL,08 7010 4949,52153438,10,0
+58,"Star Thai
+","387 Victoria St, Abbotsford VIC 3067",5,Thai,1,1,Victoria,1,11/06/2019,0,18/09/2018,46,39534147566,1,NULL,08 5550 5350,62798801,10,0
+59,Yellow Thai,"156 Pakington St, Kew VIC 3101",0,Thai,1,1,Victoria,1,11/06/2019,0,12/09/2016,41,45007723845,1,NULL,08 7010 0370,47302144,10,0
+60,Sri's Kitchen,"1346 Malvern Rd, Malvern VIC 3144",5,Thai,1,1,Victoria,1,11/06/2019,0,9/07/2017,26,60206949729,1,NULL,08 5550 7047,44504615,20,0
+61,Ayam Goreng,"1346 Malvern Rd, Malvern VIC 3144",5,Indonesian,1,1,Victoria,1,11/06/2019,0,22/09/2016,52,97294477479,1,NULL,08 7010 3096,96264420,10,0
+62,Pondok Soul,"197 Carlisle St, Balaclava VIC 3183",5,Indonesian,1,1,Victoria,1,11/06/2019,0,10/11/2018,88,99029228632,1,NULL,08 5550 6178,90312001,10,0
+63,Bakmi Lim,"217 Barkly St, St Kilda VIC 3182",0,Indonesian,1,1,Victoria,1,11/06/2019,0,6/10/2016,55,73298212794,1,NULL,08 7010 1964,38048597,10,0
+64,Soul & Origin,"Level 1/624 Ann St, Fortitude Valley QLD 4006",2,Indonesian,1,1,Queensland,1,11/06/2019,0,15/02/2019,43,98505858203,1,NULL,07 5550 2779,99126001,10,0
+65,"Bintang Cafe
+","39 James St, Fortitude Valley QLD 4006",3,Indonesian,1,1,Queensland,1,11/06/2019,0,4/10/2018,6,47019286384,1,NULL,07 7010 6393,47649044,20,0
+66,Queen Street Thai,"Shop 071/91 Queen St, Brisbane City QLD 4000",4,Thai,1,1,Queensland,1,11/06/2019,0,11/01/2016,36,70502068203,1,NULL,07 5550 9449,62935606,20,0
+67,Dapur Java,"95 Turbot St, Brisbane City QLD 4000",2,Indonesian,1,1,Queensland,1,11/06/2019,0,24/05/2018,49,91550945894,1,NULL,07 7010 5405,55690313,NULL,0
+69,Bali Brisbane,"95 Turbot St, Brisbane City QLD 4000",2,Indonesian,1,1,Queensland,1,12/06/2019,0,19/04/2017,49,81953165293,1,NULL,07 5550 8162,46224345,10,0
+70,Melting Pot,"60 Park Rd, Milton QLD 4064",4,Chinese,1,1,Queensland,1,12/06/2019,0,10/03/2018,52,64946760854,1,NULL,07 7010 1906,39556098,10,0
+71,"The Full Balti
+","485 Boundary St, Spring Hill QLD 4000",4,Indian,1,1,Queensland,1,12/06/2019,0,18/03/2019,55,35525673884,1,NULL,07 5550 7693,86586066,20,1
+72,K Town,"The Village Centre, 18/8 Carraway St, Kelvin Grove QLD 4059",5,Korean,1,1,Queensland,1,12/06/2019,0,1/06/2016,26,91049068361,1,NULL,07 7010 3166,34938123,10,0
+73,Crying Tiger,"76 Skyring Terrace, Newstead QLD 4006",5,Thai,1,1,Queensland,1,12/06/2019,0,5/08/2018,60,43243015929,1,NULL,07 5550 6931,39860106,10,0
+74,Crying Lion,"1/618 Wynnum Rd, Morningside QLD 4170",4,Thai,1,0,Queensland,1,12/06/2019,0,13/08/2017,26,69766621815,1,NULL,07 7010 4060,81561579,10,0
+75,Taro Taro,"14 Annerley Rd, Woolloongabba QLD 4102",2,Chinese,1,1,Queensland,1,12/06/2019,0,27/08/2016,66,87444451963,1,NULL,07 5550 3775,58680549,20,0
+76,Mr Bun,"297 Old Cleveland Rd, Coorparoo QLD 4151",5,Chinese,0,1,Queensland,1,12/06/2019,0,4/05/2016,60,83818281518,1,NULL,07 7010 7251,57579203,,0
+77,Rising Star,"Shop 4/417 Logan Rd, Stones Corner QLD 4120",5,Chinese,1,1,Queensland,1,12/06/2019,1,14/07/2018,44,77936786262,1,NULL,07 5550 6155,86662799,,0
+78,Blue Lagoon,"590 Logan Rd, Greenslopes QLD 4120",1,Chinese,1,1,Queensland,0,12/06/2019,0,12/03/2018,53,75014457186,1,NULL,07 7010 3548,58485678,,0
+79,People's House,"Shop 2/82 Bennetts Rd, Coorparoo QLD 4151",5,Chinese,1,1,Queensland,1,12/06/2019,0,6/09/2017,56,79360696537,1,NULL,07 5550 4103,98980597,,0
+80,Munch Away,"Shop 9/300 Old Cleveland Rd, Coorparoo QLD 4151",2,Chinese,1,1,Queensland,1,12/06/2019,0,24/08/2017,31,57640498632,1,NULL,07 7010 8263,79136789,,0
+82,Oriental Mandarin,"shop 7/250 Ipswich Rd, Woolloongabba QLD 4102",1,Chinese,1,1,Queensland,1,12/06/2019,0,31/05/2019,41,54962062173,1,NULL,07 5550 1996,44360426,,0
+83,Sunee's Garden,"17 Samuel St, Camp Hill QLD 4152",4,Thai,1,0,Queensland,,,0,29/08/2018,44,86496388490,1,NULL,07 7010 9048,82000294,,0
+84,Riverside Chinese,"42 Charlotte St, Brisbane City QLD 4000",0,Chinese,1,1,Queensland,1,12/06/2019,0,6/05/2019,55,49385161020,1,NULL,07 5550 4789,55591462,10,0
+85,Chong's Thai,"Lower Ground, Shop 1/245 Albert St, Brisbane City QLD 4000",3,Thai,1,1,Queensland,1,13/06/2019,0,30/04/2018,51,70737625470,1,NULL,07 7010 6549,43629114,,0
+86,Chatty Thai,"132 Boundary St, West End QLD 4101",5,Thai,1,1,Queensland,1,13/06/2019,0,30/04/2018,46,52978072799,1,NULL,07 5550 3465,66876901,10,0
+87,Mamasan's Massaman,"5/75 Hardgrave Rd, West End QLD 4101",1,Thai,1,1,Queensland,1,13/06/2019,0,30/04/2018,23,93269080816,1,NULL,07 7010 1372,59433954,10,0
+88,Reantong Thai,"165 Wickham St, Fortitude Valley QLD 4006",3,Thai,1,1,Queensland,1,13/06/2019,0,30/04/2018,22,59629396820,1,NULL,07 5550 8710,50237176,5,0
+95,Red Lantern Viet,"33 Hindmarsh Square, Adelaide SA 5000",1,Vietnamese,0,0,South Australia,1,13/06/2019,0,30/04/2018,2,93655835100,1,NULL,08 5550 1464,74451581,,0
+96,Hanoi House,"56A King William Rd, Goodwood SA 5034",5,Vietnamese,1,1,South Australia,1,13/06/2019,0,30/04/2018,27,85204058028,1,NULL,08 7010 3052,44054805,20,0
+97,Da lat Delights,"9/580 Goodwood Rd, Daw Park SA 5041",3,Vietnamese,1,1,South Australia,0,14/06/2019,0,30/04/2018,47,47461520299,1,NULL,08 5550 2723,91350556,NULL,0
+98,Pho Ga,"Findon Shopping Centre, Shop 52, 303 Grange Rd, Findon SA 5023",5,Vietnamese,1,1,South Australia,1,14/06/2019,0,30/04/2018,41,88808251676,1,NULL,08 7010 1952,41744347,20,0
+99,"Hanoi Pho
+","2/556 Magill Rd, Magill SA 5072",1,Vietnamese,0,1,South Australia,1,14/06/2019,1,30/04/2018,59,56073384657,1,NULL,08 5550 3266,90622677,,0
+101,Aki's Curry House,"255 Esplanade, Henley Beach SA 5022",2,Indian,1,1,South Australia,1,14/06/2019,0,30/04/2018,15,95322214644,1,NULL,08 7010 0609,43763990,20,0
+102,Masala Now,"7/140 Grand Jct Rd, Rosewater SA 5013",5,Indian,1,0,South Australia,1,14/06/2019,0,30/04/2018,92,88391574402,1,NULL,08 5550 4179,98580345,,0
+103,Nithik's Kitchen,"Findon Shopping Centre, Shop 52, 303 Grange Rd, Findon SA 5023",1,Indian,1,1,South Australia,0,14/06/2019,0,30/04/2018,86,35775543193,1,NULL,08 7010 7448,73468260,10,1
+110,Zushi Adelaide,"1/31-39 Gouger St, Adelaide SA 5000",5,Japanese,0,1,South Australia,1,14/06/2019,0,30/04/2018,53,49924588216,1,NULL,08 5550 6645,88720902,,0
+111,Kid Kyoto,"114 Gouger St, Adelaide SA 5000",2,Japanese,1,1,South Australia,1,14/06/2019,0,30/04/2018,8,60838186430,1,NULL,08 7010 0515,65667132,10,0
+112,Olden Bowl Bar,"82 Hutt St, Adelaide SA 5000",2,Japanese,1,1,South Australia,1,14/06/2019,0,30/04/2018,17,40917611124,1,NULL,08 5550 2306,77183022,5,0
+119,Cho Cho Adelaide,"21 Rundle Mall, Adelaide SA 5000",5,Thai,1,1,South Australia,1,14/06/2019,0,30/04/2018,55,96495173602,1,NULL,08 7010 1407,89543386,5,1
+120,Tokyo Takeaway,"189 Glen Osmond Rd, Frewville SA 5063",4,Japanese,1,1,South Australia,1,15/06/2019,0,30/04/2018,46,86843257421,1,NULL,08 5550 3038,72518170,NULL,0
+121,Seoul Ria BBQ,"104 Glen Osmond Rd, Parkside SA 5063",3,Korean,1,1,South Australia,1,15/06/2019,0,30/04/2018,18,41880416646,1,NULL,08 7010 6655,41213345,10,0
+122,Old Saigon,"Shop 22/61-79 Quay St, Haymarket NSW 2000",1,Vietnamese,1,1,New South Wales,1,15/06/2019,0,30/04/2018,38,37469598257,1,NULL,02 5550 1794,77314562,10,0
