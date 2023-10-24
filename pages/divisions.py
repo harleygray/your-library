@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import plotly.figure_factory as ff
 import plotly.graph_objs as go
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 
 def fetch_and_store_divisions(api_key):
@@ -183,49 +183,49 @@ def format_division_data(division_data, members):
 
     return party_vote_df, individual_politicians_df
 
-def plot_parliament(individual_votes, active_division):
-    house = active_division["house"]
+# def plot_parliament(individual_votes, active_division):
+#     house = active_division["house"]
     
-    if house == "senate":
-        rows = [10, 13, 15, 18, 20]
-    elif house == "representatives":
-        rows = [14, 16, 19, 21, 24, 26, 31]
+#     if house == "senate":
+#         rows = [10, 13, 15, 18, 20]
+#     elif house == "representatives":
+#         rows = [14, 16, 19, 21, 24, 26, 31]
     
-    fig, ax = plt.subplots()
+#     fig, ax = plt.subplots()
     
-    radius = 0.7
+#     radius = 0.7
     
-    dot_counter = 0
-    for row in rows:
-        # Calculate angle_step based on the number of dots in the current row
-        angle_step = np.pi / (row - 1) if row > 1 else 0  # Avoid division by zero
-        start_angle = np.pi  # Start from the leftmost point in the semicircle
+#     dot_counter = 0
+#     for row in rows:
+#         # Calculate angle_step based on the number of dots in the current row
+#         angle_step = np.pi / (row - 1) if row > 1 else 0  # Avoid division by zero
+#         start_angle = np.pi  # Start from the leftmost point in the semicircle
 
-        for i in range(row):
-            if dot_counter >= len(individual_votes):
-                break
+#         for i in range(row):
+#             if dot_counter >= len(individual_votes):
+#                 break
             
-            vote = individual_votes.iloc[dot_counter]["Vote"]
-            dot_color = "blue" if vote == "Yes" else ("red" if vote == "No" else "gray")
+#             vote = individual_votes.iloc[dot_counter]["Vote"]
+#             dot_color = "blue" if vote == "Yes" else ("red" if vote == "No" else "gray")
             
-            angle = start_angle - i * angle_step
-            x = radius * np.cos(angle)
-            y = radius * np.sin(angle)
+#             angle = start_angle - i * angle_step
+#             x = radius * np.cos(angle)
+#             y = radius * np.sin(angle)
             
-            if house == "representatives":
-                dot_size = 100
-            else:
-                dot_size = 150
-            ax.scatter(x, y, c=dot_color, s=dot_size)  # Dot size increased by 2x
+#             if house == "representatives":
+#                 dot_size = 100
+#             else:
+#                 dot_size = 150
+#             ax.scatter(x, y, c=dot_color, s=dot_size)  # Dot size increased by 2x
             
-            dot_counter += 1
+#             dot_counter += 1
         
-        radius += 0.2  # Increment the radius for the next row
+#         radius += 0.2  # Increment the radius for the next row
     
-    ax.set_aspect("equal", "box")
-    plt.axis("off")
+#     ax.set_aspect("equal", "box")
+#     plt.axis("off")
     
-    st.pyplot(fig)  # Display the plot using Streamlit
+#     st.pyplot(fig)  # Display the plot using Streamlit
 
 def load_members_from_files():
     # Define the directory and filename
