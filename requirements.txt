@@ -8,6 +8,7 @@ weaviate-client
 altair
 tiktoken
 comet_llm
+plotly
 # uncomment to use huggingface llms
 # huggingface-hub==0.14.1
 
