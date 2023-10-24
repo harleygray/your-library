@@ -10,30 +10,81 @@ import plotly.graph_objs as go
 import matplotlib.pyplot as plt
 import numpy as np
 
-def fetch_divisions(api_key):
+def fetch_and_store_divisions(api_key):
+    # Define the directory and filename for storing divisions
+    directory = './data/parliament'
+    filename = f"{directory}/divisions.json"
+    
+    # Create directory if it doesn't exist
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    
+    # Fetch the most recent 100 divisions
     url = f"https://theyvoteforyou.org.au/api/v1/divisions.json?key={api_key}"
     response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        st.write(f"Failed to get data: {response.status_code}")
+    if response.status_code != 200:
+        st.write(f"Failed to get divisions: {response.status_code}")
         return None
+    
+    recent_divisions = response.json()
+    
+    # Load existing divisions from the file, if any
+    existing_divisions = {}
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            existing_divisions = json.load(f)
+    
+    # Iterate through each division to get details
+    for division in recent_divisions:
+        division_id = division.get('id', 'unknown_id')
+        if division_id not in existing_divisions:
+            # Fetch details of the new division
+            detail_url = f"https://theyvoteforyou.org.au/api/v1/divisions/{division_id}.json?key={api_key}"
+            detail_response = requests.get(detail_url)
+            if detail_response.status_code == 200:
+                division_detail = detail_response.json()
+                
+                # Store new division details
+                existing_divisions[division_id] = division_detail
+    
+    # Save all division data back to the file
+    with open(filename, 'w') as f:
+        json.dump(existing_divisions, f)
+
+    return existing_divisions
 
 def fetch_members(api_key):
+    # Define the directory and filename
+    directory = './data/parliament'
+    filename = f"{directory}/members.json"
+    
+    # Create directory if it doesn't exist
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    
+    # Load existing members from the file, if any
+    existing_members = {}
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            existing_members = json.load(f)
+    
+    # Make the API call
     url = f"https://theyvoteforyou.org.au/api/v1/people.json?key={api_key}"
     response = requests.get(url)
+    
     if response.status_code == 200:
-        return response.json()
-    else:
-        st.write(f"Failed to get data: {response.status_code}")
-        return None
-
-def division_details(api_key, divisions, target_name):
-    division_id = next((division for division in divisions if division['name'] == target_name), None)['id']
-    url = f"https://theyvoteforyou.org.au/api/v1/divisions/{division_id}.json?key={api_key}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
+        fetched_members = response.json()
+        
+        # Check if any of the fetched members are new
+        existing_ids = set(member.get('id', 'unknown_id') for member in existing_members)
+        fetched_ids = set(member.get('id', 'unknown_id') for member in fetched_members)
+        
+        if fetched_ids - existing_ids:  # Non-empty set means new members
+            # Update the member data file
+            with open(filename, 'w') as f:
+                json.dump(fetched_members, f)
+        
+        return fetched_members
     else:
         st.write(f"Failed to get data: {response.status_code}")
         return None
@@ -57,21 +108,6 @@ def find_division_by_name(divisions, target_name):
     # Use next to find the first match; defaults to None if not found
     matching_division = next((division for division in divisions if division['name'] == target_name), None)
     return matching_division
-
-def display_division(division):
-    st.markdown(f"### Division Details")
-    
-    st.write(f"**ID**: {division['id']}")
-    st.write(f"**House**: {division['house']}")
-    st.write(f"**Name**: {division['name']}")
-    st.write(f"**Date**: {division['date']}")
-    st.write(f"**Number**: {division['number']}")
-    st.write(f"**Clock Time**: {division['clock_time']}")
-    st.write(f"**Aye Votes**: {division['aye_votes']}")
-    st.write(f"**No Votes**: {division['no_votes']}")
-    st.write(f"**Possible Turnout**: {division['possible_turnout']}")
-    st.write(f"**Rebellions**: {division['rebellions']}")
-    st.write(f"**Edited**: {division['edited']}")
 
 def format_division_data(division_data, members):
     individual_politicians = {}
@@ -108,7 +144,43 @@ def format_division_data(division_data, members):
     # Compute party_vote_counts from individual_politicians_df
     party_vote_df = individual_politicians_df.groupby(['Party', 'Vote']).size().unstack(fill_value=0)
     party_vote_df['Absent'] = party_vote_df.apply(lambda row: row.sum(), axis=1) - party_vote_df['Yes'] - party_vote_df['No']
-    
+
+    # Define the mapping dictionary for the 'Effective Party' column
+    effective_party_map = {
+        'Australian Greens': 'Australian Greens',
+        'Australian Labor Party': 'Australian Labor Party',
+        'Country Liberal Party': 'Liberal National Party',
+        'DPRES': 'Australian Labor Party',
+        'Independent': 'Independent',
+        'Jacqui Lambie Network': 'Jacqui Lambie Network',
+        'Liberal National Party': 'Liberal National Party',
+        'Liberal Party': 'Liberal National Party',
+        'National Party': 'Liberal National Party',
+        'PRES': 'Australian Labor Party',
+        'Pauline Hanson\'s One Nation Party': 'Pauline Hanson\'s One Nation Party',
+        'United Australia Party': 'United Australia Party',
+        'Centre Alliance': 'Independent',
+        'CWM': 'Liberal National Party',
+        'Katter\'s Australian Party': 'Independent',
+        'SPK': 'Australian Labor Party'
+    }
+    # references
+    # https://theyvoteforyou.org.au/people/senate/wa/sue_lines/friends
+    # https://theyvoteforyou.org.au/people/senate/nt/jacinta_nampijinpa_price/friends
+    # https://theyvoteforyou.org.au/people/representatives/parkes/mark_coulton/friends
+
+    # Add the 'Effective Party' column to the DataFrame
+    individual_politicians_df['Effective Party'] = individual_politicians_df['Party'].map(effective_party_map)
+
+    # Make a specialized update for Independent senators
+    condition = individual_politicians_df['Effective Party'] == 'Independent'
+
+    # Concatenate the 'First Name' and 'Last Name' columns to form the complete name
+    individual_politicians_df.loc[condition, 'Effective Party'] = individual_politicians_df.loc[condition, 'First Name'] + ' ' + individual_politicians_df.loc[condition, 'Last Name']
+
+    # Handle any NaN values that might appear if a 'Party' is not in the mapping
+    individual_politicians_df['Effective Party'].fillna('Unknown', inplace=True)
+
     return party_vote_df, individual_politicians_df
 
 def plot_parliament(individual_votes, active_division):
@@ -155,6 +227,176 @@ def plot_parliament(individual_votes, active_division):
     
     st.pyplot(fig)  # Display the plot using Streamlit
 
+def load_members_from_files():
+    # Define the directory and filename
+    directory = './data/parliament'
+    filename = f"{directory}/members.json"
+    
+    # Check if the file with all members exists
+    if os.path.exists(filename):
+        # Load data from the file if it exists
+        with open(filename, 'r') as f:
+            return json.load(f)
+    else:
+        st.write("No local member data found.")
+        return None
+
+def load_divisions_from_files():
+    # Define the directory and filename
+    directory = './data/parliament'
+    filename = f"{directory}/divisions.json"
+    
+    # Check if the file with all divisions exists
+    if os.path.exists(filename):
+        # Load data from the file if it exists
+        with open(filename, 'r') as f:
+            return json.load(f)
+    else:
+        st.write("No local division data found.")
+        return None
+
+def plotly_vote_breakdown(individual_votes, visible_parties):
+
+
+    party_color_map = {
+    'Australian Greens': '#009C3D',
+    'Australian Labor Party': '#E13940',
+    'David Pocock': '#4ef8a6',
+    'Lidia Thorpe': '#7A3535',
+    'Jacqui Lambie Network': '#FFFFFF',
+    'Liberal National Party': '#1C4F9C',
+    'Pauline Hanson\'s One Nation Party': '#F36D24',
+    'United Australia Party': '#ffed00'
+    }
+
+    # Get unique parties from the DataFrame
+    unique_parties = individual_votes['Effective Party'].unique()
+
+    # Group by 'Effective Party' and 'Vote' and then count the number of occurrences
+    effective_party_vote_df = individual_votes.groupby(['Effective Party', 'Vote']).size().unstack(fill_value=0)
+
+    # Calculate total votes per effective party
+    effective_party_vote_df['Total_Votes'] = effective_party_vote_df.sum(axis=1)
+
+    # Initialize an empty dictionary to store aggregated voting data
+    aggregated_votes = {}
+
+    # Aggregate the data from individual_votes
+    for _, row in individual_votes.iterrows():
+        party = row['Effective Party']
+        vote = row['Vote']
+        
+        if party not in aggregated_votes:
+            aggregated_votes[party] = {'Yes': 0, 'No': 0, 'Absent': 0}
+            
+        if vote == 'Yes':
+            aggregated_votes[party]['Yes'] += 1
+        elif vote == 'No':
+            aggregated_votes[party]['No'] += 1
+        else:  # Absent
+            aggregated_votes[party]['Absent'] += 1
+
+    # Instantiate bars
+    vote_types = ['Yes', 'No', 'Absent']
+    bars = []
+    unique_parties = set()  # To keep track of unique parties for legend
+    max_vote = 0  # To keep track of the maximum vote
+
+    for vote_type in vote_types:
+        for effective_party in effective_party_vote_df.index:
+            # Sum all votes of this type across all parties
+            sum_votes = effective_party_vote_df[vote_type].sum()
+            
+            # Update max_vote
+            max_vote = max(max_vote, sum_votes)
+
+            count = effective_party_vote_df.loc[effective_party, vote_type]
+            if count == 0:
+                continue  # Skip if count is zero
+            # Set color based on whether the effective_party is in visible_parties
+            color = party_color_map.get(effective_party, 'gray') if effective_party in visible_parties else 'gray'
+
+            # Consistently set the name attribute based on the effective party
+            legend_name = f"{effective_party}"
+
+            bars.append(
+                go.Bar(
+                    name=legend_name,
+                    x=[vote_type],
+                    y=[count],
+                    marker=dict(color=color),
+                    hoverinfo='y+name',
+                    hoverlabel=dict(namelength=-1),
+                    showlegend=(effective_party not in unique_parties)  # Show in legend only if it's the first occurrence
+                )
+            )
+
+            unique_parties.add(effective_party)  # Mark party as added to legend
+
+    # Create figure
+    fig = go.Figure(data=bars)
+
+    # Add the dashed line
+    fig.add_shape(
+        go.layout.Shape(
+            type='line',
+            x0=min(vote_types),
+            x1=max(vote_types),
+            y0=39,
+            y1=39,
+            line=dict(
+                dash='dash',
+                width=4,
+                color='#FFFFFF'
+            ),
+        )
+    )
+
+    # Change the y-axis upper limit
+    y_axis_max = max(55, max_vote + 20)
+
+    # Add Annotations and Layout
+    fig.update_layout(
+        title='vote breakdown by party',
+        xaxis_title='vote',
+        yaxis_title='# votes',
+        barmode='stack',
+        legend=dict(
+            x=0.5,
+            y=-0.2,
+            xanchor='center',
+            yanchor='top',
+            orientation='h'
+            ),
+        yaxis=dict(range=[0, y_axis_max]),
+        shapes=[
+            dict(
+                type='line',
+                yref='y',
+                y0=39,
+                y1=39,
+                xref='paper',
+                x0=0,
+                x1=1,
+                line=dict(dash='dash')
+            ),
+        ],
+        annotations=[
+            dict(
+                x=1,
+                y=42,
+                xref='paper',
+                yref='y',
+                text='required Yes votes to pass',
+                showarrow=False
+            ),
+        ],
+        hovermode='x',
+    )
+
+    # Return fig object
+    return fig
+
 
 def main():
     # Load environment variables
@@ -164,154 +406,147 @@ def main():
     TVFY_API_KEY = os.getenv("TVFY_API_KEY")
 
     # Streamlit UI setup
-    st.set_page_config(page_icon='🗳️', page_title="parliamentary divisions", initial_sidebar_state="collapsed")
+    st.set_page_config(
+        page_icon='🗳️', 
+        page_title="parliamentary divisions", 
+        initial_sidebar_state="collapsed",
+        layout="wide")
     st.header("🗳️ parliamentary divisions 🗳️")
     st.write("control panel for investigating parliamentary divisions")
 
     # Set initial state
-    keys = ['latest_divisions']
+    keys = ['latest_divisions', 'members']
     default_values = [
-        None
+        None, None
     ]
 
     for key, default_value in zip(keys, default_values):
         if key not in st.session_state:
             st.session_state[key] = default_value
 
-    # Fetch member information
-    members = fetch_members(TVFY_API_KEY)
-    count_politicians_by_party = count_politicians_by_party_chamber(members)
-    #st.write(count_politicians_by_party)
-    #st.write(members[0:3])
-
-    # Call Divisions API
-    if st.button('fetch divisions'):
-        with st.spinner("fetching..."):    
-            data = fetch_divisions(TVFY_API_KEY)
-            if data:
-                st.write("Data fetched successfully.")
-                st.session_state["latest_divisions"] = data
-                st.json(st.session_state["latest_divisions"])
 
 
+    # Update information buttons
+    button1, button2 = st.columns(2)
+    with button1:
+        # Update member list
+        if st.button('update members list'):
+            with st.spinner("fetching..."):    
+                members = fetch_members(TVFY_API_KEY)
+                if members:
+                    st.success("updated successfully")
+
+    with button2:
+        # Update divisions list
+        if st.button('update divisions list'):
+            with st.spinner("fetching..."):
+                data = fetch_and_store_divisions(TVFY_API_KEY)
+                if data:
+                    st.success("updated successfully")
     
 
-    if st.session_state["latest_divisions"] is not None:
-        division_names = [division['name'] for division in st.session_state["latest_divisions"]]
 
-        selected_division = st.selectbox(label="select a division", options=division_names)
-        selected_division_details = division_details(
-            api_key=TVFY_API_KEY, 
-            divisions=st.session_state["latest_divisions"], 
-            target_name=selected_division)
 
+
+
+    st.session_state['divisions'] = load_divisions_from_files()
+    st.session_state['members'] = load_members_from_files()
+
+
+
+
+    if st.session_state['divisions'] is not None:
+        division_names = [division['name'] for key, division in st.session_state['divisions'].items()]
+
+        members = st.session_state['members']
+
+        selected_division_name = st.selectbox(label="select a division", options=division_names)
+        selected_division_details = next(
+            (division for division in st.session_state['divisions'].values() if division['name'] == selected_division_name), None)
 
         party_votes, individual_votes = format_division_data(selected_division_details, members)
         st.markdown(selected_division_details['summary'])
-        st.write(individual_votes)
-        st.write(party_votes)
-        st.write(selected_division_details)
-        #display_division(selected_division_details)
-        #display_division(st.session_state["latest_divisions"][0])
 
-        # Assuming individual_politicians_df and party_vote_df are already created
-        # Mapping parties to their colors
-        party_color_map = {
-            'Australian Greens': '#009C3D',
-            'Australian Labor Party': '#E13940',
-            'Country Liberal Party': '#ff6900',
-            'DPRES': '#000080',
-            'Independent': '#808080',
-            'Jacqui Lambie Network': '#000000',
-            'Liberal National Party': '#1C4F9C',
-            'Liberal Party': '#1C4F9C',
-            'National Party': '#FFF200',
-            'PRES': '#000080',
-            'Pauline Hanson\'s One Nation Party': '#0176BC',
-            'United Australia Party': '#ffed00'
-        }
+
+        #plot_parliament(individual_votes, selected_division_details)
 
 
 
 
-        plot_parliament(individual_votes, selected_division_details)
 
-        # Assuming you have party_vote_df DataFrame
-        vote_types = ['Yes', 'No', 'Absent']
-        bars = []
+        
 
-        for vote_type in vote_types:
-            for party in party_votes.index:
-                count = party_votes.loc[party, vote_type]
-                if count == 0:
-                    continue  # Skip if count is zero
-                color = party_color_map.get(party, '#000000')  # Default to black
 
-                bars.append(
-                    go.Bar(
-                        name=f"{party}",
-                        x=[vote_type],
-                        y=[count],
-                        marker=dict(color=color),
-                        hoverinfo='y+name',
-                        hoverlabel=dict(namelength=-1)  # Allow the label to expand as needed
-                    )
-                )
+        # # Group by 'Effective Party' and 'Vote' and then count the number of occurrences
+        # effective_party_vote_df = individual_votes.groupby(['Effective Party', 'Vote']).size().unstack(fill_value=0)
 
-        # Create figure
-        fig = go.Figure(data=bars)
+        # # Calculate total votes per effective party
+        # effective_party_vote_df['Total_Votes'] = effective_party_vote_df.sum(axis=1)
 
-        # Add the dashed line
-        fig.add_shape(
-            go.layout.Shape(
-                type='line',
-                x0=min(vote_types),
-                x1=max(vote_types),
-                y0=39,
-                y1=39,
-                line=dict(
-                    dash='dash',
-                    width=1,
-                    color='black',
-                ),
-            )
-        )
+        # # Sort by total votes
+        # sorted_effective_party_votes = effective_party_vote_df.sort_values('Total_Votes')
 
-        # Add Annotations and Layout
-        fig.update_layout(
-            title='Votes By Type',
-            xaxis_title='Vote Type',
-            yaxis_title='Votes',
-            barmode='stack',
-            shapes=[
-                dict(
-                    type='line',
-                    yref='y',
-                    y0=39,
-                    y1=39,
-                    xref='paper',
-                    x0=0,
-                    x1=1,
-                    line=dict(dash='dash')
-                ),
-            ],
-            annotations=[
-                dict(
-                    x=0,
-                    y=39,
-                    xref='paper',
-                    yref='y',
-                    text='required Yes votes to pass',
-                    showarrow=False
-                ),
-            ],
-            plot_bgcolor='#A6A6A6',
-            paper_bgcolor='#A6A6A6',
-            hovermode='x',
-        )
+        # # Set default as the largest party turnout and five smallest parties
+        # default_parties = [sorted_effective_party_votes.index[-1], sorted_effective_party_votes.index[:5].tolist()]
 
-        # Streamlit Plotly chart
-        st.plotly_chart(fig, use_container_width=True)
+        # # Flatten the list
+        # default_parties = [default_parties[0]] + default_parties[1]
+
+
+        # Create a 2-column layout
+        # col1, col2 = st.columns([1, 3])
+
+        major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
+
+        with major_parties:
+            visible_parties = ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
+            fig = plotly_vote_breakdown(individual_votes, visible_parties)
+            st.plotly_chart(fig, use_container_width=True)
+        with minor_independents:
+            if selected_division_details['house'] == 'senate':
+                visible_parties = [
+                    'Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party',
+                    'David Pocock', 'Pauline Hanson\'s One Nation Party'
+                ]
+            fig = plotly_vote_breakdown(individual_votes, visible_parties)
+            st.plotly_chart(fig, use_container_width=True)
+        with all_members:
+            if selected_division_details['house'] == 'senate':
+                visible_parties = [
+                    'Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party',
+                    'David Pocock', 'Pauline Hanson\'s One Nation Party',
+                    'Australian Labor Party', 'Liberal National Party', 'Australian Greens'
+                ]
+            fig = plotly_vote_breakdown(individual_votes, visible_parties)
+            st.plotly_chart(fig, use_container_width=True)
+        
+
+        # # Initialize or update the session state for checkboxes
+        # if 'checkbox_state' not in st.session_state or st.session_state.checkbox_state is None:
+        #     st.session_state.checkbox_state = {}
+            
+    #     # Initialize new entries in the checkbox_state
+    #     for party in unique_parties:
+    #         if party not in st.session_state.checkbox_state:
+    #             st.session_state.checkbox_state[party] = party in default_parties
+
+    #     # Now you can loop through and create checkboxes
+    #     for party in unique_parties:
+    #         st.session_state.checkbox_state[party] = col1.checkbox(
+    #             label=f"{party}", 
+    #             value=st.session_state.checkbox_state[party]
+    # )
+
+        # Now you can use st.session_state.checkbox_state to get the state of each checkbox
+        # For example, to get the currently visible parties:
+        
+        #visible_parties = [party for party, is_checked in st.session_state.checkbox_state.items() if is_checked]
+
+
+
+        st.dataframe(individual_votes, use_container_width=True, hide_index=True)
+
+
 
 
 
