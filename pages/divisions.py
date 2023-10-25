@@ -205,7 +205,6 @@ def format_division_data(division_data):
     if not members:
         st.write("No members data to process")
         return pd.DataFrame()
-    st.write(members[0:2])
     individual_politicians = create_individual_politicians_dict(members)
 
     update_votes(individual_politicians, division_data.get('votes', []))
@@ -480,20 +479,17 @@ def main():
         page_title="parliamentary divisions", 
         initial_sidebar_state="collapsed",
         layout="wide")
-    st.header("🗳️ parliamentary divisions 🗳️")
+    #st.header("🗳️ parliamentary divisions 🗳️")
     
     cover_image, one_liner = st.columns([0.6, 0.4])
     with cover_image:
-        st.image('static/img/Parliament-House-Australia-Thennicke.jpg', width=600)
+        st.image('static/img/Parliament-House-Australia-Thennicke.jpg', width=400)
     with one_liner:
         st.markdown("### a window into parliament")
-        st.markdown('''the aim of this project is to show the proceedings of government in a clear way\n
-        ssss
-        ss
-        \n
-        s
+        st.markdown('''the aim of this project is to show the proceedings of government in a clear way
         ''')
 
+    st.divider()
     # Set initial state
     keys = ['latest_divisions', 'members']
     default_values = [
@@ -537,8 +533,8 @@ def main():
     if st.session_state['divisions'] is not None:
         division_names = [division['name'] for key, division in st.session_state['divisions'].items()]
 
-
-        selected_division_name = st.selectbox(label="select a division", options=division_names)
+        st.write("here you can select a 'division': a vote in either the house of representatives or the senate")
+        selected_division_name = st.selectbox(label="", options=division_names)
         selected_division_details = next(
             (division for division in st.session_state['divisions'].values() if division['name'] == selected_division_name), None)
 
@@ -548,7 +544,7 @@ def main():
         #plot_parliament(individual_votes, selected_division_details)
 
 
-        st.write(individual_votes)
+        
         major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
 
         with major_parties:
