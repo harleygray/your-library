@@ -552,40 +552,40 @@ def main():
         major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
 
         with major_parties:
-            visible_parties = ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
-            fig1 = plotly_vote_breakdown(individual_votes, visible_parties)
+            visible_parties1 = ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
+            fig1 = plotly_vote_breakdown(individual_votes, visible_parties1)
             st.plotly_chart(fig1, use_container_width=True)
         with minor_independents:
             if selected_division_details['house'] == 'senate':
-                visible_parties = [
+                visible_parties2 = [
                     'Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party',
                     'David Pocock', 'Pauline Hanson\'s One Nation Party'
                 ]
             else: 
-                visible_parties = [
+                visible_parties2 = [
                     'Rebekha Sharkie', 'Kate Chaney''Zoe Daniel',
                     'Andrew Gee', 'Helen Haines', 'Dai Le',
                     'Monique Ryan', 'Sophie Scamps', 'Allegra Spender',
                     'Zali Steggall', 'Andrew Wilkie', 'Bob Katter'
                 ]
-            fig2 = plotly_vote_breakdown(individual_votes, visible_parties)
+            fig2 = plotly_vote_breakdown(individual_votes, visible_parties2)
             st.plotly_chart(fig2, use_container_width=True)
         with all_members:
             if selected_division_details['house'] == 'senate':
-                visible_parties = [
+                visible_parties3 = [
                     'Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party',
                     'David Pocock', 'Pauline Hanson\'s One Nation Party',
                     'Australian Labor Party', 'Liberal National Party', 'Australian Greens'
                 ]
             else:
-                visible_parties = [
+                visible_parties3 = [
                     'Rebekha Sharkie', 'Kate Chaney''Zoe Daniel',
                     'Andrew Gee', 'Helen Haines', 'Dai Le',
                     'Monique Ryan', 'Sophie Scamps', 'Allegra Spender',
                     'Zali Steggall', 'Andrew Wilkie', 'Bob Katter',
                     'Australian Labor Party', 'Liberal National Party', 'Australian Greens'
                 ]
-            fig3 = plotly_vote_breakdown(individual_votes, visible_parties)
+            fig3 = plotly_vote_breakdown(individual_votes, visible_parties3)
             st.plotly_chart(fig3, use_container_width=True)
         
 
