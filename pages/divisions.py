@@ -54,39 +54,90 @@ def fetch_and_store_divisions(api_key):
     return existing_divisions
 
 def fetch_members(api_key):
-    # Define the directory and filename
     directory = './data/parliament'
-    filename = f"{directory}/members.json"
-    
-    # Create directory if it doesn't exist
+    senate_filename = f"{directory}/senate.json"
+    house_filename = f"{directory}/house.json"
+
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+    existing_senate_members = {}
+    existing_house_members = {}
+
+    # Load existing senate and house members
+    if os.path.exists(senate_filename):
+        with open(senate_filename, 'r') as f:
+            existing_senate_members = json.load(f)
+            
+    if os.path.exists(house_filename):
+        with open(house_filename, 'r') as f:
+            existing_house_members = json.load(f)
     
-    # Load existing members from the file, if any
-    existing_members = {}
-    if os.path.exists(filename):
-        with open(filename, 'r') as f:
-            existing_members = json.load(f)
-    
-    # Make the API call
     url = f"https://theyvoteforyou.org.au/api/v1/people.json?key={api_key}"
     response = requests.get(url)
+
+    def flatten_member_info(member):
+        latest_member = member['latest_member']
+        additional_info = member.get('additional_info', {})
+        
+        return {
+            'id': member['id'],
+            'name': f"{latest_member['name']['first']} {latest_member['name']['last']}",
+            'electorate': latest_member['electorate'],
+            'house': latest_member['house'],
+            'party': latest_member['party'],
+            'rebellions': additional_info.get('rebellions'),
+            'votes_attended': additional_info.get('votes_attended'),
+            'votes_possible': additional_info.get('votes_possible'),
+            'offices': [office['position'] for office in additional_info.get('offices', [])]
+        }
     
     if response.status_code == 200:
         fetched_members = response.json()
         
-        # Check if any of the fetched members are new
-        existing_ids = set(member.get('id', 'unknown_id') for member in existing_members)
-        fetched_ids = set(member.get('id', 'unknown_id') for member in fetched_members)
+        senate_members = []
+        house_members = []
+
+        for member in fetched_members:
+            member_id = member.get('id', 'unknown_id')
+            
+            # Fetch additional info
+            additional_info = fetch_additional_info(member_id, api_key)
+            # If additional info is fetched, update the member dictionary
+            if additional_info:
+                member['additional_info'] = additional_info
+            
+            # Flatten and filter member information
+            flat_member = flatten_member_info(member)
+
+            house = flat_member['house']
+            if house == 'senate':
+                senate_members.append(flat_member)
+            elif house == 'representatives':
+                house_members.append(flat_member)
         
-        if fetched_ids - existing_ids:  # Non-empty set means new members
-            # Update the member data file
-            with open(filename, 'w') as f:
-                json.dump(fetched_members, f)
+        # Save to files
+        if senate_members:
+            with open(senate_filename, 'w') as f:
+                json.dump(senate_members, f)
         
-        return fetched_members
+        if house_members:
+            with open(house_filename, 'w') as f:
+                json.dump(house_members, f)
+                
+        return senate_members, house_members
+
     else:
-        st.write(f"Failed to get data: {response.status_code}")
+        # Handle the failure case
+        return None, None
+    
+def fetch_additional_info(member_id, api_key):
+    url = f"https://theyvoteforyou.org.au/api/v1/people/{member_id}.json?key={api_key}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
         return None
 
 def count_politicians_by_party_chamber(members):
@@ -101,51 +152,67 @@ def count_politicians_by_party_chamber(members):
     
     return pivot_df
 
-    
-    return pivot_df
-
 def find_division_by_name(divisions, target_name):
     # Use next to find the first match; defaults to None if not found
     matching_division = next((division for division in divisions if division['name'] == target_name), None)
     return matching_division
 
-def format_division_data(division_data, members):
+#def format_member_data(members):
+
+def generate_unique_id(member):
+    first_name = member.get('first_name') or member.get('name').split()[0]
+    last_name = member.get('last_name') or member.get('name').split()[1]
+    party = member.get('party', 'Unknown')
+    return f"{first_name}_{last_name}_{party}"
+
+def create_individual_politicians_dict(members):
     individual_politicians = {}
-    house = division_data['house']
-
-    # Create a dictionary of all members by a unique identifier
     for member in members:
-        latest_member = member['latest_member']
-        if latest_member['house'] != house:
-            continue  # Skip if the member is not from the same house as the division
-
-        unique_id = f"{latest_member['name']['first']}_{latest_member['name']['last']}_{latest_member['party']}"
+        if 'name' not in member or 'party' not in member:
+            st.write(f"Member entry missing 'name' or 'party': {member}")
+            continue
+            
+        unique_id = generate_unique_id(member)
         individual_politicians[unique_id] = {
-            'First Name': latest_member['name']['first'],
-            'Last Name': latest_member['name']['last'],
-            'Electorate': latest_member['electorate'],
-            'Party': latest_member['party'],
-            'Vote': 'Absent'  # Initialize everyone as 'Absent'
+            'First Name': member['name'].split()[0],
+            'Last Name': member['name'].split()[1],
+            'Electorate': member.get('electorate', 'N/A'),
+            'Party': member['party'],
+            'Vote': 'Absent'
         }
+    return individual_politicians
 
-    for vote_entry in division_data['votes']:
-        vote = vote_entry['vote']
-        member = vote_entry['member']
-        party = member['party']
-        unique_id = f"{member['first_name']}_{member['last_name']}_{party}"
+def update_votes(individual_politicians, votes):
+    
+    for vote_entry in votes:
+        if 'member' not in vote_entry or ('name' not in vote_entry['member'] and ('first_name' not in vote_entry['member'] or 'last_name' not in vote_entry['member'])):
+            st.write(f"Skipping invalid vote_entry: {vote_entry}")
+            continue
 
-        if vote == 'aye':
-            individual_politicians.get(unique_id, {})['Vote'] = 'Yes'  # Update vote if exists
-        else:
-            individual_politicians.get(unique_id, {})['Vote'] = 'No'  # Update vote if exists
+        unique_id = generate_unique_id(vote_entry['member'])
+        individual_politicians.get(unique_id, {}).update({
+            'Vote': 'Yes' if vote_entry['vote'] == 'aye' else 'No'
+        })
+
+def format_division_data(division_data):
+    if not division_data:
+        st.write("Empty division_data")
+        return pd.DataFrame()
+
+    house = division_data.get('house', 'N/A')
+
+    members = load_members_from_files(house=house)
+    if not members:
+        st.write("No members data to process")
+        return pd.DataFrame()
+    st.write(members[0:2])
+    individual_politicians = create_individual_politicians_dict(members)
+
+    update_votes(individual_politicians, division_data.get('votes', []))
 
     individual_politicians_df = pd.DataFrame(list(individual_politicians.values()))
 
-    # Compute party_vote_counts from individual_politicians_df
-    party_vote_df = individual_politicians_df.groupby(['Party', 'Vote']).size().unstack(fill_value=0)
-    party_vote_df['Absent'] = party_vote_df.apply(lambda row: row.sum(), axis=1) - party_vote_df['Yes'] - party_vote_df['No']
-
-    # Define the mapping dictionary for the 'Effective Party' column
+    # Define the mapping dictionary for 'Effective Party' column.
     effective_party_map = {
         'Australian Greens': 'Australian Greens',
         'Australian Labor Party': 'Australian Labor Party',
@@ -164,24 +231,24 @@ def format_division_data(division_data, members):
         'Katter\'s Australian Party': 'Independent',
         'SPK': 'Australian Labor Party'
     }
+
     # references
     # https://theyvoteforyou.org.au/people/senate/wa/sue_lines/friends
     # https://theyvoteforyou.org.au/people/senate/nt/jacinta_nampijinpa_price/friends
     # https://theyvoteforyou.org.au/people/representatives/parkes/mark_coulton/friends
 
-    # Add the 'Effective Party' column to the DataFrame
+    # Update 'Effective Party' based on 'Party'.
     individual_politicians_df['Effective Party'] = individual_politicians_df['Party'].map(effective_party_map)
 
-    # Make a specialized update for Independent senators
+    # Special update for Independent senators.
     condition = individual_politicians_df['Effective Party'] == 'Independent'
-
-    # Concatenate the 'First Name' and 'Last Name' columns to form the complete name
     individual_politicians_df.loc[condition, 'Effective Party'] = individual_politicians_df.loc[condition, 'First Name'] + ' ' + individual_politicians_df.loc[condition, 'Last Name']
 
-    # Handle any NaN values that might appear if a 'Party' is not in the mapping
+    # Handle any NaN values.
     individual_politicians_df['Effective Party'].fillna('Unknown', inplace=True)
 
-    return party_vote_df, individual_politicians_df
+
+    return individual_politicians_df
 
 # def plot_parliament(individual_votes, active_division):
 #     house = active_division["house"]
@@ -227,10 +294,14 @@ def format_division_data(division_data, members):
     
 #     st.pyplot(fig)  # Display the plot using Streamlit
 
-def load_members_from_files():
+def load_members_from_files(house):
     # Define the directory and filename
     directory = './data/parliament'
-    filename = f"{directory}/members.json"
+    if (house=='senate'):
+        filename = f"{directory}/senate.json"
+    else:
+        filename = f"{directory}/house.json"
+
     
     # Check if the file with all members exists
     if os.path.exists(filename):
@@ -256,17 +327,18 @@ def load_divisions_from_files():
         return None
 
 def plotly_vote_breakdown(individual_votes, visible_parties):
-
+    print("Visible Parties: ", visible_parties)
+    print("Unique Parties in DataFrame: ", individual_votes['Effective Party'].unique())
 
     party_color_map = {
-    'Australian Greens': '#009C3D',
-    'Australian Labor Party': '#E13940',
-    'David Pocock': '#4ef8a6',
-    'Lidia Thorpe': '#7A3535',
-    'Jacqui Lambie Network': '#FFFFFF',
-    'Liberal National Party': '#1C4F9C',
-    'Pauline Hanson\'s One Nation Party': '#F36D24',
-    'United Australia Party': '#ffed00'
+        'Australian Greens': '#009C3D',
+        'Australian Labor Party': '#E13940',
+        'David Pocock': '#4ef8a6',
+        'Lidia Thorpe': '#7A3535',
+        'Jacqui Lambie Network': '#FFFFFF',
+        'Liberal National Party': '#1C4F9C',
+        'Pauline Hanson\'s One Nation Party': '#F36D24',
+        'United Australia Party': '#ffed00'
     }
 
     # Get unique parties from the DataFrame
@@ -327,7 +399,6 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
                     marker=dict(color=color),
                     hoverinfo='y+name',
                     hoverlabel=dict(namelength=-1),
-                    showlegend=(effective_party not in unique_parties)  # Show in legend only if it's the first occurrence
                 )
             )
 
@@ -358,7 +429,6 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
     # Add Annotations and Layout
     fig.update_layout(
         title='vote breakdown by party',
-        xaxis_title='vote',
         yaxis_title='# votes',
         barmode='stack',
         legend=dict(
@@ -383,7 +453,7 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
         ],
         annotations=[
             dict(
-                x=1,
+                x=0.1,
                 y=42,
                 xref='paper',
                 yref='y',
@@ -396,7 +466,6 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
 
     # Return fig object
     return fig
-
 
 def main():
     # Load environment variables
@@ -412,7 +481,18 @@ def main():
         initial_sidebar_state="collapsed",
         layout="wide")
     st.header("🗳️ parliamentary divisions 🗳️")
-    st.write("control panel for investigating parliamentary divisions")
+    
+    cover_image, one_liner = st.columns([0.6, 0.4])
+    with cover_image:
+        st.image('static/img/Parliament-House-Australia-Thennicke.jpg', width=600)
+    with one_liner:
+        st.markdown("### a window into parliament")
+        st.markdown('''the aim of this project is to show the proceedings of government in a clear way\n
+        ssss
+        ss
+        \n
+        s
+        ''')
 
     # Set initial state
     keys = ['latest_divisions', 'members']
@@ -425,24 +505,24 @@ def main():
             st.session_state[key] = default_value
 
 
+    with st.sidebar:
+        # Update information buttons
+        button1, button2 = st.columns(2)
+        with button1:
+            # Update member list
+            if st.button('update members list'):
+                with st.spinner("fetching..."):    
+                    members = fetch_members(TVFY_API_KEY)
+                    if members:
+                        st.success("updated successfully")
 
-    # Update information buttons
-    button1, button2 = st.columns(2)
-    with button1:
-        # Update member list
-        if st.button('update members list'):
-            with st.spinner("fetching..."):    
-                members = fetch_members(TVFY_API_KEY)
-                if members:
-                    st.success("updated successfully")
-
-    with button2:
-        # Update divisions list
-        if st.button('update divisions list'):
-            with st.spinner("fetching..."):
-                data = fetch_and_store_divisions(TVFY_API_KEY)
-                if data:
-                    st.success("updated successfully")
+        with button2:
+            # Update divisions list
+            if st.button('update divisions list'):
+                with st.spinner("fetching..."):
+                    data = fetch_and_store_divisions(TVFY_API_KEY)
+                    if data:
+                        st.success("updated successfully")
     
 
 
@@ -450,7 +530,6 @@ def main():
 
 
     st.session_state['divisions'] = load_divisions_from_files()
-    st.session_state['members'] = load_members_from_files()
 
 
 
@@ -458,58 +537,39 @@ def main():
     if st.session_state['divisions'] is not None:
         division_names = [division['name'] for key, division in st.session_state['divisions'].items()]
 
-        members = st.session_state['members']
 
         selected_division_name = st.selectbox(label="select a division", options=division_names)
         selected_division_details = next(
             (division for division in st.session_state['divisions'].values() if division['name'] == selected_division_name), None)
 
-        party_votes, individual_votes = format_division_data(selected_division_details, members)
+        individual_votes = format_division_data(selected_division_details)
         st.markdown(selected_division_details['summary'])
-
 
         #plot_parliament(individual_votes, selected_division_details)
 
 
-
-
-
-        
-
-
-        # # Group by 'Effective Party' and 'Vote' and then count the number of occurrences
-        # effective_party_vote_df = individual_votes.groupby(['Effective Party', 'Vote']).size().unstack(fill_value=0)
-
-        # # Calculate total votes per effective party
-        # effective_party_vote_df['Total_Votes'] = effective_party_vote_df.sum(axis=1)
-
-        # # Sort by total votes
-        # sorted_effective_party_votes = effective_party_vote_df.sort_values('Total_Votes')
-
-        # # Set default as the largest party turnout and five smallest parties
-        # default_parties = [sorted_effective_party_votes.index[-1], sorted_effective_party_votes.index[:5].tolist()]
-
-        # # Flatten the list
-        # default_parties = [default_parties[0]] + default_parties[1]
-
-
-        # Create a 2-column layout
-        # col1, col2 = st.columns([1, 3])
-
+        st.write(individual_votes)
         major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
 
         with major_parties:
             visible_parties = ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
-            fig = plotly_vote_breakdown(individual_votes, visible_parties)
-            st.plotly_chart(fig, use_container_width=True)
+            fig1 = plotly_vote_breakdown(individual_votes, visible_parties)
+            st.plotly_chart(fig1, use_container_width=True)
         with minor_independents:
             if selected_division_details['house'] == 'senate':
                 visible_parties = [
                     'Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party',
                     'David Pocock', 'Pauline Hanson\'s One Nation Party'
                 ]
-            fig = plotly_vote_breakdown(individual_votes, visible_parties)
-            st.plotly_chart(fig, use_container_width=True)
+            else: 
+                visible_parties = [
+                    'Rebekha Sharkie', 'Kate Chaney''Zoe Daniel',
+                    'Andrew Gee', 'Helen Haines', 'Dai Le',
+                    'Monique Ryan', 'Sophie Scamps', 'Allegra Spender',
+                    'Zali Steggall', 'Andrew Wilkie', 'Bob Katter'
+                ]
+            fig2 = plotly_vote_breakdown(individual_votes, visible_parties)
+            st.plotly_chart(fig2, use_container_width=True)
         with all_members:
             if selected_division_details['house'] == 'senate':
                 visible_parties = [
@@ -517,8 +577,16 @@ def main():
                     'David Pocock', 'Pauline Hanson\'s One Nation Party',
                     'Australian Labor Party', 'Liberal National Party', 'Australian Greens'
                 ]
-            fig = plotly_vote_breakdown(individual_votes, visible_parties)
-            st.plotly_chart(fig, use_container_width=True)
+            else:
+                visible_parties = [
+                    'Rebekha Sharkie', 'Kate Chaney''Zoe Daniel',
+                    'Andrew Gee', 'Helen Haines', 'Dai Le',
+                    'Monique Ryan', 'Sophie Scamps', 'Allegra Spender',
+                    'Zali Steggall', 'Andrew Wilkie', 'Bob Katter',
+                    'Australian Labor Party', 'Liberal National Party', 'Australian Greens'
+                ]
+            fig3 = plotly_vote_breakdown(individual_votes, visible_parties)
+            st.plotly_chart(fig3, use_container_width=True)
         
 
         # # Initialize or update the session state for checkboxes
