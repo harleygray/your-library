@@ -6,6 +6,8 @@ import pandas as pd
 from dotenv import load_dotenv
 import plotly.figure_factory as ff
 import plotly.graph_objs as go
+from pathlib import Path
+import base64
 
 #import matplotlib.pyplot as plt
 import numpy as np
@@ -140,25 +142,6 @@ def fetch_additional_info(member_id, api_key):
     else:
         return None
 
-def count_politicians_by_party_chamber(members):
-    # First, normalize the 'latest_member' field if it's nested
-    members_df = pd.json_normalize(members, sep='_')
-    
-    # Group by 'house' and 'party', then count the members
-    grouped_df = members_df.groupby(['latest_member_house', 'latest_member_party']).size().reset_index(name='Count')
-    
-    # Create a pivot table for easier access later
-    pivot_df = pd.pivot_table(grouped_df, values='Count', index='latest_member_party', columns='latest_member_house', fill_value=0)
-    
-    return pivot_df
-
-def find_division_by_name(divisions, target_name):
-    # Use next to find the first match; defaults to None if not found
-    matching_division = next((division for division in divisions if division['name'] == target_name), None)
-    return matching_division
-
-#def format_member_data(members):
-
 def generate_unique_id(member):
     first_name = member.get('first_name') or member.get('name').split()[0]
     last_name = member.get('last_name') or member.get('name').split()[1]
@@ -183,7 +166,6 @@ def create_individual_politicians_dict(members):
     return individual_politicians
 
 def update_votes(individual_politicians, votes):
-    
     for vote_entry in votes:
         if 'member' not in vote_entry or ('name' not in vote_entry['member'] and ('first_name' not in vote_entry['member'] or 'last_name' not in vote_entry['member'])):
             st.write(f"Skipping invalid vote_entry: {vote_entry}")
@@ -326,9 +308,6 @@ def load_divisions_from_files():
         return None
 
 def plotly_vote_breakdown(individual_votes, visible_parties):
-    print("Visible Parties: ", visible_parties)
-    print("Unique Parties in DataFrame: ", individual_votes['Effective Party'].unique())
-
     party_color_map = {
         'Australian Greens': '#009C3D',
         'Australian Labor Party': '#E13940',
@@ -427,9 +406,10 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
 
     # Add Annotations and Layout
     fig.update_layout(
-        title='vote breakdown by party',
+        #title='vote breakdown by party',
         yaxis_title='# votes',
         barmode='stack',
+        margin=dict(l=0, t=0, b=0),
         legend=dict(
             x=0.5,
             y=-0.2,
@@ -481,14 +461,24 @@ def main():
         layout="wide")
     #st.header("🗳️ parliamentary divisions 🗳️")
     
-    cover_image, one_liner = st.columns([0.6, 0.4])
-    with cover_image:
-        st.image('static/img/Parliament-House-Australia-Thennicke.jpg', width=400)
-    with one_liner:
-        st.markdown("### a window into parliament")
-        st.markdown('''the aim of this project is to show the proceedings of government in a clear way
-        ''')
+    st.markdown("### a window into parliament")
+    st.markdown('''this tool aims to display the proceedings of government in a clear way
+    ''')
+    #st.image('static/img/Parliament-House-Australia-Thennicke.jpg', width=400)
 
+    #header_html = "<img src='data:static/img;base64,{}' class='img-fluid'>".format(
+   #     img_to_bytes("Parliament-House-Australia-Thennicke.jpg")
+    #)
+    #st.markdown(
+    #    header_html, unsafe_allow_html=True,
+   # )
+
+    # -----------------  loading assets  ----------------- #
+    with open("static/img/Parliament-House-Australia-Thennicke.jpg", "rb") as image_file:
+        image_data = base64.b64encode(image_file.read()).decode()
+    photo_html = f'<img src="data:image/png;base64,{image_data}" width="450" alt="Parliament House" title="Parliament House"></a>'
+    st.markdown(photo_html, unsafe_allow_html=True)
+    
     st.divider()
     # Set initial state
     keys = ['latest_divisions', 'members']
@@ -534,7 +524,7 @@ def main():
         division_names = [division['name'] for key, division in st.session_state['divisions'].items()]
 
         st.write("here you can select a 'division': a vote in either the house of representatives or the senate")
-        selected_division_name = st.selectbox(label="", options=division_names)
+        selected_division_name = st.selectbox(label="select division", options=division_names)
         selected_division_details = next(
             (division for division in st.session_state['divisions'].values() if division['name'] == selected_division_name), None)
 
@@ -542,7 +532,8 @@ def main():
         st.markdown(selected_division_details['summary'])
 
         #plot_parliament(individual_votes, selected_division_details)
-
+        st.divider()
+        st.write("this is a breakdown of the vote. the votes for major parties are highlighted by default, change this by clicking the other tabs")
 
         
         major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
@@ -584,28 +575,8 @@ def main():
             fig3 = plotly_vote_breakdown(individual_votes, visible_parties3)
             st.plotly_chart(fig3, use_container_width=True)
         
-
-        # # Initialize or update the session state for checkboxes
-        # if 'checkbox_state' not in st.session_state or st.session_state.checkbox_state is None:
-        #     st.session_state.checkbox_state = {}
-            
-    #     # Initialize new entries in the checkbox_state
-    #     for party in unique_parties:
-    #         if party not in st.session_state.checkbox_state:
-    #             st.session_state.checkbox_state[party] = party in default_parties
-
-    #     # Now you can loop through and create checkboxes
-    #     for party in unique_parties:
-    #         st.session_state.checkbox_state[party] = col1.checkbox(
-    #             label=f"{party}", 
-    #             value=st.session_state.checkbox_state[party]
-    # )
-
-        # Now you can use st.session_state.checkbox_state to get the state of each checkbox
-        # For example, to get the currently visible parties:
-        
-        #visible_parties = [party for party, is_checked in st.session_state.checkbox_state.items() if is_checked]
-
+        st.divider()
+        st.write("each member's vote is also shown below")
 
 
         st.dataframe(individual_votes, use_container_width=True, hide_index=True)
