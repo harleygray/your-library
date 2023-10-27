@@ -2,7 +2,5 @@ __pycache__/
 .vscode/
 .env
 environment.yml
-data/notes.csv
-ask-multiple-pdfs/open-interpreter/ 
-scripts/exploration.ipynb
 archive
+notebooks/exploration.ipynb

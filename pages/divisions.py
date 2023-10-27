@@ -56,6 +56,7 @@ def fetch_and_store_divisions(api_key):
     return existing_divisions
 
 def fetch_members(api_key):
+    # OS setup
     directory = './data/parliament'
     senate_filename = f"{directory}/senate.json"
     house_filename = f"{directory}/house.json"
@@ -65,29 +66,71 @@ def fetch_members(api_key):
 
     existing_senate_members = {}
     existing_house_members = {}
-
-    # Load existing senate and house members
-    if os.path.exists(senate_filename):
-        with open(senate_filename, 'r') as f:
-            existing_senate_members = json.load(f)
-            
-    if os.path.exists(house_filename):
-        with open(house_filename, 'r') as f:
-            existing_house_members = json.load(f)
     
     url = f"https://theyvoteforyou.org.au/api/v1/people.json?key={api_key}"
     response = requests.get(url)
 
+    # Dictionary to classify parties as major vs minor/independent
+    party_dict = {
+        'major_parties': {
+            'senate': ['Australian Labor Party', 'Liberal National Party', 'Australian Greens'],
+            'representatives': ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
+        },
+        'minor_independents': {
+            'senate': ['Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party', 'David Pocock', 'Pauline Hanson\'s One Nation Party'],
+            'representatives': ['Rebekha Sharkie', 'Kate Chaney', 'Zoe Daniel', 'Andrew Gee', 'Helen Haines', 'Dai Le', 'Monique Ryan', 'Sophie Scamps', 'Allegra Spender', 'Zali Steggall', 'Andrew Wilkie', 'Bob Katter']
+        },
+        'all_members': {
+            'senate': [],  # will populate this below
+            'representatives': []  # will populate this below
+        }
+    }
+
+    # Mapping dictionary for 'Effective Party' column.
+    effective_party_map = {
+        'Country Liberal Party': 'Liberal National Party',
+        'DPRES': 'Australian Labor Party',
+        'Liberal Party': 'Liberal National Party',
+        'National Party': 'Liberal National Party',
+        'PRES': 'Australian Labor Party',
+        'Centre Alliance': 'Independent',
+        'CWM': 'Liberal National Party',
+        'Katter\'s Australian Party': 'Independent',
+        'SPK': 'Australian Labor Party'
+    }
+    # references
+    # https://theyvoteforyou.org.au/people/senate/wa/sue_lines/friends
+    # https://theyvoteforyou.org.au/people/senate/nt/jacinta_nampijinpa_price/friends
+    # https://theyvoteforyou.org.au/people/representatives/parkes/mark_coulton/friends
+
+    # For coloring data visualisations
+    party_color_map = {
+        'Australian Greens': '#009C3D',
+        'Australian Labor Party': '#E13940',
+        'David Pocock': '#4ef8a6',
+        'Lidia Thorpe': '#7A3535',
+        'Jacqui Lambie Network': '#FFFFFF',
+        'Liberal National Party': '#1C4F9C',
+        'Pauline Hanson\'s One Nation Party': '#F36D24',
+        'United Australia Party': '#ffed00' # todo - add more
+    }
+
     def flatten_member_info(member):
         latest_member = member['latest_member']
+        party = latest_member['party']
+        effective_party = effective_party_map.get(party, party)  # Get effective party from map, or use original party if not found
+        color = party_color_map.get(effective_party, 'gray')  # Get color from map, default to black if not found
+
         additional_info = member.get('additional_info', {})
-        
+
         return {
             'id': member['id'],
             'name': f"{latest_member['name']['first']} {latest_member['name']['last']}",
             'electorate': latest_member['electorate'],
             'house': latest_member['house'],
             'party': latest_member['party'],
+            'effective_party': effective_party,
+            'color': color,
             'rebellions': additional_info.get('rebellions'),
             'votes_attended': additional_info.get('votes_attended'),
             'votes_possible': additional_info.get('votes_possible'),
@@ -176,6 +219,7 @@ def update_votes(individual_politicians, votes):
             'Vote': 'Yes' if vote_entry['vote'] == 'aye' else 'No'
         })
 
+@st.cache_data()
 def format_division_data(division_data):
     if not division_data:
         st.write("Empty division_data")
@@ -193,31 +237,9 @@ def format_division_data(division_data):
 
     individual_politicians_df = pd.DataFrame(list(individual_politicians.values()))
 
-    # Define the mapping dictionary for 'Effective Party' column.
-    effective_party_map = {
-        'Australian Greens': 'Australian Greens',
-        'Australian Labor Party': 'Australian Labor Party',
-        'Country Liberal Party': 'Liberal National Party',
-        'DPRES': 'Australian Labor Party',
-        'Independent': 'Independent',
-        'Jacqui Lambie Network': 'Jacqui Lambie Network',
-        'Liberal National Party': 'Liberal National Party',
-        'Liberal Party': 'Liberal National Party',
-        'National Party': 'Liberal National Party',
-        'PRES': 'Australian Labor Party',
-        'Pauline Hanson\'s One Nation Party': 'Pauline Hanson\'s One Nation Party',
-        'United Australia Party': 'United Australia Party',
-        'Centre Alliance': 'Independent',
-        'CWM': 'Liberal National Party',
-        'Katter\'s Australian Party': 'Independent',
-        'SPK': 'Australian Labor Party'
-    }
 
-    # references
-    # https://theyvoteforyou.org.au/people/senate/wa/sue_lines/friends
-    # https://theyvoteforyou.org.au/people/senate/nt/jacinta_nampijinpa_price/friends
-    # https://theyvoteforyou.org.au/people/representatives/parkes/mark_coulton/friends
 
+    
     # Update 'Effective Party' based on 'Party'.
     individual_politicians_df['Effective Party'] = individual_politicians_df['Party'].map(effective_party_map)
 
@@ -275,6 +297,7 @@ def format_division_data(division_data):
     
 #     st.pyplot(fig)  # Display the plot using Streamlit
 
+@st.cache_data()
 def load_members_from_files(house):
     # Define the directory and filename
     directory = './data/parliament'
@@ -293,6 +316,7 @@ def load_members_from_files(house):
         st.write("No local member data found.")
         return None
 
+@st.cache_data()
 def load_divisions_from_files():
     # Define the directory and filename
     directory = './data/parliament'
@@ -307,17 +331,9 @@ def load_divisions_from_files():
         st.write("No local division data found.")
         return None
 
+@st.cache_data()
 def plotly_vote_breakdown(individual_votes, visible_parties):
-    party_color_map = {
-        'Australian Greens': '#009C3D',
-        'Australian Labor Party': '#E13940',
-        'David Pocock': '#4ef8a6',
-        'Lidia Thorpe': '#7A3535',
-        'Jacqui Lambie Network': '#FFFFFF',
-        'Liberal National Party': '#1C4F9C',
-        'Pauline Hanson\'s One Nation Party': '#F36D24',
-        'United Australia Party': '#ffed00'
-    }
+
 
     # Get unique parties from the DataFrame
     unique_parties = individual_votes['Effective Party'].unique()
@@ -409,6 +425,8 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
         #title='vote breakdown by party',
         yaxis_title='# votes',
         barmode='stack',
+        clickmode='none',
+        dragmode=False,
         margin=dict(l=0, t=0, b=0),
         legend=dict(
             x=0.5,
@@ -417,7 +435,11 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
             yanchor='top',
             orientation='h'
             ),
-        yaxis=dict(range=[0, y_axis_max]),
+        yaxis=dict(
+            range=[0, y_axis_max],
+            fixedrange=True
+            ),
+        xaxis=dict(fixedrange=True),
         shapes=[
             dict(
                 type='line',
@@ -445,6 +467,21 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
 
     # Return fig object
     return fig
+
+@st.cache_data
+def create_plotly_fig(individual_votes, house, visible_parties): 
+
+
+    # Populate all_members by unioning major_parties and minor_independents for each house type
+    for house_type in ['senate', 'representatives']:
+        party_dict['all_members'][house_type] = list(set(
+            party_dict['major_parties'][house_type] + party_dict['minor_independents'][house_type]
+        ))
+
+
+
+
+
 
 def main():
     # Load environment variables
@@ -490,7 +527,7 @@ def main():
         if key not in st.session_state:
             st.session_state[key] = default_value
 
-
+    # buttons can be turned off once scheduled  
     with st.sidebar:
         # Update information buttons
         button1, button2 = st.columns(2)
@@ -513,14 +550,14 @@ def main():
 
 
 
-
+    # divisions = load_divisions_from_files()
 
     st.session_state['divisions'] = load_divisions_from_files()
 
 
 
 
-    if st.session_state['divisions'] is not None:
+    if divisions is not None:
         division_names = [division['name'] for key, division in st.session_state['divisions'].items()]
 
         st.write("here you can select a 'division': a vote in either the house of representatives or the senate")
@@ -530,31 +567,45 @@ def main():
 
         individual_votes = format_division_data(selected_division_details)
         st.markdown(selected_division_details['summary'])
+        
 
         #plot_parliament(individual_votes, selected_division_details)
         st.divider()
         st.write("this is a breakdown of the vote. the votes for major parties are highlighted by default, change this by clicking the other tabs")
 
         
+
+
+
+        # create_plotly_fig(
+        #    individual_votes,
+        #    house=selected_division_details['house'],
+        #    visible_parties='minor_independent')
+
+
         major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
 
+
+        
+
+
+
+
+
+        # Major Parties
+        visible_parties1 = ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
+        fig1 = plotly_vote_breakdown(individual_votes, visible_parties1)
+
+        # Minor Parties and Independents
+        fig2 = plotly_vote_breakdown(individual_votes, visible_parties2)
+        fig3 = plotly_vote_breakdown(individual_votes, visible_parties3)
+
+
         with major_parties:
-            visible_parties1 = ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
             fig1 = plotly_vote_breakdown(individual_votes, visible_parties1)
             st.plotly_chart(fig1, use_container_width=True)
         with minor_independents:
-            if selected_division_details['house'] == 'senate':
-                visible_parties2 = [
-                    'Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party',
-                    'David Pocock', 'Pauline Hanson\'s One Nation Party'
-                ]
-            else: 
-                visible_parties2 = [
-                    'Rebekha Sharkie', 'Kate Chaney''Zoe Daniel',
-                    'Andrew Gee', 'Helen Haines', 'Dai Le',
-                    'Monique Ryan', 'Sophie Scamps', 'Allegra Spender',
-                    'Zali Steggall', 'Andrew Wilkie', 'Bob Katter'
-                ]
+            
             fig2 = plotly_vote_breakdown(individual_votes, visible_parties2)
             st.plotly_chart(fig2, use_container_width=True)
         with all_members:

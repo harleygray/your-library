@@ -1,0 +1,29 @@
+name: Scheduled Fetch Members
+
+on:
+  schedule:
+    # Run every day at 6am AEDT / 7pm UTC 
+    - cron: '0 19 * * *'
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests python-dotenv
+
+    - name: Run fetch_members
+      run: python fetch_members.py
+      env:
+        TVFY_API_KEY: ${{ secrets.TVFY_API_KEY }}
