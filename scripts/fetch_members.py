@@ -18,22 +18,6 @@ def fetch_members(api_key):
     url = f"https://theyvoteforyou.org.au/api/v1/people.json?key={api_key}"
     response = requests.get(url)
 
-    # Dictionary to classify parties as major vs minor/independent
-    party_dict = {
-        'major_parties': {
-            'senate': ['Australian Labor Party', 'Liberal National Party', 'Australian Greens'],
-            'representatives': ['Australian Labor Party', 'Liberal National Party', 'Australian Greens']
-        },
-        'minor_independents': {
-            'senate': ['Lidia Thorpe', 'Jacqui Lambie Network', 'United Australia Party', 'David Pocock', 'Pauline Hanson\'s One Nation Party'],
-            'representatives': ['Rebekha Sharkie', 'Kate Chaney', 'Zoe Daniel', 'Andrew Gee', 'Helen Haines', 'Dai Le', 'Monique Ryan', 'Sophie Scamps', 'Allegra Spender', 'Zali Steggall', 'Andrew Wilkie', 'Bob Katter']
-        },
-        'all_members': {
-            'senate': [],  # will populate this below
-            'representatives': []  # will populate this below
-        }
-    }
-
     # Mapping dictionary for 'Effective Party' column.
     effective_party_map = {
         'Country Liberal Party': 'Liberal National Party',
@@ -51,23 +35,12 @@ def fetch_members(api_key):
     # https://theyvoteforyou.org.au/people/senate/nt/jacinta_nampijinpa_price/friends
     # https://theyvoteforyou.org.au/people/representatives/parkes/mark_coulton/friends
 
-    # For coloring data visualisations
-    party_color_map = {
-        'Australian Greens': '#009C3D',
-        'Australian Labor Party': '#E13940',
-        'David Pocock': '#4ef8a6',
-        'Lidia Thorpe': '#7A3535',
-        'Jacqui Lambie Network': '#FFFFFF',
-        'Liberal National Party': '#1C4F9C',
-        'Pauline Hanson\'s One Nation Party': '#F36D24',
-        'United Australia Party': '#ffed00' # todo - add more
-    }
+
 
     def flatten_member_info(member):
         latest_member = member['latest_member']
         party = latest_member['party']
         effective_party = effective_party_map.get(party, party)  # Get effective party from map, or use original party if not found
-        color = party_color_map.get(effective_party, 'gray')  # Get color from map, default to black if not found
 
         additional_info = member.get('additional_info', {})
 
@@ -78,7 +51,6 @@ def fetch_members(api_key):
             'house': latest_member['house'],
             'party': latest_member['party'],
             'effective_party': effective_party,
-            'color': color,
             'rebellions': additional_info.get('rebellions'),
             'votes_attended': additional_info.get('votes_attended'),
             'votes_possible': additional_info.get('votes_possible'),
@@ -133,11 +105,6 @@ def fetch_additional_info(member_id, api_key):
     else:
         return None
 
-def generate_unique_id(member):
-    first_name = member.get('first_name') or member.get('name').split()[0]
-    last_name = member.get('last_name') or member.get('name').split()[1]
-    party = member.get('party', 'Unknown')
-    return f"{first_name}_{last_name}_{party}"
 
 
 if __name__ == "__main__":
