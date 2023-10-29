@@ -24,6 +24,6 @@ jobs:
         pip install requests python-dotenv
 
     - name: Run fetch_members
-      run: python fetch_members.py
+      run: python scripts/fetch_members.py
       env:
         TVFY_API_KEY: ${{ secrets.TVFY_API_KEY }}

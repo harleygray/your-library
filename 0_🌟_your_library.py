@@ -378,7 +378,7 @@ def main():
 
     # Header
     st.markdown("### a window into parliament")
-    st.markdown('''this tool aims to display the proceedings of government in a clear way''')
+    st.markdown('''a tool to clearly display the proceedings of government''')
     st.markdown(photo_html, unsafe_allow_html=True)
     st.divider()
 
@@ -450,11 +450,8 @@ def main():
         with all_members:
             st.plotly_chart(fig_all, use_container_width=True)
         
-        st.divider()
-        st.write("each member's vote is also shown below")
-
-
-        st.dataframe(individual_votes, use_container_width=True, hide_index=True)
+        with st.expander("individual member votes"):
+            st.dataframe(individual_votes, use_container_width=True, hide_index=True)
 
 
 if __name__ == '__main__':
