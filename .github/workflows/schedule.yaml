@@ -4,6 +4,7 @@ on:
   schedule:
     # Run every day at 6am AEDT / 7pm UTC 
     - cron: '0 19 * * *'
+  workflow_dispatch:
 
 jobs:
   fetch:
