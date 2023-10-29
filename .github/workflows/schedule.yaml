@@ -28,7 +28,7 @@ jobs:
       env:
         TVFY_API_KEY: ${{ secrets.TVFY_API_KEY }}
     
-  - name: Run fetch_divisions
-      run: python scripts/fetch_divisions.py
-      env:
-        TVFY_API_KEY: ${{ secrets.TVFY_API_KEY }}
+    - name: Run fetch_divisions
+        run: python scripts/fetch_divisions.py
+        env:
+          TVFY_API_KEY: ${{ secrets.TVFY_API_KEY }}
