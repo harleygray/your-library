@@ -7,49 +7,6 @@ from dotenv import load_dotenv
 import plotly.graph_objs as go
 import base64
 
-def fetch_and_store_divisions(api_key):
-    # Define the directory and filename for storing divisions
-    directory = './data/parliament'
-    filename = f"{directory}/divisions.json"
-    
-    # Create directory if it doesn't exist
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    
-    # Fetch the most recent 100 divisions
-    url = f"https://theyvoteforyou.org.au/api/v1/divisions.json?key={api_key}"
-    response = requests.get(url)
-    if response.status_code != 200:
-        st.write(f"Failed to get divisions: {response.status_code}")
-        return None
-    
-    recent_divisions = response.json()
-    
-    # Load existing divisions from the file, if any
-    existing_divisions = {}
-    if os.path.exists(filename):
-        with open(filename, 'r') as f:
-            existing_divisions = json.load(f)
-    
-    # Iterate through each division to get details
-    for division in recent_divisions:
-        division_id = division.get('id', 'unknown_id')
-        if division_id not in existing_divisions:
-            # Fetch details of the new division
-            detail_url = f"https://theyvoteforyou.org.au/api/v1/divisions/{division_id}.json?key={api_key}"
-            detail_response = requests.get(detail_url)
-            if detail_response.status_code == 200:
-                division_detail = detail_response.json()
-                
-                # Store new division details
-                existing_divisions[division_id] = division_detail
-    
-    # Save all division data back to the file
-    with open(filename, 'w') as f:
-        json.dump(existing_divisions, f)
-
-    return existing_divisions
-
 def create_individual_politicians_dict(members):
     individual_politicians = {}
     for member in members:
@@ -336,16 +293,11 @@ def plotly_vote_breakdown(individual_votes, visible_parties):
     # Return fig object
     return fig
 
-
 def generate_unique_id(member):
     first_name = member.get('first_name') or member.get('name').split()[0]
     last_name = member.get('last_name') or member.get('name').split()[1]
     party = member.get('party', 'Unknown')
     return f"{first_name}_{last_name}_{party}"
-
-
-
-
 
 def main():
     # Load environment variables
@@ -381,27 +333,6 @@ def main():
     st.markdown('''a tool to clearly display the proceedings of government''')
     st.markdown(photo_html, unsafe_allow_html=True)
     st.divider()
-
-
-    # buttons can be turned off once scheduled  
-    with st.sidebar:
-        # Update information buttons
-        button1, button2 = st.columns(2)
-        with button1:
-            # Update member list
-            if st.button('update members list'):
-                with st.spinner("fetching..."):    
-                    members = fetch_members(TVFY_API_KEY)
-                    if members:
-                        st.success("updated successfully")
-
-        with button2:
-            # Update divisions list
-            if st.button('update divisions list'):
-                with st.spinner("fetching..."):
-                    data = fetch_and_store_divisions(TVFY_API_KEY)
-                    if data:
-                        st.success("updated successfully")
     
     if st.session_state['divisions'] is None or st.session_state['senate'] is None or st.session_state['representatives'] is None:
         st.write('data not loaded in yet')
@@ -409,16 +340,18 @@ def main():
         st.write("here you can select a 'division': a vote in either the house of representatives or the senate")
         division_names = [division['name'] for key, division in st.session_state['divisions'].items()]
         
+        # User input for selecting a division
         selected_division_name = st.selectbox(label="select division", options=division_names)
+
+        # Format voting data for division
         selected_division = next(
             (division for division in st.session_state['divisions'].values() if division['name'] == selected_division_name), None)
-
         individual_votes = format_division_data(selected_division)
+        
+
         st.markdown(selected_division['summary'])
         st.divider()
-
         st.write("this is a breakdown of the vote. the votes for major parties are highlighted by default, change this by clicking the other tabs")
-        major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
 
         # Dictionary to classify parties as major vs minor/independent
         party_dict = {
@@ -438,11 +371,13 @@ def main():
         party_dict['all_members']['senate'] = party_dict['major_parties']['senate'] + party_dict['minor_independents']['senate']
         party_dict['all_members']['representatives'] = party_dict['major_parties']['representatives'] + party_dict['minor_independents']['representatives']
 
-        # Figures 
+        # Generate figures 
         fig_major = plotly_vote_breakdown(individual_votes, party_dict['major_parties'][selected_division['house']])
         fig_minor = plotly_vote_breakdown(individual_votes, party_dict['minor_independents'][selected_division['house']])
         fig_all = plotly_vote_breakdown(individual_votes, party_dict['all_members'][selected_division['house']])
 
+        # Display figures
+        major_parties, minor_independents, all_members = st.tabs(['major parties', 'minor parties & independents', 'all members'])
         with major_parties:
             st.plotly_chart(fig_major, use_container_width=True)
         with minor_independents:
