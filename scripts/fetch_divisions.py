@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import json
 import requests
 
-def fetch_divisions(api_key):
+def fetch_divisions(api_key, start_date=None, end_date=None):
     # Define the directory and filename for storing divisions
     directory = './data/parliament'
     filename = f"{directory}/divisions.json"
@@ -12,9 +12,14 @@ def fetch_divisions(api_key):
     if not os.path.exists(directory):
         os.makedirs(directory)
     
-    # Fetch the most recent 100 divisions
-    url = f"https://theyvoteforyou.org.au/api/v1/divisions.json?key={api_key}"
-    response = requests.get(url)
+    if start_date is None or end_date is None:
+        # Fetch the most recent 100 divisions
+        url = f"https://theyvoteforyou.org.au/api/v1/divisions.json?key={api_key}"
+        response = requests.get(url)
+    else:
+        # Fetch divisions within date range
+        url = f"https://theyvoteforyou.org.au/api/v1/divisions.json?start_date={start_date}&end_date={end_date}&key={api_key}"
+        response = requests.get(url)
     if response.status_code != 200:
         st.write(f"Failed to get divisions: {response.status_code}")
         return None

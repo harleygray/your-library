@@ -416,7 +416,7 @@ def main():
     if st.session_state['divisions'] is None or st.session_state['senate'] is None or st.session_state['representatives'] is None:
         st.write('data not loaded in yet')
     else:
-        st.write("⬇️ here you can select a 'division': a vote in either the house of representatives or the senate")
+        st.write("⬇️ select a type of 'division': a vote in either the house of representatives or the senate")
         
         col1, col2 = st.columns([0.3,0.7])
         division_names = [division['name'] for key, division in st.session_state['divisions'].items()]
@@ -427,34 +427,21 @@ def main():
         
         with col2:
             if selected_division_category == 'Bills':
-        
                 selected_bill_name = st.selectbox(label='pick a bill', options=list(divisions_dict['Bills'].keys()))
-                #st.write(divisions_dict['Bills'][selected_bill_name])
                 if len(divisions_dict['Bills'][selected_bill_name]) == 1:
                     full_name = selected_bill_name + ' - ' + divisions_dict['Bills'][selected_bill_name][0]
                 else:
                     selected_bill_reading = st.selectbox(label='which division?', options=list(divisions_dict['Bills'][selected_bill_name]))
                     full_name = selected_bill_name + ' - ' + selected_bill_reading
                 
-                st.write(full_name)
-                
             else:
-                
                 selected_division = st.selectbox(label='pick a division', options=list(divisions_dict[selected_division_category]))
                 full_name = selected_division_category + ' - ' + selected_division
-                #st.write(full_name)
         
         # Hold selected division in session state
         st.session_state['selected_division'] = return_division(full_name, st.session_state['divisions'])
         
-        #st.divider()
         individual_votes = format_division_data(st.session_state['selected_division'])
-
-
-        
-
-        
-        #st.write("votes for major parties are highlighted by default. change this by clicking the other tabs")
 
         # Dictionary to classify parties as major vs minor/independent
         party_dict = {
