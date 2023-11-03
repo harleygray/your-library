@@ -4,3 +4,5 @@ __pycache__/
 environment.yml
 archive
 notebooks/exploration.ipynb
+dbschema/
+edgedb.toml

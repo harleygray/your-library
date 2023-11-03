@@ -3,6 +3,7 @@
 python-dotenv
 streamlit==1.28.0
 streamlit-agraph
+edgedb
 #faiss-cpu
 #weaviate-client
 #altair
