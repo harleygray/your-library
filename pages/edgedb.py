@@ -140,9 +140,10 @@ def main():
         layout="centered")
 
     senators_json = load_members_from_files('./data/parliament/senate.json')
+    mps_json = load_members_from_files('./data/parliament/house.json')
 
     senate_info = extract_info(senators_json)
-
+    mps_info = extract_info(mps_json)
     #st.write('unique parties:')
     #st.write(senate_info[0])
     #st.write('unique offices:')
@@ -173,43 +174,77 @@ def main():
     # Load senate divisions
     divisions = load_divisions_from_files()
     senate_divisions = {}
+    house_divisions = {}
     for division_id, division_data in divisions.items():
         if division_data['house'] == 'senate':
             senate_divisions[division_id] = division_data
+        elif division_data['house'] == 'representatives':
+            house_divisions[division_id] = division_data
 
     debug = st.container()
 
     with st.sidebar:
         if st.button('add all unique offices'):
             for office in senate_info[1]:
-                client.query(
-                    "insert parliament::Office { name := <str>$office }",
+                client.query("""
+                    insert parliament::Office { 
+                        name := <str>$office 
+                    }
+                    unless conflict on .name
+                    else parliament::Office
+                    """,
                     office=office
                 )
+            for office in mps_info[1]:
+                client.query("""
+                    insert parliament::Office { 
+                        name := <str>$office 
+                    }
+                    unless conflict on .name
+                    else parliament::Office
+                    """,
+                    office=office
+                )
+            st.toast('added offices', icon='✅')
 
         if st.button('add all parties'):
             for party_name in senate_info[0]:
                 client.query("""
-                    insert parliament::Party { 
-                    name := <str>$name
-                    }                
-                """, name=party_name)
+                    insert parliament::Party {
+                        name := <str>$name
+                    }
+                    unless conflict on .name
+                    else parliament::Party
+                    """, 
+                    name=party_name)
+            
+            st.toast('added parties from senate', icon='✅')
 
-        if st.button('add member info'):
+            for party_name in mps_info[0]:
+                client.query("""
+                    insert parliament::Party {
+                        name := <str>$name
+                    }
+                    unless conflict on .name
+                    else parliament::Party
+                    """, 
+                    name=party_name
+                )
+            st.toast('added parties from house', icon='✅')
+
+        if st.button('add members and senators info'):
             for item in senators_json:
                 client.query("""
                     insert parliament::Member { 
-                    full_name := <str>$full_name,
-                    house :=  <str>$house,
-                    person_id := <int16>$person_id,
-                    offices := (select parliament::Office filter .name IN array_unpack(<array<str>>$offices)),
-
-
-                    electorate := <str>$electorate,
-                    party := assert_single((select parliament::Party filter .name = <str>$party))
-
-                    }                
-                """, 
+                        full_name := <str>$full_name,
+                        house :=  <str>$house,
+                        person_id := <int16>$person_id,
+                        offices := (select parliament::Office filter .name IN array_unpack(<array<str>>$offices)),
+                        electorate := <str>$electorate,
+                        party := assert_single((select parliament::Party filter .name = <str>$party))
+                    }
+                    unless conflict on .person_id
+                    else parliament::Member""", 
                 full_name=item['name'],
                 house=item['house'],
                 person_id=item['id'],
@@ -217,32 +252,32 @@ def main():
                 electorate=item['electorate'],
                 party=item['party']
                 )
-            st.toast(f'added {len(senators_json)} members', icon='✅')
+            st.toast('added senators', icon='✅')
 
-        if st.button('add senate votes'):
-            for item in senate_divisions.values():
-                print(f"Current vote: {item['name']}")
-                for vote in item['votes']:
-                    #st.write(vote)
-                    member_id = vote['member']['person']['id']
-                    print(f"Current member_id: {member_id}")  # Print the current value of member_id
+            for item in mps_json:
+                client.query("""
+                    insert parliament::Member { 
+                        full_name := <str>$full_name,
+                        house :=  <str>$house,
+                        person_id := <int16>$person_id,
+                        offices := (select parliament::Office filter .name IN array_unpack(<array<str>>$offices)),
+                        electorate := <str>$electorate,
+                        party := assert_single(
+                            (select parliament::Party filter .name = <str>$party))
+                    }
+                    unless conflict on .person_id
+                    else parliament::Member""", 
+                full_name=item['name'],
+                house=item['house'],
+                person_id=item['id'],
+                offices=item['offices'],
+                electorate=item['electorate'],
+                party=item['party']
+                )
+            st.toast(f'added mps', icon='✅')
 
-                    client.query("""
-                        insert parliament::DivisionVote { 
-                            division_id := <int16>$division_id,
-                            member :=  assert_single((select parliament::Member filter .person_id = <int16>$member_id)),
-                            vote := <str>$vote
-                        }                
-                        """, 
-                        division_id=item['id'],
-                        member_id=vote['member']['person']['id'],
-                        vote=vote['vote'],
-                        )
-                    st.toast(f'added senate votes', icon='✅')
-
-        if st.button('add senate divisions'):
-            for item in senate_divisions.values():
-                print(f"Current vote: {item['name']}")
+        if st.button('add votes'):
+            for division_id, division_data in divisions.items():
                 client.query("""
                     insert parliament::Division { 
                         division_id := <int16>$division_id,
@@ -253,27 +288,45 @@ def main():
                         aye_votes := <int16>$aye_votes,
                         no_votes := <int16>$no_votes,
                         possible_turnout := <int16>$possible_turnout,
-                        summary := <str>$summary,
-                        votes := (select parliament::DivisionVote filter .division_id = <int16>$division_id),
-                    }                
-                    """, 
-                    division_id=item['id'],
-                    house=item['house'],
-                    name=item['name'],
-                    date=item['date'],
-                    clock_time=item['clock_time'],
-                    aye_votes=item['aye_votes'],
-                    no_votes=item['no_votes'],
-                    possible_turnout=item['possible_turnout'],
-                    summary=item['summary']
-                    )
-                st.toast(f'added senate divisions', icon='✅')
+                        summary := <str>$summary
+                    }
+                    unless conflict on .division_id
+                    else parliament::Division""", 
+                division_id=division_data['id'],
+                house=division_data['house'],
+                name=division_data['name'],
+                date=division_data['date'],
+                clock_time=division_data['clock_time'],
+                aye_votes=division_data['aye_votes'],
+                no_votes=division_data['no_votes'],
+                possible_turnout=division_data['possible_turnout'],
+                summary=division_data['summary']
+                )
+                
+
+                for vote in division_data['votes']:
+                    print(f"Current member_id: {vote['member']['person']['id']}") 
+                    
+                    client.query("""
+                        insert parliament::DivisionVote { 
+                            division := (select parliament::Division filter .division_id = <int16>$division_id),
+                            member :=  assert_single((select parliament::Member filter .person_id = <int16>$member_id)),
+                            vote := <str>$vote
+                        } 
+                        unless conflict on ((.member, .division)) 
+                        else parliament::DivisionVote;               
+                        """, 
+                        division_id=division_data['id'],
+                        member_id=vote['member']['person']['id'],
+                        vote=vote['vote'],
+                        )
+                st.toast(f'added votes for {division_data["name"]}', icon='✅')
+
 
         if st.button('update divisions with categories'):
             for item in senate_divisions.values():
                 division_categories= division_category(item['name'])
                 debug.write(division_categories)
-
 
                 client.query("""
                     with division_category := (
@@ -336,7 +389,24 @@ def main():
                 )
             st.toast(f'ran update', icon='✅')
 
-        
+    division_categories = client.query("""
+        select distinct(parliament::DivisionCategory {
+            category_name
+        })"""
+    )
+    
+    selected_division_category =  st.radio(label='pick a type of division', options=list(category.category_name for category in division_categories))
+
+    division_subcategories = client.query("""
+        select distinct(parliament::DivisionSubcategory {
+            category_name
+        }) filter .category = (select parliament::DivisionCategory filter .category_name = <str>$selected_division_category)""",
+        selected_division_category=selected_division_category
+    )
+    
+    selected_division_subcategory =  st.radio(label='pick a subcategory of division', options=list(category.category_name for category in division_subcategories))
+
+
 
     #st.write(senate_divisions.values())
     # result = client.query("""
