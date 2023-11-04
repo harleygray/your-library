@@ -405,6 +405,8 @@ def main():
     st.session_state['representatives'] = load_members_from_files('./data/parliament/house.json')
     st.session_state['senate'] = load_members_from_files('./data/parliament/senate.json')
     st.session_state['divisions'] = load_divisions_from_files()
+    #st.write(type(st.session_state['divisions']))
+    #st.write(sum(1 for item in st.session_state['divisions'].values() if item['house'] == 'senate'))
 
     # Header
     background_image("window into parliament", "a tool to clearly display the proceedings of government")
