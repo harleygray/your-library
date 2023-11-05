@@ -6,6 +6,9 @@ import os
 import json
 import requests
 import re
+from itertools import groupby
+from operator import attrgetter
+import pandas as pd
 
 @st.cache_data()
 def load_members_from_files(filename):
@@ -389,25 +392,106 @@ def main():
                 )
             st.toast(f'ran update', icon='✅')
 
-    division_categories = client.query("""
-        select distinct(parliament::DivisionCategory {
-            category_name
+    with st.expander("select division"):
+        division_categories = client.query("""
+            select distinct(parliament::DivisionCategory {
+                category_name
+            })"""
+        )
+        category_names = map(lambda category: category.category_name, division_categories)
+        selected_division_category =  st.radio(label='pick a type of division', options=list(category_names))
+
+        division_subcategories = client.query("""
+            select distinct(parliament::DivisionSubcategory {
+                category_name
+            }) filter .category = (select parliament::DivisionCategory filter .category_name = <str>$selected_division_category)""",
+            selected_division_category=selected_division_category
+        )
+        
+        st.dataframe(
+            list(category.category_name for category in division_subcategories)
+        )
+
+    st.subheader('select all divisions a member voted in')
+    all_members = client.query("""
+        select distinct(parliament::Member {
+            full_name,
+            party: { name }
         })"""
     )
     
-    selected_division_category =  st.radio(label='pick a type of division', options=list(category.category_name for category in division_categories))
+    member_names = map(lambda category: category.full_name + ", " + category.party.name, all_members)
 
-    division_subcategories = client.query("""
-        select distinct(parliament::DivisionSubcategory {
-            category_name
-        }) filter .category = (select parliament::DivisionCategory filter .category_name = <str>$selected_division_category)""",
-        selected_division_category=selected_division_category
-    )
+    # First, sort all_members by party.name
+    all_members_sorted = sorted(all_members, key=attrgetter('party.name'))
+
+    # Then, use groupby to group them by party.name
+    grouped_members = groupby(all_members_sorted, key=attrgetter('party.name'))
+
+    # Now, grouped_members is an iterable of tuples, where the first element is the party name,
+    # and the second element is an iterable of members in that party.
+    # You can convert it to a dictionary where the party name is the key and the value is a list of member names:
+    member_names_by_party = {party: list(map(attrgetter('full_name'), members)) for party, members in grouped_members}
     
-    selected_division_subcategory =  st.radio(label='pick a subcategory of division', options=list(category.category_name for category in division_subcategories))
+    party_col, member_col = st.columns(2)
 
+    with party_col: 
+        selected_party = st.multiselect(label='which parties?', options=list(member_names_by_party.keys()))
+    # Assuming 'selected_party' is a list of parties chosen with st.multiselect
+    for party in selected_party:  # Iterate over all selected options
+        st.write(member_names_by_party.get(party, "No members found for selected party"))
 
+    # Check if a party has been selected and not empty
+    if selected_party:  
+        party_members_options = [member for party in selected_party for member in member_names_by_party.get(party, [])]
+    else:
+        # If no party is selected, show all members
+        party_members_options = [member for members in member_names_by_party.values() for member in members]
 
+    with member_col:
+        selected_member_names = st.multiselect(label='which member?', options=party_members_options)
+
+    # show all divisions. [division_name], division_outcome, member_vote1, ...member_vote_n,
+    
+    divisions = client.query("""
+        with member := (
+            select parliament::Member 
+            filter .full_name in array_unpack(<array<str>>$selected_member_names)
+        )
+        select parliament::Division {**} {
+            division_name := .name,
+            member_votes := (
+                select .votes {
+                    member_name := .member.full_name,
+                    vote := .vote
+                }
+                filter .member.full_name in array_unpack(<array<str>>$selected_member_names)     
+            )
+        } 
+        filter .member_votes.member_name in array_unpack(<array<str>>$selected_member_names)""",
+        selected_member_names=selected_member_names)
+
+    #all_divisions_sorted = sorted(divisions, key=attrgetter('division_name'))
+    #grouped_divisions_members = groupby(all_divisions_sorted, key=attrgetter('member_votes.member_name'))
+    
+    # Flatten the data
+    flattened_data = [
+        {
+            "division_name": obj.division_name,
+            "member_name": vote.member_name,
+            "vote": vote.vote,
+        }
+        for obj in divisions
+        for vote in obj.member_votes
+    ]
+
+    # Create a DataFrame
+    df = pd.DataFrame(flattened_data)
+
+    # Pivot the DataFrame to get one column per member
+    pivot_df = df.pivot_table(index="division_name", columns="member_name", values="vote", aggfunc='first')
+    
+    st.dataframe(pivot_df)
     #st.write(senate_divisions.values())
     # result = client.query("""
     #     select parliament::Division {**} limit 5
