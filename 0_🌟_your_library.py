@@ -331,23 +331,64 @@ def categorise_divisions(division_names):
         'Documents': [],
         'Committees': [],
         'Motions': [],
-        'Bills': {}
+        'Bills': {},
+        'Budget': [],
+        'Regulations and Determinations': [],
+        'Statements': []
     }
+    
+    # Regular expression patterns for different division formats
+    bill_pattern = re.compile(r"^(Bills? —? .+? \d{4})[;,]?( in Committee - | - |;)?(.*)")
+    budget_pattern = re.compile(r"^(Budget) - (.+) - (.+)")
+    reg_det_pattern = re.compile(r"^(Regulations and Determinations) - (.+?) - (.+)")
+    statement_pattern = re.compile(r"^(Statements) — (.+)")
 
     for division in division_names:
+        # Initialize a flag to indicate if the current division has been categorized
         categorized = False
-        for category in categories.keys():
+
+        # Check against known categories other than 'Bills', 'Budget', 'Regulations and Determinations', 'Statements'
+        for category in ['Matters of Urgency', 'Business', 'Documents', 'Committees', 'Motions']:
             if division.startswith(category):
-                clean_name = division[len(category) + 3:]  # +3 to remove the " - " as well
+                # If a known category is found, strip out the category and " - " to get the clean name
+                clean_name = division[len(category) + 3:]  # Skip past category and " - "
                 categories[category].append(clean_name)
                 categorized = True
-                break
+                break  # Exit the loop after categorizing
+
+        # Handle budget-related divisions
         if not categorized:
-            bill_split = re.split(r'(\d{4}(?:-\d{4})?) - ', division)
-            if len(bill_split) >= 3:
-                bill_title = bill_split[0] + bill_split[1]
-                bill_stage = bill_split[2]
-                categories['Bills'].setdefault(bill_title, []).append(bill_stage)
+            match = budget_pattern.match(division)
+            if match:
+                categories['Budget'].append(match.group(2).strip() + " - " + match.group(3).strip())
+                categorized = True
+
+        # Handle regulations and determinations
+        if not categorized:
+            match = reg_det_pattern.match(division)
+            if match:
+                categories['Regulations and Determinations'].append(match.group(2).strip() + " - " + match.group(3).strip())
+                categorized = True
+
+        # Handle statements
+        if not categorized:
+            match = statement_pattern.match(division)
+            if match:
+                categories['Statements'].append(match.group(2).strip())
+                categorized = True
+
+        # If division is not categorized yet, it may be a Bill
+        if not categorized:
+            match = bill_pattern.match(division)
+            if match:
+                # Extract the bill name (including year) and division stage
+                bill_name = match.group(1).strip()
+                division_stage = match.group(3).strip() if match.group(3) else "General"
+                categories['Bills'].setdefault(bill_name, []).append(division_stage)
+            else:
+                # Log or handle unrecognized division formats if necessary
+                print(f"Unrecognized division format: {division}")
+
     return categories
 
 @st.cache_data()
@@ -429,16 +470,28 @@ def main():
         
         with col2:
             if selected_division_category == 'Bills':
-                selected_bill_name = st.selectbox(label='pick a bill', options=list(divisions_dict['Bills'].keys()))
-                if len(divisions_dict['Bills'][selected_bill_name]) == 1:
-                    full_name = selected_bill_name + ' - ' + divisions_dict['Bills'][selected_bill_name][0]
+                st.write(divisions_dict['Bills'])
+                # Ensure there are bill names to select from
+                if divisions_dict['Bills']:
+                    selected_bill_name = st.selectbox(label='pick a bill', options=list(divisions_dict['Bills'].keys()))
+                    # Display the subdivisions or stages of the selected bill
+                    if selected_bill_name:  # Ensure a bill name is selected
+                        bill_stages = divisions_dict['Bills'][selected_bill_name]
+                        if len(bill_stages) == 1:
+                            full_name = selected_bill_name + ' - ' + bill_stages[0]
+                        else:
+                            selected_bill_reading = st.selectbox(label='which division?', options=bill_stages)
+                            full_name = selected_bill_name + ' - ' + selected_bill_reading
                 else:
-                    selected_bill_reading = st.selectbox(label='which division?', options=list(divisions_dict['Bills'][selected_bill_name]))
-                    full_name = selected_bill_name + ' - ' + selected_bill_reading
-                
+                    st.write("No bills available for selection.")
             else:
-                selected_division = st.selectbox(label='pick a division', options=list(divisions_dict[selected_division_category]))
-                full_name = selected_division_category + ' - ' + selected_division
+                # Ensure there are divisions to select from within the chosen category
+                if divisions_dict[selected_division_category]:  # Check for non-empty category
+                    selected_division = st.selectbox(label='pick a division', options=divisions_dict[selected_division_category])
+                    full_name = selected_division_category + ' - ' + selected_division
+                else:
+                    st.write(f"No divisions available for {selected_division_category} category.")
+
         
         # Hold selected division in session state
         st.session_state['selected_division'] = return_division(full_name, st.session_state['divisions'])
