@@ -84,7 +84,7 @@ def main():
             {
                 "division_name": obj.division_name,
                 "member_name": vote.member_name,
-                "vote": vote.vote,
+                "vote": str(vote.vote),
             }
             for obj in divisions
             for vote in obj.member_votes
@@ -97,6 +97,56 @@ def main():
         pivot_df = df.pivot_table(index="division_name", columns="member_name", values="vote", aggfunc='first')
         
         st.dataframe(pivot_df)
+
+
+    input_postcode = st.number_input('enter your postcode', min_value=0, max_value=7999, value=4000)
+
+    
+    query = """
+        SELECT parliament::Member {
+            full_name,
+            party_name := .party.name,
+            house,
+            votes: {
+                division: {
+                name,
+                summary
+                },
+                vote
+            },
+            electorates: {
+                name,
+                suburbs: {
+                name,
+                postcode
+                } FILTER .postcode = <str>$input_postcode
+            } FILTER .suburbs.postcode = <str>$input_postcode
+        } FILTER .electorates.suburbs.postcode = <str>$input_postcode;
+        """
+    members = client.query(query, input_postcode=str(input_postcode))
+
+    # Flatten the data
+    flattened_data = [
+        {
+            "member_name": obj.full_name,
+            "party": obj.party_name,
+            "house": str(obj.house),
+            "division_name": vote.division.name,
+            "vote": str(vote.vote),
+        }
+        for obj in members
+        for vote in obj.votes
+    ]
+
+    # Create a DataFrame
+    df = pd.DataFrame(flattened_data)
+
+    # Pivot the DataFrame to get one column per member
+    pivot_df = df.pivot_table(index="division_name", columns="member_name", values="vote", aggfunc='first')
+    
+    st.dataframe(pivot_df)
+
+
 
 if __name__ == '__main__':
   main()
