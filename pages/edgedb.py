@@ -43,7 +43,7 @@ def return_divisions(_client, selected_member_names, selected_division_category)
     return df
 
 @st.cache_data
-def return_members(_client, input_postcode):
+def query_member_records(_client, input_postcode):
     query = """
         SELECT parliament::Member {
             full_name,
@@ -52,7 +52,8 @@ def return_members(_client, input_postcode):
             votes: {
                 division: {
                 name,
-                summary
+                summary,
+                division_category
                 },
                 vote
             },
@@ -75,6 +76,7 @@ def return_members(_client, input_postcode):
             "house": str(obj.house),
             "division_name": vote.division.name,
             "vote": str(vote.vote),
+            "category": vote.division.division_category,
         }
         for obj in members
         for vote in obj.votes
@@ -101,11 +103,7 @@ def main():
     # EdgeDB client
     client = edgedb.create_client()
 
-    with st.sidebar:
-        selected_house = st.radio("choose house (WIP)", options=["representatives","senate"])
 
-        division_categories = client.query("select distinct(parliament::Division.division_category);")
-        selected_division_category =  st.radio(label='filter by type of division', options=list(division_categories))
 
     # with st.expander('select all divisions a member voted in'):
     #     all_members = client.query("""
@@ -148,17 +146,37 @@ def main():
         
     #     st.dataframe(pivot_df)
 
-    input_postcode = st.number_input('enter your postcode', min_value=0, max_value=7999, value=4000)
-
-    members = return_members(client, input_postcode=input_postcode)
-
-    # Filter the DataFrame by selected house
-    df = members[members["house"] == selected_house]
-
-    # Pivot the DataFrame to get one column per member
-    pivot_df = df.pivot_table(index="division_name", columns="member_name", values="vote", aggfunc='first')
     
-    st.dataframe(pivot_df)
+    
+    # Select one division at random
+    random_state = 0
+    with st.form(key='random_division'):
+        # Return the voting records of all members representing the postcode
+        input_postcode = st.number_input('enter your postcode', min_value=0, max_value=7999, value=4000)
+        member_records = query_member_records(client, input_postcode=input_postcode)
+
+        # Filter by house
+        selected_house = st.radio("choose house", options=["representatives","senate"])
+
+        # Filter by division_category
+        division_categories = client.query("select distinct(parliament::Division.division_category);")
+        selected_division_category =  st.radio(label='filter by type of division', options=list(division_categories))
+
+        # Filter the DataFrame by selected house and selected division category
+        filtered_records = member_records.loc[
+            (member_records["house"] == selected_house) & 
+            (member_records["category"] == selected_division_category)
+        ]
+        
+        st.write(filtered_records.sample(n=1))
+        st.form_submit_button(label='new random division')
+
+    
+    
+    # Pivot the DataFrame to get one column per member
+    #pivot_df = df.pivot_table(index="division_name", columns="member_name", values="vote", aggfunc='first')
+    
+    #st.dataframe(pivot_df)
 
     
 
